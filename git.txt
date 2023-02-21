@@ -1,0 +1,12 @@
+#upload
+
+git add MyStringTest.java
+git commit -m "Message"
+git push -u origin master
+
+#download
+git pull origin master
+
+#config
+git remote add orgin https://github.com/Mk-Engineer/Storage.git
+git remote -v
