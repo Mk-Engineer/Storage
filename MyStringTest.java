@@ -560,6 +560,7 @@ class Solution {
     public int strStr(String haystack, String needle){
         
         System.out.println("mk-omen");
+        System.out.println("Github");
         return 0;
     }
 
