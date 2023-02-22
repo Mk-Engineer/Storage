@@ -559,11 +559,25 @@ class Solution {
      */
     public int strStr(String haystack, String needle){
         
-        System.out.println("mk-omen");
-        System.out.println("Github");
-        System.out.println("Notebook-42");
-        System.out.println("admin cancel");
         return 0;
+    }
+
+    //求next[]数组 / 前缀表
+    public void getNext(int[] next,String s) {
+        char[] chars = s.toCharArray();
+        int j = -1;
+        next[0] = j;
+
+        for(int i = 1; i < chars.length; i++) {
+            while(j >= 0 && chars[i] != chars[j + 1]) {
+                j = next[j];
+            }
+
+            if(chars[i] == chars[j + 1]) {
+                j++;
+            }
+            next[i] = j;
+        }
     }
 
 }
