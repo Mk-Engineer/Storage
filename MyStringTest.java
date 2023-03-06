@@ -557,31 +557,116 @@ class Solution {
      * @param needle
      * @return
      */
-    public int strStr(String haystack, String needle){
+    public int strStr(String haystack, String needle) {
+        int m = needle.length();
+
+        //当needle是空字符串时我们应当返回0
+        if(m == 0) {
+            return 0;
+        }
+
+        int n = haystack.length();
+        if(n < m) {
+            return -1;
+        }
+
+        int i = 0;
+        int j = 0;
+
+        while(i < n - m + 1) {
+            //找到首字母相等
+            while(i < n && haystack.charAt(i) != needle.charAt(j)){
+                i++;
+            }
+
+            if(i == n) {
+                return -1;
+            }   
+
+            //遍历后续字符，判断是否相等
+            i++;
+            j++;
+
+            while(i < n && j < m && haystack.charAt(i) == needle.charAt(j)) {
+                i++;
+                j++;
+            }
+
+            if(j == m) {//找到
+                return i = j;//返回第一个索引
+            } else {//未找到
+                i -= j - 1;//(寻找后续的可能)
+                j = 0;
+            }
+        }
+        return -1;
+    }
+
+
+
+    /**
+     * 基于窗口滑动的算法
+     * <p>
+     * 时间复杂度：O(m*n)
+     * 空间复杂度：O(1)
+     * 注：n为haystack的长度，m为needle的长度
+     */
+    public int strStr0(String haystack, String needle) {
+        int m = needle.length();
+        // 当 needle 是空字符串时我们应当返回 0
+        if (m == 0) {
+            return 0;
+        }
+        int n = haystack.length();
+        if (n < m) {
+            return -1;
+        }
+        int i = 0;
+        int j = 0;
+        while (i < n - m + 1) {
+            // 找到首字母相等
+            while (i < n && haystack.charAt(i) != needle.charAt(j)) {
+                i++;
+            }
+            if (i == n) {// 没有首字母相等的
+                return -1;
+            }
+            // 遍历后续字符，判断是否相等
+            i++;
+            j++;
+            while (i < n && j < m && haystack.charAt(i) == needle.charAt(j)) {
+                i++;
+                j++;
+            }
+            if (j == m) {// 找到
+                return i - j;
+            } else {// 未找到
+                i -= j - 1;
+                j = 0;
+            }
+        }
+        return -1;
+    }
+    public int strStr1(String haystack, String needle){
         
         return 0;
     }
-
+    
     //求next[]数组 / 前缀表
     public void getNext(int[] next,String s) {
         char[] chars = s.toCharArray();
         int j = -1;
         next[0] = j;
-
+    
         for(int i = 1; i < chars.length; i++) {
             while(j >= 0 && chars[i] != chars[j + 1]) {
                 j = next[j];
             }
-
+    
             if(chars[i] == chars[j + 1]) {
                 j++;
             }
             next[i] = j;
         }
     }
-
-    public void test() {
-        System.out.println("Test");
-    }
-
 }
