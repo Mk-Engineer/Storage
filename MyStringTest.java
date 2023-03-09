@@ -654,6 +654,7 @@ class Solution {
     
     //求next[]数组 / 前缀表
     public void getNext(int[] next,String s) {
+        System.out.println("MK-OMEN: New");
         char[] chars = s.toCharArray();
         int j = -1;
         next[0] = j;
