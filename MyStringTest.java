@@ -557,6 +557,7 @@ class Solution {
      * @param needle
      * @return
      */
+    //暴力穷解
     public int strStr(String haystack, String needle) {
         int m = needle.length();
 
@@ -604,13 +605,12 @@ class Solution {
 
 
     public int strStr1(String haystack, String needle){
-        
+    
         return 0;
     }
     
     //求next[]数组 / 前缀表
     public void getNext(int[] next,String s) {
-        System.out.println("public");
         char[] chars = s.toCharArray();
         int j = -1;
         next[0] = j;
@@ -626,5 +626,4 @@ class Solution {
             next[i] = j;
         }
     }
-    //public
 }
