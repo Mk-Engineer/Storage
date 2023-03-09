@@ -625,4 +625,5 @@ class Solution {
             next[i] = j;
         }
     }
+    //public
 }
