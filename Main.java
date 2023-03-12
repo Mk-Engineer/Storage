@@ -96,8 +96,8 @@ public class Main
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         System.out.println();
         
-	System.out.println("Terminal iPad upload");
-
-
+	System.out.println("iPad upload");
+	System.out.println("Add File");
+    }
 
 }
