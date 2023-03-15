@@ -98,7 +98,7 @@ public class Main
         
 	System.out.println("iPad upload");
 	System.out.println("github send 1st");
-	System.out.println("iSH upload 4th");
+	System.out.println("iSH upload 5th");
    	System.out.println("OhMyZsh Success");
     }
 
