@@ -601,7 +601,7 @@ class Solution {
             }
 
             if(j == m) {//找到
-                return i = j;//返回第一个索引
+                return i - j;//返回第一个索引
             } else {//未找到
                 i -= j - 1; //i回到最初匹配的位置
                 j = 0;	    //j从头开始
