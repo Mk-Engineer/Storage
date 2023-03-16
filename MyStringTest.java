@@ -6,15 +6,25 @@ public class MyStringTest {
         System.out.println("Hello MyString Test " + System.currentTimeMillis());
         System.out.println();
 	
-	String haystack0 = "fucksadbutsad"
-	String needle0 = "sad"
+	String haystack0 = "fucksadbutsad";
+	String needle0 = "sad";
+
+	System.out.println(haystack0);
+	System.out.println(needle0);
+	System.out.println();
         
+	
+
         String str = new String("   Last      Christmas You Giving My Ass   ");
         String str2 = new String("Hello MyString Test");
         System.out.println("Before: \n" + str);
 
         Solution slt = new Solution();
+
         System.out.println();
+	System.out.println(slt.strStr(haystack0,needle0));
+
+	System.out.println();
         System.out.println(slt.reverseWords(str));
         System.out.println(slt.reverseWords2(str));
         System.out.println(slt.reverseWords3(str));
@@ -610,7 +620,7 @@ class Solution {
         return -1;
     }
 
-    public int strStr(String haystack, String needle) {
+    public int strStr0(String haystack, String needle) {
 	return -1;
     }
 
