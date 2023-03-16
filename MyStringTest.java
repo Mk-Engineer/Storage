@@ -5,6 +5,9 @@ public class MyStringTest {
         System.out.println();
         System.out.println("Hello MyString Test " + System.currentTimeMillis());
         System.out.println();
+	
+	String haystack0 = "fucksadbutsad"
+	String needle0 = "sad"
         
         String str = new String("   Last      Christmas You Giving My Ass   ");
         String str2 = new String("Hello MyString Test");
@@ -553,10 +556,11 @@ class Solution {
      * 空间复杂度：O(1)
      * 注：n为haystack长度，m为needle长度
      * 
-     * @param haystack
-     * @param needle
+     * @param haystack 文本串
+     * @param needle   模式串/匹配串
      * @return
      */
+    //暴力穷解
     public int strStr(String haystack, String needle) {
         int m = needle.length();
 
@@ -570,9 +574,13 @@ class Solution {
             return -1;
         }
 
-        int i = 0;
-        int j = 0;
+        int i = 0;// 计数文本串，文本串指针
+        int j = 0;// 计数匹配串，匹配串指针
 
+	/*
+	 * n 是文本串长度
+	 * m 是匹配串长度
+	 */
         while(i < n - m + 1) {//条件什么意思？
             //找到首字母相等
             while(i < n && haystack.charAt(i) != needle.charAt(j)){
@@ -593,19 +601,27 @@ class Solution {
             }
 
             if(j == m) {//找到
-                return i = j;//返回第一个索引
+                return i - j;//返回第一个索引
             } else {//未找到
-                i -= j - 1;//(寻找后续的可能)
-                j = 0;
+                i -= j - 1; //i回到最初匹配的位置
+                j = 0;	    //j从头开始
             }
         }
         return -1;
     }
 
+    public int strStr(String haystack, String needle) {
+	return -1;
+    }
 
     public int strStr1(String haystack, String needle){
-        
+
         return 0;
+    }
+
+    public void getNext0(int[] next, String s) {
+	
+		
     }
     
     //求next[]数组 / 前缀表
