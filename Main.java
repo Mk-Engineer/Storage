@@ -19,7 +19,9 @@ public class Main
 
             // function1(n);
             // function2(n);
-            function3(n);
+            // function3(n);
+            System.out.println("Result:" + fibonacci2(0,1,n));
+            System.out.println();
 
             long endTime = System.currentTimeMillis();
             long costTime = endTime - startTime;
@@ -92,6 +94,51 @@ public class Main
             }
         }
     }
+
+    //斐波那契数列
+    public static int fibonacci1(int i) {
+        if(i <= 0) return 0;
+        if(i == 1) return 1;
+        return fibonacci1(i-1) + fibonacci1(i-2);
+    }
+    
+    public static int fibonacci2(int first, int second, int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n < 3) {
+            return 1;
+        }
+        else if (n == 3) {
+            return first + second;
+        }
+        else {
+            return fibonacci2(second, first + second, n - 1);
+        }
+    }
+
+    /**
+     * #二分查找-递归实现
+     * 
+     * @param arr 待查找数列
+     * @param l   左边界
+     * @param r   右边界
+     * @param x   待查找值
+     * @return
+     */
+    public static int binary_search( int arr[], int l, int r, int x) {
+        if (r >= l) {
+            int mid = l + (r - l) / 2;
+            if (arr[mid] == x)
+                return mid;
+            if (arr[mid] > x)
+                return binary_search(arr, l, mid - 1, x);
+            //if(arr[mid] < x)    
+            return binary_search(arr, mid + 1, r, x);
+        }
+        return -1;
+    }
+    
 }
 
 
