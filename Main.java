@@ -121,10 +121,10 @@ public class Main
      * #二分查找-递归实现
      * 
      * @param arr 待查找数列
-     * @param l   左边界
-     * @param r   右边界
+     * @param l   左边界脚标
+     * @param r   右边界脚标
      * @param x   待查找值
-     * @return
+     * @return    待查找值的脚标
      */
     public static int binary_search( int arr[], int l, int r, int x) {
         if (r >= l) {
