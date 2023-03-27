@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -27,6 +28,27 @@ public class Main
             long costTime = endTime - startTime;
             System.out.println("算法耗时 == " + costTime + "ms");
         }
+
+        
+
+        /* Remove Arr Elements */
+        // int[] arr = new int[]{6,3,3,5,6,5,9,8};
+        // System.out.println(Arrays.toString(arr));
+        // System.out.println();
+        
+        // // int index1 = removeElement1(arr,5);
+        // // System.out.println("removeElement1:" + index1);
+        // // System.out.println(Arrays.toString(arr));
+        // // System.out.println();
+        
+        // int index2 = removeElement2(arr,5);
+        // System.out.println("removeElement2:"+ index2);
+        // System.out.println(Arrays.toString(arr));
+        // System.out.println();
+
+
+
+        /* SYMBOL */
         // System.out.println();
         // System.out.println("MMMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMM");
         // System.out.println("MMMMMMMMMMMM8ZZZZZZZZZZZZZZMMMMMMMMMMMMM");
@@ -176,6 +198,47 @@ public class Main
 		}
 		return -1;
 	}
+
+    //移除数组中的元素
+
+    //1 快慢双指针法
+    public static int removeElement1(int[] nums, int val) {
+        int slowIndex = 0;
+        for(int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+            if(nums[fastIndex] != val) {
+                nums[slowIndex] = nums[fastIndex];
+                slowIndex++;
+            }
+            // else if(nums[fastIndex] = val) {
+            //     //nums[slowIndex] = val;
+            //     //slowIndex : stay
+            // }
+        }
+
+        return slowIndex;
+    }
+
+    //2 相向双指针法
+    public static int removeElement2(int[] nums, int val) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while(right >= 0 && nums[right] == val) 
+            right--;//将right移到从右数第一个值不为val的位置
+
+        while(left <= right) {
+            if(nums[left] == val) {//left位置的元素需要移除
+                //将right位置的元素移到left覆盖，right位置移除
+                nums[left] = nums[right];
+                right--;
+            }
+            left++;
+
+            while(right >= 0 && nums[right] == val)
+                right--;
+        }    
+        return left;
+    }
 
 }
 
