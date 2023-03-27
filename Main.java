@@ -12,22 +12,22 @@ public class Main
 {
     public static void main(String[] args) 
     {       
-        while(true) {
-            Scanner in = new Scanner(System.in);
-            System.out.print("输入n: ");
-            int n = in.nextInt();
-            long startTime = System.currentTimeMillis();
+        // while(true) {
+        //     Scanner in = new Scanner(System.in);
+        //     System.out.print("输入n: ");
+        //     int n = in.nextInt();
+        //     long startTime = System.currentTimeMillis();
 
-            // function1(n);
-            // function2(n);
-            // function3(n);
-            System.out.println("Result:" + fibonacci2(0,1,n));
-            System.out.println();
+        //     // function1(n);
+        //     // function2(n);
+        //     // function3(n);
+        //     System.out.println("Result:" + fibonacci2(0,1,n));
+        //     System.out.println();
 
-            long endTime = System.currentTimeMillis();
-            long costTime = endTime - startTime;
-            System.out.println("算法耗时 == " + costTime + "ms");
-        }
+        //     long endTime = System.currentTimeMillis();
+        //     long costTime = endTime - startTime;
+        //     System.out.println("算法耗时 == " + costTime + "ms");
+        // }
 
         
 
@@ -49,36 +49,40 @@ public class Main
 
 
         /* SYMBOL */
-        // System.out.println();
-        // System.out.println("MMMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMM");
-        // System.out.println("MMMMMMMMMMMM8ZZZZZZZZZZZZZZMMMMMMMMMMMMM");
-        // System.out.println("MMMMMMMMM$ZZZZZZZZZZZZZZZZZZZZMMMMMMMMMM");
-        // System.out.println("MMMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMMMM");
-        // System.out.println("MMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMM");
-        // System.out.println("MMMMNZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMM");
-        // System.out.println("MMMMZZZZZZZZZZZZZZZZZZZ~.....,ZZZZZZMMMM");
-        // System.out.println("MMMZZZZZZZZZZO,..............ZZZZZZZZMMM");
-        // System.out.println("MMZZZZZZ~................ZZZZZZZZZZZZNMM");
-        // System.out.println("MMZZZZZZ,.......Z$ZZZZ...ZZZZZZZZZZZZZMM");
-        // System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
-        // System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
-        // System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
-        // System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
-        // System.out.println("MMZZZZZZZZZZZ...$ZZZZ$...ZZZZZZZZZZZZZMM");
-        // System.out.println("MMZZZZZZZZZZZ...$ZZZZZ...,ZZZZZZZZZZZZMM");
-        // System.out.println("MMMZZZZZZZZZZ...$ZZZZZZ...=OZZZZZZZZZMMM");
-        // System.out.println("MMMZZZZZZZZZZ...ZZZZZZZZ...$ZZZZZZZZMMMM");
-        // System.out.println("MMMMZZZZZZZZZ?:OZZZZZZZZ=.,:ZZZZZZZZMMMM");
-        // System.out.println("MMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMM");
-        // System.out.println("MMMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMMM");
-        // System.out.println("MMMMMMMMMZZZZZZZZZZZZZZZZZZZZZZMMMMMMMMM");
-        // System.out.println("MMMMMMMMMMM$ZZZZZZZZZZZZZZZZNMMMMMMMMMMM");
-        // System.out.println("MMMMMMMMMMMMMMMZZZZZZZZZMMMMMMMMMMMMMMMM");
-        // System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        // System.out.println();
+        System.out.println();
+        System.out.println("SAMPING:" + System.currentTimeMillis());
+        System.out.println();
+        System.out.println("MMMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMM");
+        System.out.println("MMMMMMMMMMMM8ZZZZZZZZZZZZZZMMMMMMMMMMMMM");
+        System.out.println("MMMMMMMMM$ZZZZZZZZZZZZZZZZZZZZMMMMMMMMMM");
+        System.out.println("MMMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMMMM");
+        System.out.println("MMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMM");
+        System.out.println("MMMMNZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMM");
+        System.out.println("MMMMZZZZZZZZZZZZZZZZZZZ~.....,ZZZZZZMMMM");
+        System.out.println("MMMZZZZZZZZZZO,..............ZZZZZZZZMMM");
+        System.out.println("MMZZZZZZ~................ZZZZZZZZZZZZNMM");
+        System.out.println("MMZZZZZZ,.......Z$ZZZZ...ZZZZZZZZZZZZZMM");
+        System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
+        System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
+        System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
+        System.out.println("MZZZZZZZZZZZZ...$ZZZZZ...ZZZZZZZZZZZZZMM");
+        System.out.println("MMZZZZZZZZZZZ...$ZZZZ$...ZZZZZZZZZZZZZMM");
+        System.out.println("MMZZZZZZZZZZZ...$ZZZZZ...,ZZZZZZZZZZZZMM");
+        System.out.println("MMMZZZZZZZZZZ...$ZZZZZZ...=OZZZZZZZZZMMM");
+        System.out.println("MMMZZZZZZZZZZ...ZZZZZZZZ...$ZZZZZZZZMMMM");
+        System.out.println("MMMMZZZZZZZZZ?:OZZZZZZZZ=.,:ZZZZZZZZMMMM");
+        System.out.println("MMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMM");
+        System.out.println("MMMMMMMZZZZZZZZZZZZZZZZZZZZZZZZZZMMMMMMM");
+        System.out.println("MMMMMMMMMZZZZZZZZZZZZZZZZZZZZZZMMMMMMMMM");
+        System.out.println("MMMMMMMMMMM$ZZZZZZZZZZZZZZZZNMMMMMMMMMMM");
+        System.out.println("MMMMMMMMMMMMMMMZZZZZZZZZMMMMMMMMMMMMMMMM");
+        System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+        System.out.println();
         
     }
 
+
+    //#时间复杂度
     // O(n)
     public static void function1(long n) {
         System.out.println("O(n)");
@@ -117,7 +121,9 @@ public class Main
         }
     }
 
-    //斐波那契数列
+
+
+    //#斐波那契数列
     public static int fibonacci1(int i) {
         if(i <= 0) return 0;
         if(i == 1) return 1;
@@ -138,6 +144,8 @@ public class Main
             return fibonacci2(second, first + second, n - 1);
         }
     }
+
+
 
     /**
      * #二分查找-递归实现
@@ -199,8 +207,9 @@ public class Main
 		return -1;
 	}
 
-    //移除数组中的元素
 
+
+    //#移除数组中的元素
     //1 快慢双指针法
     public static int removeElement1(int[] nums, int val) {
         int slowIndex = 0;
@@ -240,6 +249,28 @@ public class Main
         return left;
     }
 
+    
+
+    //#数组平方排序
+    //双指针法
+    public static int[] sortedSquares(int[] nums) {
+        int right = nums.length - 1;
+        int left = 0;
+
+        int[] result = new int[nums.length];
+        int index = result.length - 1;
+
+        while(left <= right) {
+            if(nums[left] * nums[left] > nums[right] * nums[right]) {
+                result[index--] = nums[left] * nums[left];
+                ++left;
+            } else {
+                result[index--] = nums[right] * nums[right];
+                --right;
+            }
+        }
+        return result;
+    }
 }
 
 
