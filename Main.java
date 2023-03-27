@@ -138,7 +138,45 @@ public class Main
         }
         return -1;
     }
-    
+	
+	//二分查找
+	//1 全闭区间
+	public static int search1(int[] nums, int target) {
+		if(target < nums[0] || target > nums[nums.length - 1]){
+			return -1;
+		}
+
+		int left = 0, right = nums.length - 1;
+		
+		while(left <= right) {
+			int mid = left + ((right - left) >> 1);
+
+			if(nums[mid] == target)
+				return mid;
+			else if(nums[mid] < target)
+				left = mid + 1;
+			else if(nums[mid] > target)
+				right = mid - 1;
+		}
+		return -1;
+	}
+
+	//2 左闭右开
+	public static int search2(int[] nums, int target){
+		int left = 0, right = nums.length;
+
+		while(left < right) {
+			int mid = left + ((right - left) >> 1);
+			if(nums[mid] == target)
+				return mid;
+			else if(nums[mid] < target)
+				left = mid + 1;
+			else if(nums[mid] > target)
+				right = mid;
+		}
+		return -1;
+	}
+
 }
 
 
