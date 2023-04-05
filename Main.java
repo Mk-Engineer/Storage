@@ -50,8 +50,8 @@ public class Main
 
 
         //#HashSetTest
-        int[] arr1 = new int[]{4,9,5};
-        int[] arr2 = new int[]{9,4,9,8,4};
+        int[] arr1 = new int[]{9,4,9,8,4};
+        int[] arr2 = new int[]{4,9,5};
         intersection(arr1,arr2);
 
 
@@ -355,17 +355,19 @@ public class Main
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> resSet = new HashSet<>();
 
-        //将数组1的元素，全部加入set
+        //将数组1的元素，全部加入set，去掉重复元素
         for(int i : nums1) {
+            // System.out.println("nums1-i: " + i);
             set1.add(i);
         }
-
+        
         // System.out.println("set1: " + Arrays.toString(set1.toArray()));
         
         //判断hash表中是否存在该元素
         for(int i : nums2) {
             if(set1.contains(i)) {
                 resSet.add(i);
+                // System.out.println("nums2-i: " + i);
             }
         }
         // System.out.println("resSet: " + Arrays.toString(resSet.toArray()));
