@@ -49,6 +49,13 @@ public class Main
 
 
 
+        //#HashSetTest
+        int[] arr1 = new int[]{4,9,5};
+        int[] arr2 = new int[]{9,4,9,8,4};
+        intersection(arr1,arr2);
+
+
+
         /* SYMBOL */
         System.out.println();
         System.out.println("SAMPING:" + System.currentTimeMillis());
@@ -306,7 +313,7 @@ public class Main
      * @param t
      * @return
      */
-    public boolean isAnagram(String s, String t) {
+    public static boolean isAnagram(String s, String t) {
         int[] record = new int[26];
 
         // 在24个位置上，字母存在，数字+1
@@ -326,6 +333,53 @@ public class Main
             }
         }
         return true;
+    }
+
+
+
+    /**
+     * #两个数组的交集
+     * 
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        if(nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0){
+            return new int[0];
+        }
+
+        // System.out.println("nums1: " + Arrays.toString(nums1));
+        // System.out.println("nums2: " + Arrays.toString(nums2));
+
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> resSet = new HashSet<>();
+
+        //将数组1的元素，全部加入set
+        for(int i : nums1) {
+            set1.add(i);
+        }
+
+        // System.out.println("set1: " + Arrays.toString(set1.toArray()));
+        
+        //判断hash表中是否存在该元素
+        for(int i : nums2) {
+            if(set1.contains(i)) {
+                resSet.add(i);
+            }
+        }
+        // System.out.println("resSet: " + Arrays.toString(resSet.toArray()));
+
+        //方法1：将结果集合转换为数组
+        // return resSet.stream().mapToInt(x -> x).toArray();
+
+        //方法2：另外申请一个数组存放setRes中的元素，最后返回数组
+        int[] arr = new int[resSet.size()];
+        int j = 0;
+        for(int i : resSet) {
+            arr[j++] = i;
+        }
+        return arr;
     }
 }
 
