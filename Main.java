@@ -55,6 +55,14 @@ public class Main
         // intersection(arr1,arr2);
 
 
+        //#twoSum
+        // int[] num1 = new int[]{11,2,9,7,15,3,21,6};
+        // int[] num2 = new int[]{11,9,15,21};
+        // System.out.println(Arrays.toString(twoSum(num1,9)));
+        // System.out.println();
+        // System.out.println(Arrays.toString(twoSum(num2,9)));
+
+
 
         /* SYMBOL */
         System.out.println();
@@ -417,7 +425,35 @@ public class Main
 
 
 
-    //#
+    /**
+     * #两数之和
+     * 
+     * @param nums
+     * @param target
+     * @return 存在，返回下标 / 不存在，返回[0,0]
+    */
+    public static int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];
+        if(nums == null || nums.length == 0){
+            return res;
+        }
+
+        Map<Integer,Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++) {
+            int temp = target - nums[i];
+            if(map.containsKey(temp)) {
+                res[1] = i;
+                res[0] = map.get(temp);
+                break;
+            }
+            map.put(nums[i], i); //没找到匹配对，把访问过的元素和下表加入到map中
+        }
+        
+        return res;
+    }
 }
 
 
+
+//#
