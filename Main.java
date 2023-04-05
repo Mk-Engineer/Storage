@@ -292,6 +292,41 @@ public class Main
 		}
 		return result == Integer.MAX_VALUE ? 0 : result;
 	}
+
+
+
+    /**
+     * #哈希表
+     *  根据关键码的值而直接进行访问的数据结构
+     *  用来快速判断一个元素是否出现在集合里
+     * 
+     * 有效的字母异位词 字典解法
+     * 时间复杂度O(n) 空间复杂度O(1)
+     * @param s
+     * @param t
+     * @return
+     */
+    public boolean isAnagram(String s, String t) {
+        int[] record = new int[26];
+
+        // 在24个位置上，字母存在，数字+1
+        for(int i = 0; i < s.length(); i++) {
+            record[s.charAt(i) - 'a']++;
+        }
+        
+        // 在24个位置上，字母存在，数字-1
+        for(int i = 0; i < t.length(); i++) {
+            record[t.charAt(i) - 'a']--;
+        }
+
+        //如果字母种类及出现次数完全吻合，最终record中24个位置应该全部为 0
+        for(int count: record) {
+            if(count != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 
