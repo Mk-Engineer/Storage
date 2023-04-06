@@ -14,8 +14,6 @@ public class Main
 {
     public static void main(String[] args) 
     {       
-		//iSH iPad
-
 		// while(true) {
         //     Scanner in = new Scanner(System.in);
         //     System.out.print("输入n: ");
@@ -621,5 +619,5 @@ public class Main
 
 
 
-    //#MK-OMEN
+    //#Notebook-42
 }
