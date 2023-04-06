@@ -1,5 +1,6 @@
 // import java.util.Arrays;
 // import java.util.Scanner;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -13,7 +14,9 @@ public class Main
 {
     public static void main(String[] args) 
     {       
-        // while(true) {
+		//iSH iPad
+
+		// while(true) {
         //     Scanner in = new Scanner(System.in);
         //     System.out.print("输入n: ");
         //     int n = in.nextInt();
@@ -64,9 +67,22 @@ public class Main
 
 
 
+        //#threeSum
+        // int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
+        // System.out.println(Arrays.toString(nums));
+        // System.out.println();
+        // System.out.println(Arrays.toString(threeSum(nums).toArray()));
+
+
+
         /* SYMBOL */
         System.out.println();
-        System.out.println("SAMPING:" + System.currentTimeMillis());
+        Date date = new Date(System.currentTimeMillis()); // 将毫秒数转换为Date对象
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 创建日期格式化对象
+        String formattedDate = formatter.format(date); // 将Date对象格式化为字符串
+        
+        System.out.println("SAMPING AT: " + formattedDate);
+        
         System.out.println();
         System.out.println("MMMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMM8ZZZZZZZZZZZZZZMMMMMMMMMMMMM");
@@ -452,8 +468,158 @@ public class Main
         
         return res;
     }
+
+
+
+    /**
+     * #四数之和
+     *      给定四个包含整数的数组列表 A , B , C , D ,
+     *      计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
+     * 
+     * 步骤：
+     *     首先定义 一个unordered_map，key放a和b两数之和，value 放a和b两数之和出现的次数。 
+     *     遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中。
+     *     定义int变量count，用来统计 a+b+c+d = 0 出现的次数。
+     *     在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，
+     *     就用count把map中key对应的value也就是出现次数统计出来。
+     *     最后返回统计值 count。
+     * 
+     * @param nums1
+     * @param nums2
+     * @param nums3
+     * @param nums4
+     * @return 总元组数 \ 总次数
+     */
+    public static int fourSumCount(int[] nums1,int[] nums2,int[] nums3,int[] nums4) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int temp;
+        int res = 0;
+
+        //统计两个数组中的元素之和，同时统计出现的次数，放入map。
+        for(int i : nums1) {
+            for(int j : nums2) {
+                temp = i + j;
+                if (map.containsKey(temp)) {
+                    map.put(temp, map.get(temp) + 1);//value + 1
+                } else {
+                    map.put(temp,1);
+                }
+            }
+        }
+
+        //统计剩余两个元素的和，在map中找到是否存在相加为0的情况，同记录次数
+        for(int i : nums3) {
+            for(int j : nums4) {
+                temp = i + j;
+                if(map.containsKey(0-temp)) {
+                    res += map.get(0-temp);
+                }
+            }
+        }
+        
+        return res;
+    }
+
+
+
+    /**
+     * #赎金信
+     *      给定一个赎金信 (ransom) 字符串和一个杂志(magazine)字符串，
+     *      判断第一个字符串 ransom 能不能由第二个字符串 magazines 里面的字符构成。
+     *      如果可以构成，返回 true ；否则返回 false。
+     * 
+     *      (题目说明：为了不暴露赎金信字迹，要从杂志上搜索各个需要的字母，组成单词来表达意思。
+     *      杂志字符串中的每个字符只能在赎金信字符串中使用一次。)
+     * 
+     * @param ransomNote
+     * @param magazine
+     * @return 能构成 / 不能构成
+     */
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        //定义一个哈希映射数组
+        int[] record = new int[26];
+
+        for(char c : magazine.toCharArray()) {
+            record[c - 'a'] += 1;
+        }
+        
+        for(char c : ransomNote.toCharArray()) {
+            record[c - 'a'] -= 1;
+        }
+
+        //如果数组中存在负数，说明ransomNote中总存在magazine中不存在的字符
+        for(int i : record) {
+            if(i < 0) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+
+
+    /**
+     * #三数之和
+     *      给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
+     *      使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
+     * 
+     * [双指针法]
+     *      * 双指针法一定要排序！
+     * 
+     *      拿这个nums数组来举例，首先将数组排序，然后有一层for循环，i从下标0的地方开始，同时定一个下标left 定义在i+1的位置上，定义下标right 在数组结尾的位置上。
+     *      依然还是在数组中找到 abc 使得a + b +c =0，我们这里相当于 a = nums[i]，b = nums[left]，c = nums[right]。
+     *      接下来如何移动left 和right呢， 如果nums[i] + nums[left] + nums[right] > 0 就说明 此时三数之和大了，因为数组是排序后了，所以right下标就应该向左移动，这样才能让三数之和小一些。
+     *      如果 nums[i] + nums[left] + nums[right] < 0 说明 此时 三数之和小了，left 就向右移动，才能让三数之和大一些，直到left与right相遇为止。
+     * 
+     * 时间复杂度：O(n^2)
+     * 
+     * @param nums
+     * @return
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+
+        //找出a + b + c = 0
+        //a = nums[i] , b = nums[left] , c = nums[right]
+        for(int i = 0; i < nums.length; i++) {
+            // 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果
+            if(nums[i] > 0) {
+                return result;
+            }
+
+            if(i > 0 && nums[i] == nums[i-1]) { //去重a
+                continue;
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while(right > left) {//直到left与right相遇为止
+                int sum = nums[i] + nums[left] + nums[right];
+                if(sum > 0) {
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    //去重逻辑应该放到找到一个三元组之后，对b、c进行去重
+                    while(right > left && nums[right] == nums[right - 1])
+                        right--;
+                    while(right > left && nums[left] == nums[left + 1])
+                        left++;    
+
+                    //找到答案时，双指针同时收缩    
+                    right--;
+                    left++;                        
+                }
+            }
+        }
+        return result;
+    }
+
+
+
+    //#MK-OMEN
 }
-
-
-
-//#
