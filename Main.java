@@ -686,3 +686,51 @@ public class Main
         return result;
     }
 }
+
+
+
+//#栈和队列
+/**
+ * 使用栈实现队列的下列操作：
+ *  push(x) -- 将一个元素放入队列的尾部。
+ *  pop() -- 从队列首部移除元素。
+ *  peek() -- 返回队列首部的元素。
+ *  empty() -- 返回队列是否为空。
+*/
+class MyQueue {
+    Stack<Integer> stackIn;
+    Stack<Integer> stackOut;
+
+    public MyQueue() {
+        stackIn = new Stack<>();
+        stackOut = new Stack<>();
+    }
+
+    public void push(int x) {
+        stackIn.push(x);
+    }
+
+    public int pop() {
+        dumpstackIn();
+        return stackOut.pop();
+    }
+
+    public int peek() {
+        dumpstackIn();
+        return stackOut.peek();
+    }
+
+    public boolean empty() {
+        return (stackIn.isEmpty() && stackOut.isEmpty());
+    }
+
+    //如果stackOut不为空，将stackIn中的全部元素放到stackOut中
+    private void dumpstackIn() {
+        if(!stackOut.isEmpty())
+            return;
+        
+        while(!stackIn.isEmpty()) {
+            stackOut.push(stackIn.pop());
+        }              
+    }
+}
