@@ -734,3 +734,172 @@ class MyQueue {
         }              
     }
 }
+
+
+
+/**
+ * 使用队列实现栈的下列操作：
+
+    push(x) -- 元素 x 入栈
+    pop() -- 移除栈顶元素
+    top() -- 获取栈顶元素
+    empty() -- 返回栈是否为空
+*/
+
+// 使用2个Queue实现
+class MyStack0 {
+
+    Queue<Integer> queue1; //和栈中保持一样元素的队列
+    Queue<Integer> queue2; //辅助队列
+
+    public MyStack0() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
+    }
+
+    //Push element onto stack
+    //offer/add 入队
+    public void push(int x) {
+        queue2.offer(x); //先放入辅助队列
+
+        while(!queue1.isEmpty()) {
+            queue2.offer(queue1.poll());
+        }
+
+        Queue<Integer> queueTemp;
+        queueTemp = queue1;
+        queue1 = queue2;
+        queue2 = queueTemp; //最后交换queue1和queue2，将元素都放到queue1中
+    }
+
+    //Removes the top element
+    //poll 出队
+    public int pop() {
+        return queue1.poll(); // queue1中的元素和栈中保持一致
+    }
+
+    //Get the top element
+    public int top() {
+        return queue1.peek();
+    }
+
+    public boolean empty() {
+        return queue1.isEmpty();
+    }
+}
+
+
+
+//使用两个Deque实现
+class MyStack1 {
+    //Deque接口继承了Queue接口
+    //所以Queue中的add、poll、peek等效于Deque中的addLast、pollFirst、peekFirst
+
+    Deque<Integer> que1;//和栈中保持元素一致的队列
+    Deque<Integer> que2;//辅助队列
+
+    public MyStack1() {
+        que1 = new ArrayDeque<>();
+        que2 = new ArrayDeque<>();
+    }
+
+    public void push(int x) {
+        que1.addLast(x);
+    }
+
+    public int pop() {
+        int size = que1.size();
+        size--;
+
+        //将que1导入que2，但留下最后一个值
+        while((size--) > 0) {
+            que2.addLast/*入队*/(que1.peekFirst()/*出队*/);
+            que1.pollFirst();/*出队*/
+        }
+
+        int res = que1.pollFirst();/*出队*/
+        //
+        que1 = que2;
+        //
+        que2 = new ArrayDeque<>();
+
+        return res;
+    }
+
+    public int top() {
+        return que1.peekLast();
+    }
+
+    public boolean empty() {
+        return que1.isEmpty();
+    }
+}
+
+
+
+//用1个Deque实现
+class MyStack2 {
+    Deque<Integer> que;
+
+    public MyStack2() {
+        que = new ArrayDeque<>();
+    }
+
+    public void push(int x) {
+        que.addLast(x);
+    }
+
+    public int pop() {
+        int size = que.size();
+        size--;
+
+        while((size--) > 0) {
+            que.addLast(que.peekFirst());
+            que.pollFirst();
+        }
+
+        int res = que.pollFirst();
+        return res;
+    }
+
+    public int top() {
+        return que.peekLast();
+    }
+
+    public boolean empty() {
+        return que.isEmpty();
+    }
+}
+
+
+
+//用1个Queue实现
+class MyStack3 {
+    Queue<Integer> queue;
+
+    public MyStack3() {
+        queue = new LinkedList<>();
+    }
+
+    //每offer一个数A进来，都重新排列，将此数A放到队首
+    public void push(int x) {
+        queue.offer(x);
+        int size = queue.size();
+
+        //移动除了 A 的其它数
+        while((size--) > 1)
+            queue.offer(queue.poll());
+    }
+
+    public int pop() {
+        return queue.poll();
+    }
+
+    public int top() {
+        return queue.peek();
+    }
+
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
