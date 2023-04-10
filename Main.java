@@ -81,6 +81,18 @@ public class Main
 
         
 
+        //#isValid
+        String s1 = "([{}]()";
+        String s2 = "([{}}}";
+        String s3 = "([{}])))";
+        String s4 = "{[()]}";
+        System.out.println(s1 + " s1 Match is: " + isValid(s1));
+        System.out.println(s2 + " s2 Match is: " + isValid(s2));
+        System.out.println(s3 + " s3 Match is: " + isValid(s3));
+        System.out.println(s4 + " s4 Match is: " + isValid(s4));
+
+
+
         /* SYMBOL */
         System.out.println();
         Date date = new Date(System.currentTimeMillis()); // 将毫秒数转换为Date对象
@@ -684,6 +696,43 @@ public class Main
             }
         }
         return result;
+    }
+
+
+
+    /**
+     * #括号匹配
+     * 
+     *  栈适合做对称匹配
+     * 
+     *      在匹配左括号的时候，右括号先入栈，
+     *      就只需要比较当前元素和栈顶相不相等就可以了，
+     *      比左括号先入栈代码实现要简单
+     * 
+     * @param s
+     * @return
+     */
+    public static boolean isValid(String s) {
+        Deque<Character> deque = new LinkedList<>();
+        char ch;
+
+        for(int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+
+            //遇到左括号，将右括号入栈
+            if(ch == '(') {
+                deque.push(')');
+            } else if (ch == '{') {
+                deque.push('}');
+            } else if (ch == '[') {
+                deque.push(']');
+            } else if (deque.isEmpty() || deque.peek() != ch) {
+                return false;
+            } else {//如果是右括号，判断是否和栈顶元素匹配
+                deque.pop();
+            }
+        }
+        return deque.isEmpty();
     }
 }
 
