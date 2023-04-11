@@ -783,6 +783,67 @@ public class Main
 
         return str;
     }
+
+
+
+    /**
+     * #拿字符串直接作为栈
+     * 
+     * @param s
+     * @return
+     */
+    public static String removeDuplicates1(String s) {
+        //将res当作栈
+        //也可以用 StringBuilder 来修改字符串，速度更快
+        //StringBuilder res = new StringBuilder();
+
+        StringBuffer res = new StringBuffer();
+        //top为res的长度
+        int top = -1;
+        
+        for(int i = 0;i < s.length(); i++) {
+            char c = s.charAt(i);
+            //当 top > 0，即栈中有字符时，当前字符如果和栈中字符相等，弹出栈顶字符，同时top--
+            if(top >= 0 && res.charAt(top) == c) {
+                res.deleteCharAt(top);
+                top--;
+            //否则，将该字符入栈，同时top++    
+            } else {
+                res.append(c);
+                top++;
+            }
+        }
+
+        return res.toString();
+    }
+
+
+
+    /**
+     * #双指针法
+     * 
+     * @param s
+     * @return
+     */
+    public static String removeDuplicates2(String s) {
+        char[] ch = s.toCharArray();
+        int fast = 0;
+        int slow = 0;
+
+        while(fast < s.length()) {
+            //直接用fast指针覆盖slow指针
+            ch[slow] = ch[fast];
+            //遇到前后相同的值，就跳过，即slow指针后退一步，下次循环就可以直接覆盖掉
+            if(slow > 0 && ch[slow] == ch[slow - 1]) {
+                slow--;
+            } else {
+                slow++;
+            }
+            fast++;
+        }
+        
+        return new String(ch,0,slow);
+    }
 }
 
 
