@@ -854,7 +854,7 @@ public class Main
      * @return
      */
     public static int evalRPN(String[] tokens) {
-        Deque<Integer> stack = new LinkedList();
+        Deque<Integer> stack = new LinkedList<>();
         for(String s : tokens) {
             if("+".equals(s)) {
                 stack.push(stack.pop() + stack.pop());
@@ -876,8 +876,71 @@ public class Main
 
 
 
-    //#
+    /**
+     * 解法一：
+     *      自定义数组
+     *  
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int[] maxSlidingWindow1(int[] nums,int k) {
+        if(nums.length == 1) {
+            return nums;
+        }
+        
+        int len = nums.length - k + 1;
+        
+        //存放结果元素的数组
+        int[] res = new int[len];
+        int num = 0;
 
+        //自定义队列
+        MyQue myQueue = new MyQue();
+
+        //先将前k个元素放入队列
+        for(int i = 0; i < k; i++) {
+            myQueue.add(nums[i]);
+        }
+
+        res[num++] = myQueue.peek();
+
+        for(int i = k; i < nums.length; i++) {
+            //滑动窗口移除最前面的元素，移除是判断该元素是否放入队列
+            myQueue.poll(nums[i - k]);
+            //滑动窗口加入最后的元素
+            myQueue.add(nums[i]);
+            //记录对应的最大值
+            res[num++] = myQueue.peek();
+        }
+        return res;
+    }
+
+
+
+    /**
+     * 解法二：
+     *  利用双端队列手动实现单调队列
+     *      用一个单调队列来存储对应的下标，每当窗口滑动的时候，
+     *      直接取队列的头部指针对应的值放入结果集即可
+     * 
+     *      单调队列类似 （tail -->） 3 --> 2 --> 1 --> 0 (--> head) 
+     *      (右边为头结点，元素存的是下标)
+     * 
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int[] maxSlidingWindow2(int[] nums,int k) {
+        // ArrayDeque<Integer> deque = new ArrayDeque<>();
+        // int n = nums.length;
+        
+        return null;
+    }
+
+
+
+    //#
 }
 
 
@@ -935,9 +998,11 @@ class MyQueue {
  *  滑动窗口最大值
  * 
  *  解法一：自定义数组
- *  解法二：利用双端队列手动实现单调队列
+ *         @param maxSlidingWindow1
+ *  解法二：利用双端队列手动实现单调队列 (见Main)
+ *         @param maxSlidingWindow2
 */
-class MyQueue0 {
+class MyQue {
     Deque<Integer> deque = new LinkedList<>();
 
     //弹出元素时，比较当前要弹出的数值是否等于队列出口的数值，如果相等则弹出
