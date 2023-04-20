@@ -94,39 +94,39 @@ public class Main
 
         
         //#deque
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
-        deque.offer(1);
-        deque.offer(2);
-        deque.offer(3);
-        deque.offer(4);
-        deque.offer(5);
-        deque.offer(6);
+        // ArrayDeque<Integer> deque = new ArrayDeque<>();
+        // deque.offer(1);
+        // deque.offer(2);
+        // deque.offer(3);
+        // deque.offer(4);
+        // deque.offer(5);
+        // deque.offer(6);
 
-        System.out.println(Arrays.toString(deque.toArray()));
-        System.out.println();
+        // System.out.println(Arrays.toString(deque.toArray()));
+        // System.out.println();
 
-        System.out.println("peek() " + deque.peek());
-        System.out.println("peekFirst() " + deque.peekFirst());
-        System.out.println("peekLast() " + deque.peekLast());
-        System.out.println();
+        // System.out.println("peek() " + deque.peek());
+        // System.out.println("peekFirst() " + deque.peekFirst());
+        // System.out.println("peekLast() " + deque.peekLast());
+        // System.out.println();
 
-        System.out.println("poll() " + deque.poll());
-        System.out.println("pollFirst() " + deque.pollFirst());
-        System.out.println("pollLast() " + deque.pollLast());
-        System.out.println();
-        System.out.println("-------------"); //#
-        System.out.println();
+        // System.out.println("poll() " + deque.poll());
+        // System.out.println("pollFirst() " + deque.pollFirst());
+        // System.out.println("pollLast() " + deque.pollLast());
+        // System.out.println();
+        // System.out.println("-------------"); //#
+        // System.out.println();
 
 
 
         //#maxSlidingWindow2
-        int[] num = new int[]{1,3,-1,-3,5,3,6,7};
-        System.out.println(Arrays.toString(num));
-        System.out.println("-------------"); //#
-        System.out.println();
+        // int[] num = new int[]{1,3,-1,-3,5,3,6,7};
+        // System.out.println(Arrays.toString(num));
+        // System.out.println("-------------"); //#
+        // System.out.println();
 
-        int[] res = maxSlidingWindow2(num,3);
-        System.out.println(Arrays.toString(res));
+        // int[] res = maxSlidingWindow2(num,3);
+        // System.out.println(Arrays.toString(res));
 
 
 
@@ -984,6 +984,7 @@ public class Main
         for(int i = 0; i < n; i++) {
             // 根据题意，i为nums下标，是要在[i - k + 1, i]中选到最大值，只需要保证两点
             // 1.队列头节点需要在[i - k + 1, i]范围内，不符合则要弹出
+            /*
             System.out.println("i = " + i); //#
             System.out.println("范围：" + "["+(i-k+1)+", "+(i-k+2)+", "+i+"]");
             if((i-k+1) >= 0)
@@ -991,16 +992,19 @@ public class Main
             System.out.println("deque.peek() = " + deque.peek()); //#
             System.out.println("i-k+1 = " + (i-k+1)); //#
             System.out.println(); //#
+            */
             while(!deque.isEmpty() && deque.peek() < i - k + 1) {
-                System.out.println("while: deque.peek() = " + deque.peek()); //#
+                // System.out.println("while: deque.peek() = " + deque.peek()); //#
                 deque.poll();//出队
             }
             // 2.出队直至队首为最大值
+            /*
             if(deque.peekLast() != null)
                 System.out.println("nums[deque.peekLast()="+nums[deque.peekLast()]+"] = " + deque.peekLast()); //#
             else
                 System.out.println("nums[i="+i+"] = " + nums[i]); //#
             System.out.println(); //#
+            */
             while(!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
                 deque.pollLast();
                 if(deque.peekLast() != null)
@@ -1015,14 +1019,16 @@ public class Main
             // 存放最大值
             // 因为单调，当i增长到符合【第一个】k范围的时候，每滑动一步都将队列头节点放入结果就行了
             if(i >= k - 1) {
+                /*
                 if(deque.peekLast() != null)
                     System.out.println("if: nums["+"i="+deque.peek()+"] = " + deque.peekLast()); //#
                 else
                     System.out.println("deque.peekLast() = " + deque.peekLast()); //#
                 System.out.println(); //#
+                */
                 res[idx++] = nums[deque.peek()];
             }
-            System.out.println("-------------"); //#
+            // System.out.println("-------------"); //#
         }
         
         return res;
