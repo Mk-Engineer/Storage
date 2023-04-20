@@ -82,14 +82,45 @@ public class Main
         
 
         //#isValid
-        String s1 = "([{}]()";
-        String s2 = "([{}}}";
-        String s3 = "([{}])))";
-        String s4 = "{[()]}";
-        System.out.println(s1 + " s1 Match is: " + isValid(s1));
-        System.out.println(s2 + " s2 Match is: " + isValid(s2));
-        System.out.println(s3 + " s3 Match is: " + isValid(s3));
-        System.out.println(s4 + " s4 Match is: " + isValid(s4));
+        // String s1 = "([{}]()";
+        // String s2 = "([{}}}";
+        // String s3 = "([{}])))";
+        // String s4 = "{[()]}";
+        // System.out.println(s1 + " s1 Match is: " + isValid(s1));
+        // System.out.println(s2 + " s2 Match is: " + isValid(s2));
+        // System.out.println(s3 + " s3 Match is: " + isValid(s3));
+        // System.out.println(s4 + " s4 Match is: " + isValid(s4));
+
+
+        
+        //#deque
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        deque.offer(1);
+        deque.offer(2);
+        deque.offer(3);
+        deque.offer(4);
+        deque.offer(5);
+        deque.offer(6);
+
+        System.out.println("peek() " + deque.peek());
+        System.out.println("peekFirst() " + deque.peekFirst());
+        System.out.println("peekLast() " + deque.peekLast());
+        System.out.println();
+
+        System.out.println("poll() " + deque.poll());
+        System.out.println("pollFirst() " + deque.pollFirst());
+        System.out.println("pollLast() " + deque.pollLast());
+        System.out.println();
+
+
+
+        //#maxSlidingWindow2
+        int[] num = new int[]{1,3,-1,-3,5,3,6,7};
+        System.out.println(Arrays.toString(num));
+        System.out.println();
+
+        int[] res = maxSlidingWindow2(num,3);
+        System.out.println(Arrays.toString(res));
 
 
 
@@ -907,7 +938,7 @@ public class Main
 
         for(int i = k; i < nums.length; i++) {
             //滑动窗口移除最前面的元素，移除是判断该元素是否放入队列
-            myQueue.poll(nums[i - k]);
+            myQueue.poll(nums[i - k]);//poll() 出队
             //滑动窗口加入最后的元素
             myQueue.add(nums[i]);
             //记录对应的最大值
@@ -927,15 +958,52 @@ public class Main
      *      单调队列类似 （tail -->） 3 --> 2 --> 1 --> 0 (--> head) 
      *      (右边为头结点，元素存的是下标)
      * 
+     *             peek    offer
+     *      deque: | 1 | 2 | 3 |    
+     *                     peekLast
+     * 
      * @param nums
      * @param k
      * @return
      */
     public static int[] maxSlidingWindow2(int[] nums,int k) {
-        // ArrayDeque<Integer> deque = new ArrayDeque<>();
-        // int n = nums.length;
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+
+        int n = nums.length;
+        int[] res = new int[n - k + 1];
+        int idx = 0;
+
+        for(int i = 0; i < n; i++) {
+            // 根据题意，i为nums下标，是要在[i - k + 1, i]中选到最大值，只需要保证两点
+            // 1.队列头节点需要在[i - k + 1, i]范围内，不符合则要弹出
+            System.out.println("i = " + i); //#
+            System.out.println("deque.peek() = " + deque.peek()); //#
+            System.out.println("i-k+1 = " + (i-k+1)); //#
+            System.out.println(); //#
+            while(!deque.isEmpty() && deque.peek() < i - k + 1) {
+                System.out.println("while: deque.peek() = " + deque.peek()); //#
+                deque.poll();//出队
+            }
+            // 2.既然是单调，就要保证每次放进去的数字比末尾的都大，否则也弹出
+            System.out.println("deque.peekLast() = " + deque.peekLast()); //#
+            System.out.println("nums[i="+i+"] = " + nums[i]); //#
+            System.out.println(); //#
+            while(!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                System.out.println("while: nums[deque.peekLast()="+deque.peekLast()+"]" + deque.peekLast()); //#
+                deque.pollLast();
+            }
+
+            deque.offer(i);//入队
+            System.out.println("-------------"); //#
+            System.out.println(); //#
+            // 因为单调，当i增长到符合第一个k范围的时候，每滑动一步都将队列头节点放入结果就行了
+            if(i >= k - 1) {
+                System.out.println("if: nums["+"i="+deque.peek()+"]"); //#
+                res[idx++] = nums[deque.peek()];
+            }
+        }
         
-        return null;
+        return res;
     }
 
 
