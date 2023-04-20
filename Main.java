@@ -102,6 +102,9 @@ public class Main
         deque.offer(5);
         deque.offer(6);
 
+        System.out.println(Arrays.toString(deque.toArray()));
+        System.out.println();
+
         System.out.println("peek() " + deque.peek());
         System.out.println("peekFirst() " + deque.peekFirst());
         System.out.println("peekLast() " + deque.peekLast());
@@ -111,12 +114,15 @@ public class Main
         System.out.println("pollFirst() " + deque.pollFirst());
         System.out.println("pollLast() " + deque.pollLast());
         System.out.println();
+        System.out.println("-------------"); //#
+        System.out.println();
 
 
 
         //#maxSlidingWindow2
         int[] num = new int[]{1,3,-1,-3,5,3,6,7};
         System.out.println(Arrays.toString(num));
+        System.out.println("-------------"); //#
         System.out.println();
 
         int[] res = maxSlidingWindow2(num,3);
@@ -958,9 +964,11 @@ public class Main
      *      单调队列类似 （tail -->） 3 --> 2 --> 1 --> 0 (--> head) 
      *      (右边为头结点，元素存的是下标)
      * 
+     *             poll
      *             peek    offer
      *      deque: | 1 | 2 | 3 |    
      *                     peekLast
+     *                     pollLast
      * 
      * @param nums
      * @param k
@@ -977,6 +985,9 @@ public class Main
             // 根据题意，i为nums下标，是要在[i - k + 1, i]中选到最大值，只需要保证两点
             // 1.队列头节点需要在[i - k + 1, i]范围内，不符合则要弹出
             System.out.println("i = " + i); //#
+            System.out.println("范围：" + "["+(i-k+1)+", "+(i-k+2)+", "+i+"]");
+            if((i-k+1) >= 0)
+                System.out.println("nums: " + "["+nums[i-k+1]+", "+nums[i-k+2]+", "+nums[i]+"]");
             System.out.println("deque.peek() = " + deque.peek()); //#
             System.out.println("i-k+1 = " + (i-k+1)); //#
             System.out.println(); //#
@@ -984,23 +995,34 @@ public class Main
                 System.out.println("while: deque.peek() = " + deque.peek()); //#
                 deque.poll();//出队
             }
-            // 2.既然是单调，就要保证每次放进去的数字比末尾的都大，否则也弹出
-            System.out.println("deque.peekLast() = " + deque.peekLast()); //#
-            System.out.println("nums[i="+i+"] = " + nums[i]); //#
+            // 2.出队直至队首为最大值
+            if(deque.peekLast() != null)
+                System.out.println("nums[deque.peekLast()="+nums[deque.peekLast()]+"] = " + deque.peekLast()); //#
+            else
+                System.out.println("nums[i="+i+"] = " + nums[i]); //#
             System.out.println(); //#
             while(!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
-                System.out.println("while: nums[deque.peekLast()="+deque.peekLast()+"]" + deque.peekLast()); //#
                 deque.pollLast();
+                if(deque.peekLast() != null)
+                    System.out.println("while: nums[deque.peekLast()="+nums[deque.peekLast()]+"] = " + deque.peekLast()); //#
+                else
+                    System.out.println("deque.peekLast() = " + deque.peekLast()); //#
+                System.out.println(); //#
             }
 
             deque.offer(i);//入队
-            System.out.println("-------------"); //#
-            System.out.println(); //#
-            // 因为单调，当i增长到符合第一个k范围的时候，每滑动一步都将队列头节点放入结果就行了
+
+            // 存放最大值
+            // 因为单调，当i增长到符合【第一个】k范围的时候，每滑动一步都将队列头节点放入结果就行了
             if(i >= k - 1) {
-                System.out.println("if: nums["+"i="+deque.peek()+"]"); //#
+                if(deque.peekLast() != null)
+                    System.out.println("if: nums["+"i="+deque.peek()+"] = " + deque.peekLast()); //#
+                else
+                    System.out.println("deque.peekLast() = " + deque.peekLast()); //#
+                System.out.println(); //#
                 res[idx++] = nums[deque.peek()];
             }
+            System.out.println("-------------"); //#
         }
         
         return res;
