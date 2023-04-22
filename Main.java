@@ -1096,6 +1096,7 @@ public class Main
 
         //在优先队列中存储二元组(num,cnt)，cnt表示元素值num在书中的出现次数
         //出现次数按从队头到队尾的顺序是从小到大排，出现次数最低的在队头(相当于小顶堆)
+        //pair[0]: num / pair[1]: cnt
         PriorityQueue<int[]> pq = new PriorityQueue<>((pair1,pair2)->pair1[1]-pair2[1]);
 
         //小顶堆只需要维持k个元素有序
