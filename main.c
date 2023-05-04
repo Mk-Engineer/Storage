@@ -9,6 +9,6 @@
 int main()
 {
     printf("Hello, C language!");
-    printf("Mk-Linux Changed");
+    printf("mk-linux changed");
     return 0;
 }
