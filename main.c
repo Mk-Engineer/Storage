@@ -10,6 +10,6 @@ int main()
 {
     printf("Hello, C language!");
     printf("Macbook  changed");
-    printf(Macbook upload);
+    printf("Macbook upload");
     return 0;
 }
