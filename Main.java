@@ -173,7 +173,7 @@ public class Main
         System.out.println("MMMMMMMMMMM$ZZZZZZZZZZZZZZZZNMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMMMMMZZZZZZZZZMMMMMMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-       	System.out.println("Hello iSH!");
+       	System.out.println("Hello Github iSH!");
 	System.out.println();
         
     }
