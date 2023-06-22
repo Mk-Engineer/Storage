@@ -175,6 +175,7 @@ public class Main
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
 		System.out.println();
 		System.out.println("Host-iSH");
+		System.out.println("Terminal-iPad iSH");
         
     }
 
