@@ -18,7 +18,7 @@ public class TreeNode {
     }
 
     public static void main(String args[]) {
-        System.out.println("Hello TreeNode iSH!");
+       // System.out.println("Hello TreeNode iSH!");
 
         TreeNode leftgrandson = new TreeNode(3);
         TreeNode rightgrandson = new TreeNode(4);
