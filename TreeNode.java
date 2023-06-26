@@ -20,11 +20,11 @@ public class TreeNode {
     public static void main(String args[]) {
        // System.out.println("Hello TreeNode iSH!");
 
-        TreeNode leftgrandson = new TreeNode(3);
-        TreeNode rightgrandson = new TreeNode(4);
-        TreeNode leftson = new TreeNode(1,leftgrandson,rightgrandson);
-        TreeNode rightson = new TreeNode(2);
-        TreeNode tree = new TreeNode(0,leftson,rightson);
+        TreeNode leftgrandson = new TreeNode(1);
+        TreeNode rightgrandson = new TreeNode(2);
+        TreeNode leftson = new TreeNode(4,leftgrandson,rightgrandson);
+        TreeNode rightson = new TreeNode(6);
+        TreeNode tree = new TreeNode(5,leftson,rightson);
 
         //
         Solution0 slt0 = new Solution0();
@@ -48,6 +48,10 @@ public class TreeNode {
         Solution4 slt4 = new Solution4();
         List result4 = slt4.inorderTraversal(tree);
         System.out.println("inorder: " + Arrays.toString(result4.toArray()));
+    
+        Solution5 slt5 = new Solution5();
+        List result5 = slt5.postorderTraversal(tree);
+        System.out.println("postorder: " + Arrays.toString(result5.toArray()));
     }
 }
 
@@ -168,5 +172,38 @@ class Solution4 {
            }
        }
        return result;
+    }
+}
+
+//后续遍历：左右中
+//入栈顺序：中左右
+//出栈顺序：中右左
+//翻转最后的结果
+class Solution5 {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+
+        if(root == null) {
+            return result;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while(!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            result.add(node.val);
+
+            if(node.left != null) {
+                stack.push(node.left);
+            }
+
+            if(node.right != null) {
+                stack.push(node.right);
+            }
+        }
+
+        Collections.reverse(result);
+        return result;
     }
 }
