@@ -38,12 +38,16 @@ public class TreeNode {
         Solution2 slt2 = new Solution2();
         List result2 = slt2.postorderTraversal(tree);
         System.out.println("POSTORDER: " + Arrays.toString(result2.toArray()));
-    
+        System.out.println(); 
 
         //
         Solution3 slt3 = new Solution3();
         List result3 = slt3.preorderTraversal(tree);
         System.out.println("preorder: " + Arrays.toString(result3.toArray()));
+
+        Solution4 slt4 = new Solution4();
+        List result4 = slt4.inorderTraversal(tree);
+        System.out.println("inorder: " + Arrays.toString(result4.toArray()));
     }
 }
 
@@ -110,7 +114,9 @@ class Solution2 {
 
 
 //栈-遍历树
+
 //前序遍历：中左右
+//入栈顺序：中右左
 class Solution3 {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -136,4 +142,31 @@ class Solution3 {
         }
         return result;
     }    
+}
+
+//中序遍历：左中右
+//入栈顺序：左右
+class Solution4 {
+    public List<Integer> inorderTraversal(TreeNode root) {
+       List<Integer> result = new ArrayList<>();
+       
+       if(root == null) {
+           return result;
+       }
+
+       Stack<TreeNode> stack = new Stack<>();
+       TreeNode cur = root;
+
+       while(cur != null || !stack.isEmpty()) {
+           if(cur != null) {
+               stack.push(cur);
+               cur = cur.left;
+           } else {
+               cur = stack.pop();
+               result.add(cur.val);
+               cur = cur.right;
+           }
+       }
+       return result;
+    }
 }
