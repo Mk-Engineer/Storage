@@ -207,3 +207,23 @@ class Solution5 {
         return result;
     }
 }
+
+//统一迭代法
+//PREORDER
+//mid left right
+class Solution6 {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<>();
+
+       if(root !=  null){
+           st.push(root);
+       }
+
+       while(!st.empty()) {
+          
+       }
+
+       return result;
+    }
+}
