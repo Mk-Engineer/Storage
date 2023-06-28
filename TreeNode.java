@@ -52,6 +52,12 @@ public class TreeNode {
         Solution5 slt5 = new Solution5();
         List result5 = slt5.postorderTraversal(tree);
         System.out.println("postorder: " + Arrays.toString(result5.toArray()));
+        System.out.println();
+
+        //
+        Solution6 slt6 = new Solution6();
+        List result6 = slt6.preorderTraversal(tree);
+        System.out.println("Preorder: " + Arrays.toString(result6.toArray()));
     }
 }
 
@@ -221,7 +227,27 @@ class Solution6 {
        }
 
        while(!st.empty()) {
-          
+           TreeNode node = st.peek();
+
+           if(node != null) {
+               st.pop();
+
+               if(node.right != null) {
+                   st.push(node.right);
+               }
+
+               if(node.left != null) {
+                   st.push(node.left);
+               }
+
+               st.push(node);
+               st.push(null);
+           } else {
+               st.pop();
+               node = st.peek();
+               st.pop();
+               result.add(node.val);
+           }
        }
 
        return result;
