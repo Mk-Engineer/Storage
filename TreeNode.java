@@ -230,23 +230,23 @@ class Solution6 {
            TreeNode node = st.peek();
 
            if(node != null) {
-               st.pop();
+               st.pop();// 将该节点弹出，避免重复操作，下面再将右中左节点添加到栈中
 
-               if(node.right != null) {
+               if(node.right != null) {// 添加右节点，空节点不入栈
                    st.push(node.right);
                }
 
-               if(node.left != null) {
+               if(node.left != null) {// 添加左节点，空节点不入栈
                    st.push(node.left);
                }
 
-               st.push(node);
-               st.push(null);
-           } else {
+               st.push(node);// 添加中间节点
+               st.push(null);// 中间节点访问过，但是还没有处理，加入空节点作为标记
+           } else { // 只有遇到空节点时，才将下一个节点放进结果集
+               st.pop();// 将空节点弹出
+               node = st.peek();// 重新取出栈中元素
                st.pop();
-               node = st.peek();
-               st.pop();
-               result.add(node.val);
+               result.add(node.val);// 加入到结果集
            }
        }
 
