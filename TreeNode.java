@@ -58,6 +58,14 @@ public class TreeNode {
         Solution6 slt6 = new Solution6();
         List result6 = slt6.preorderTraversal(tree);
         System.out.println("Preorder: " + Arrays.toString(result6.toArray()));
+    
+        Solution7 slt7 = new Solution7();
+        List result7 = slt7.inorderTraversal(tree);
+        System.out.println("Inorder: " + Arrays.toString(result7.toArray()));
+        
+        Solution8 slt8 = new Solution8();
+        List result8 = slt8.postorderTraversal(tree);
+        System.out.println("Postorder: " + Arrays.toString(result8.toArray()));
     }
 }
 
@@ -253,3 +261,85 @@ class Solution6 {
        return result;
     }
 }
+
+
+//INORDER
+//left mid right
+class Solution7 {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<>();
+
+        if(root != null) {
+            st.push(root);
+        }
+
+        while(!st.empty()) {
+           TreeNode node = st.peek();
+
+           if(node != null) {
+                st.pop();
+               
+                if(node.right != null) {
+                    st.push(node.right);
+                }
+               
+                st.push(node);
+                st.push(null);// 中间节点访问过，但是还没处理，因此做标记
+
+                if(node.left != null) {
+                    st.push(node.left);
+                }
+           } else {
+                st.pop();
+                node = st.peek();
+                st.pop();
+                result.add(node.val);
+           }
+        }
+
+        return result;
+    }
+}
+
+
+//POSTORDER
+//left right mid
+class Solution8 {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<>();
+
+        if(root != null) {
+            st.push(root);
+        }
+
+        while(!st.empty()) {
+            TreeNode node = st.peek();
+
+            if(node != null) {
+                st.pop();
+
+                st.push(node);
+                st.push(null);
+                
+                if(node.right != null) {
+                    st.push(node.right);
+                }
+
+                if(node.left != null) {
+                    st.push(node.left);
+                }
+            } else {
+                st.pop();
+                node = st.peek();
+                st.pop();
+                result.add(node.val);
+
+            }
+        }
+
+        return result;
+    }
+}
+
