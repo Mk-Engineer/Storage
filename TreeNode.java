@@ -20,11 +20,19 @@ public class TreeNode {
     public static void main(String args[]) {
        // System.out.println("Hello TreeNode iSH!");
 
+		//Tree
         TreeNode leftgrandson = new TreeNode(1);
         TreeNode rightgrandson = new TreeNode(2);
         TreeNode leftson = new TreeNode(4,leftgrandson,rightgrandson);
         TreeNode rightson = new TreeNode(6);
         TreeNode tree = new TreeNode(5,leftson,rightson);
+		
+		//Binary Tree
+		TreeNode bleftgrandson = new TreeNode(15);
+        TreeNode brightgrandson = new TreeNode(7);
+        TreeNode bleftson = new TreeNode(9);
+		TreeNode brightson = new TreeNode(20,bleftgrandson,brightgrandson);       
+        TreeNode btree = new TreeNode(3,bleftson,brightson);
 
         //
         Solution0 slt0 = new Solution0();
@@ -66,6 +74,12 @@ public class TreeNode {
         Solution8 slt8 = new Solution8();
         List result8 = slt8.postorderTraversal(tree);
         System.out.println("Postorder: " + Arrays.toString(result8.toArray()));
+        System.out.println();
+
+		//
+		Solution9 slt9 = new Solution9();
+		List<List<Integer>> result9 = slt9.levelOrder(btree);
+        System.out.println("LevelOrder: " + Arrays.toString(result9.toArray()));       
     }
 }
 
@@ -343,3 +357,65 @@ class Solution8 {
     }
 }
 
+
+
+//二叉树：层序遍历
+class Solution9 {
+    public List<List<Integer>> resList = new ArrayList<List<Integer>>();
+    
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        //checkFun01(root,0); 
+        checkFun02(root);
+    
+        return resList;
+    }
+
+    //DFS--递归方式
+    public void checkFun01(TreeNode node, Integer deep) {
+        if(node == null)
+            return;
+
+        deep++;
+
+        if(resList.size() < deep) {
+            //当层级增加时，list的Item也增加，利用list的索引值进行层级界定
+            List<Integer> item = new ArrayList<Integer>();
+            resList.add(item);
+        }
+
+        resList.get(deep - 1).add(node.val);
+
+        checkFun01(node.left, deep);
+        checkFun01(node.right, deep);
+    }
+
+    //BFS--迭代方式：借助队列
+    public void checkFun02(TreeNode node) {
+        if(node == null)
+            return;
+
+        Queue<TreeNode> que = new LinkedList<TreeNode>();
+        que.offer(node);
+
+        while(!que.isEmpty()) {
+            List<Integer> itemList = new ArrayList<Integer>();
+            int len = que.size();
+
+            while(len > 0) {
+                TreeNode tmpNode = que.poll();
+                itemList.add(tmpNode.val);
+
+                if(tmpNode.left != null) {
+                    que.offer(tmpNode.left);
+                }
+
+                if(tmpNode.right != null) {
+                    que.offer(tmpNode.right);
+                }
+
+                len--;
+            }
+            resList.add(itemList);
+        }
+    }
+}
