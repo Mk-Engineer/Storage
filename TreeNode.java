@@ -20,90 +20,90 @@ public class TreeNode {
     public static void main(String args[]) {
        // System.out.println("Hello TreeNode iSH!");
 
-		//Tree
-        TreeNode leftgrandson = new TreeNode(1);
-        TreeNode rightgrandson = new TreeNode(2);
-        TreeNode leftson = new TreeNode(4,leftgrandson,rightgrandson);
-        TreeNode rightson = new TreeNode(6);
-        TreeNode tree = new TreeNode(5,leftson,rightson);
+		//Tree0
+        TreeNode leftgrandson0 = new TreeNode(1);
+        TreeNode rightgrandson0 = new TreeNode(2);
+        TreeNode leftson0 = new TreeNode(4,leftgrandson0,rightgrandson0);
+        TreeNode rightson0 = new TreeNode(6);
+        TreeNode tree0 = new TreeNode(5,leftson0,rightson0);
 		
-		//Binary Tree
-		TreeNode bleftgrandson = new TreeNode(15);
-        TreeNode brightgrandson = new TreeNode(7);
-        TreeNode bleftson = new TreeNode(9);
-		TreeNode brightson = new TreeNode(20,bleftgrandson,brightgrandson);       
-        TreeNode btree = new TreeNode(3,bleftson,brightson);
+		//Tree1
+		TreeNode leftgrandson1 = new TreeNode(15);
+        TreeNode rightgrandson1 = new TreeNode(7);
+        TreeNode leftson1 = new TreeNode(9);
+		TreeNode rightson1 = new TreeNode(20,leftgrandson1,rightgrandson1);       
+        TreeNode tree1 = new TreeNode(3,leftson1,rightson1);
 
-        //
-        TreeNode byrightgrandrightson = new TreeNode(3);
-        TreeNode byrightgrandleftson = new TreeNode(1);
-        TreeNode byleftgrandrightson = new TreeNode(6);
-        TreeNode byleftgrandleftson = new TreeNode(9);
-        TreeNode byrightson = new TreeNode(7,byrightgrandleftson,byrightgrandrightson);
-        TreeNode byleftson = new TreeNode(2,byleftgrandleftson,byleftgrandrightson);
-        TreeNode bytree = new TreeNode(4,byleftson,byrightson);
+        //Tree2
+        TreeNode rightgrandrightson2 = new TreeNode(3);
+        TreeNode rightgrandleftson2 = new TreeNode(1);
+        TreeNode leftgrandrightson2 = new TreeNode(6);
+        TreeNode leftgrandleftson2 = new TreeNode(9);
+        TreeNode rightson2 = new TreeNode(7,rightgrandleftson2,rightgrandrightson2);
+        TreeNode leftson2 = new TreeNode(2,leftgrandleftson2,leftgrandrightson2);
+        TreeNode tree2 = new TreeNode(4,leftson2,rightson2);
 
         //
         Solution0 slt0 = new Solution0();
-        List result0 = slt0.preorderTraversal(tree);
+        List result0 = slt0.preorderTraversal(tree0);
         System.out.println("PREORDER: " + Arrays.toString(result0.toArray()));
 
         Solution1 slt1 = new Solution1();
-        List result1 = slt1.inorderTraversal(tree);
+        List result1 = slt1.inorderTraversal(tree0);
         System.out.println("INORDER: " + Arrays.toString(result1.toArray()));
 
         Solution2 slt2 = new Solution2();
-        List result2 = slt2.postorderTraversal(tree);
+        List result2 = slt2.postorderTraversal(tree0);
         System.out.println("POSTORDER: " + Arrays.toString(result2.toArray()));
         System.out.println(); 
 
         //
         Solution3 slt3 = new Solution3();
-        List result3 = slt3.preorderTraversal(tree);
+        List result3 = slt3.preorderTraversal(tree0);
         System.out.println("preorder: " + Arrays.toString(result3.toArray()));
 
         Solution4 slt4 = new Solution4();
-        List result4 = slt4.inorderTraversal(tree);
+        List result4 = slt4.inorderTraversal(tree0);
         System.out.println("inorder: " + Arrays.toString(result4.toArray()));
     
         Solution5 slt5 = new Solution5();
-        List result5 = slt5.postorderTraversal(tree);
+        List result5 = slt5.postorderTraversal(tree0);
         System.out.println("postorder: " + Arrays.toString(result5.toArray()));
         System.out.println();
 
         //
         Solution6 slt6 = new Solution6();
-        List result6 = slt6.preorderTraversal(tree);
+        List result6 = slt6.preorderTraversal(tree0);
         System.out.println("Preorder: " + Arrays.toString(result6.toArray()));
     
         Solution7 slt7 = new Solution7();
-        List result7 = slt7.inorderTraversal(tree);
+        List result7 = slt7.inorderTraversal(tree0);
         System.out.println("Inorder: " + Arrays.toString(result7.toArray()));
         
         Solution8 slt8 = new Solution8();
-        List result8 = slt8.postorderTraversal(tree);
+        List result8 = slt8.postorderTraversal(tree0);
         System.out.println("Postorder: " + Arrays.toString(result8.toArray()));
         System.out.println();
 
 		//
 		Solution9 slt9 = new Solution9();
-		List<List<Integer>> result9 = slt9.levelOrder(btree);
+		List<List<Integer>> result9 = slt9.levelOrder(tree1);
         System.out.println("LevelOrder: " + Arrays.toString(result9.toArray()));       
         System.out.println();
 
         //
         Solution10 slt10 = new Solution10();
-        List<List<Integer>> result10 = slt9.levelOrder(bytree);
+        List<List<Integer>> result10 = slt9.levelOrder(tree2);
         System.out.println("Before Invert: " + Arrays.toString(result10.toArray()));
-        slt10.invertTree(bytree);
-        List<List<Integer>> result11 = slt9.levelOrder(bytree);
+        slt10.invertTree(tree2);
+        List<List<Integer>> result11 = slt9.levelOrder(tree2);
         System.out.println("After Invert: " + Arrays.toString(result11.toArray()));
         System.out.println();
 
         //
         Solution11 slt11 = new Solution11();
-        slt11.invertTree(bytree);
-        List<List<Integer>> result12 = slt9.levelOrder(bytree);
+        slt11.invertTree(tree2);
+        List<List<Integer>> result12 = slt9.levelOrder(tree2);
         System.out.println("Invert Tree: " + Arrays.toString(result12.toArray()));
     }
 }
