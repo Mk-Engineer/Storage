@@ -35,6 +35,15 @@ public class TreeNode {
         TreeNode btree = new TreeNode(3,bleftson,brightson);
 
         //
+        TreeNode byrightgrandrightson = new TreeNode(3);
+        TreeNode byrightgrandleftson = new TreeNode(1);
+        TreeNode byleftgrandrightson = new TreeNode(6);
+        TreeNode byleftgrandleftson = new TreeNode(9);
+        TreeNode byrightson = new TreeNode(7,byrightgrandleftson,byrightgrandrightson);
+        TreeNode byleftson = new TreeNode(2,byleftgrandleftson,byleftgrandrightson);
+        TreeNode bytree = new TreeNode(4,byleftson,byrightson);
+
+        //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree);
         System.out.println("PREORDER: " + Arrays.toString(result0.toArray()));
@@ -80,6 +89,22 @@ public class TreeNode {
 		Solution9 slt9 = new Solution9();
 		List<List<Integer>> result9 = slt9.levelOrder(btree);
         System.out.println("LevelOrder: " + Arrays.toString(result9.toArray()));       
+        System.out.println();
+
+        //
+        Solution10 slt10 = new Solution10();
+        List<List<Integer>> result10 = slt9.levelOrder(bytree);
+        System.out.println("Before Invert: " + Arrays.toString(result10.toArray()));
+        slt10.invertTree(bytree);
+        List<List<Integer>> result11 = slt9.levelOrder(bytree);
+        System.out.println("After Invert: " + Arrays.toString(result11.toArray()));
+        System.out.println();
+
+        //
+        Solution11 slt11 = new Solution11();
+        slt11.invertTree(bytree);
+        List<List<Integer>> result12 = slt9.levelOrder(bytree);
+        System.out.println("Invert Tree: " + Arrays.toString(result12.toArray()));
     }
 }
 
@@ -417,5 +442,57 @@ class Solution9 {
             }
             resList.add(itemList);
         }
+    }
+}
+
+
+//翻转二叉树
+class Solution10 {
+    //DFS递归
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+
+        invertTree(root.left);
+        invertTree(root.right);
+        swapChildren(root);
+        
+        return root;
+    }
+
+    private void swapChildren(TreeNode root) {
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+    }
+}
+//BFS
+class Solution11 {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+
+        ArrayDeque<TreeNode> deque = new ArrayDeque<>();
+        deque.offer(root);
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            while(size-- > 0) {
+                TreeNode node = deque.poll();
+                swap(node);
+                if(node.left != null)
+                    deque.offer(node.left);
+                if(node.right != null)
+                    deque.offer(node.right);
+            }
+        }
+        return root;
+    }
+
+    public void swap(TreeNode root) {
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
     }
 }
