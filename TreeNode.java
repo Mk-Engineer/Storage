@@ -54,6 +54,15 @@ public class TreeNode {
 
         TreeNode tree3 = new TreeNode(1,II0_1,II0_2);
 
+        //Tree4
+        TreeNode III1_2 = new TreeNode(3);
+        TreeNode III1_4 = new TreeNode(3);
+
+        TreeNode II1_1 = new TreeNode(2,null,III1_2);
+        TreeNode II1_2 = new TreeNode(2,III1_4,null);
+
+        TreeNode tree4 = new TreeNode(1,II1_1,II1_2);
+
         //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree0);
@@ -121,6 +130,8 @@ public class TreeNode {
         //Solution12 slt12 = new Solution12();
         List<List<Integer>> result13 = slt9.levelOrder(tree3);
         System.out.println("Tree3: " + Arrays.toString(result13.toArray()));
+        List<List<Integer>> result14 = slt9.levelOrder(tree4);
+        System.out.println("Tree4: " + Arrays.toString(result14.toArray()));
     }
 }
 
