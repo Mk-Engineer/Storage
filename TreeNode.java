@@ -43,6 +43,17 @@ public class TreeNode {
         TreeNode leftson2 = new TreeNode(2,leftgrandleftson2,leftgrandrightson2);
         TreeNode tree2 = new TreeNode(4,leftson2,rightson2);
 
+        //Tree3
+        TreeNode III0_1 = new TreeNode(3);
+        TreeNode III0_2 = new TreeNode(4);
+        TreeNode III0_3 = new TreeNode(4);
+        TreeNode III0_4 = new TreeNode(3);
+
+        TreeNode II0_1 = new TreeNode(2,III0_1,III0_2);
+        TreeNode II0_2 = new TreeNode(2,III0_3,III0_4);
+
+        TreeNode tree3 = new TreeNode(1,II0_1,II0_2);
+
         //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree0);
@@ -105,6 +116,11 @@ public class TreeNode {
         slt11.invertTree(tree2);
         List<List<Integer>> result12 = slt9.levelOrder(tree2);
         System.out.println("Invert Tree: " + Arrays.toString(result12.toArray()));
+    
+        //
+        //Solution12 slt12 = new Solution12();
+        List<List<Integer>> result13 = slt9.levelOrder(tree3);
+        System.out.println("Tree3: " + Arrays.toString(result13.toArray()));
     }
 }
 
@@ -496,3 +512,7 @@ class Solution11 {
         root.right = temp;
     }
 }
+
+
+//对称二叉树
+
