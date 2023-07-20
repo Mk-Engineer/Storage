@@ -59,7 +59,7 @@ public class TreeNode {
         TreeNode III1_4 = new TreeNode(3);
 
         TreeNode II1_1 = new TreeNode(2,null,III1_2);
-        TreeNode II1_2 = new TreeNode(2,III1_4,null);
+        TreeNode II1_2 = new TreeNode(2,null,III1_4);
 
         TreeNode tree4 = new TreeNode(1,II1_1,II1_2);
 
@@ -127,11 +127,18 @@ public class TreeNode {
         System.out.println("Invert Tree: " + Arrays.toString(result12.toArray()));
     
         //
-        //Solution12 slt12 = new Solution12();
+        Solution12 slt12 = new Solution12();
         List<List<Integer>> result13 = slt9.levelOrder(tree3);
         System.out.println("Tree3: " + Arrays.toString(result13.toArray()));
         List<List<Integer>> result14 = slt9.levelOrder(tree4);
         System.out.println("Tree4: " + Arrays.toString(result14.toArray()));
+
+        System.out.println("Tree3 Result1: " + slt12.isSymmetric1(tree3));
+        System.out.println("Tree4 Result1: " + slt12.isSymmetric1(tree4));
+        System.out.println("Tree3 Result2: " + slt12.isSymmetric2(tree3));
+        System.out.println("Tree4 Result2: " + slt12.isSymmetric2(tree4));
+        System.out.println("Tree4 Result3: " + slt12.isSymmetric3(tree3));
+        System.out.println("Tree4 Result3: " + slt12.isSymmetric3(tree4));
     }
 }
 
@@ -526,4 +533,111 @@ class Solution11 {
 
 
 //对称二叉树
+class Solution12 {
+    //递归法
+    public boolean isSymmetric1(TreeNode root) {
+        return compare(root.left,root.right);
+    }
 
+    private boolean compare(TreeNode left,TreeNode right) {
+        if(left == null && right != null) {
+            return false;
+        }
+        if (left != null && right == null){
+            return false;
+        }
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+
+        //比较外侧
+        boolean compareOutside = compare(left.left,right.right);
+        //比较内测
+        boolean compareInside = compare(left.right,right.left);
+
+        return compareOutside && compareInside;
+    }
+
+    /*
+     * 迭代法
+     * 使用双端队列，相当于两个栈
+    */
+    public boolean isSymmetric2(TreeNode root) {
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offerFirst(root.left);
+        deque.offerLast(root.right);
+
+        while(!deque.isEmpty()) {
+            TreeNode leftNode = deque.pollFirst();
+            TreeNode rightNode = deque.pollLast();
+
+            if(leftNode == null && rightNode == null) {
+                continue;
+            }
+
+            if(leftNode == null && rightNode != null) {
+                return false;
+            }
+            
+            if(leftNode != null && rightNode == null) {
+                return false;
+            }
+            
+            if(leftNode.val != rightNode.val) {
+                return false;
+            }
+
+            /* 以上三个条件合并 */
+            // if(leftNode == null || rightNode == null || leftNode.val != rightNode.val) {
+            //     return false;
+            // }
+
+            deque.offerFirst(leftNode.left);
+            deque.offerFirst(leftNode.right);
+            deque.offerLast(rightNode.right);
+            deque.offerLast(rightNode.left);
+        }
+
+        return true;
+    }
+    /* 
+     * 迭代法      
+     * 使用普通队列
+     */
+    public boolean isSymmetric3(TreeNode root) {
+        Queue<TreeNode> deque = new LinkedList<>();
+        deque.offer(root.left);
+        deque.offer(root.right);
+
+        while(!deque.isEmpty()) {
+            TreeNode leftNode = deque.poll();
+            TreeNode rightNode = deque.poll();
+
+            if(leftNode == null && rightNode == null) {
+                continue;
+            }
+
+            if(leftNode == null && rightNode != null) {
+                return false;
+            }
+
+            if(leftNode != null && rightNode == null) {
+                return false;
+            }
+
+            if(leftNode.val != rightNode.val) {
+                return false;
+            }
+
+            deque.offer(leftNode.left);
+            deque.offer(rightNode.right);
+            deque.offer(leftNode.right);
+            deque.offer(rightNode.left);
+        }
+        
+        return true;
+    }
+}
