@@ -63,6 +63,26 @@ public class TreeNode {
 
         TreeNode tree4 = new TreeNode(1,II1_1,II1_2);
 
+        //Tree5
+        TreeNode II2_1 = new TreeNode(2);
+        TreeNode II2_2 = new TreeNode(3);
+
+        TreeNode tree5 = new TreeNode(1,II2_1,II2_2);
+
+        //Tree6
+        TreeNode IIII3_1 = new TreeNode(6);
+        TreeNode IIII3_2 = new TreeNode(7);
+
+        TreeNode III3_1 = new TreeNode(4,IIII3_1,IIII3_2);
+        TreeNode III3_2 = new TreeNode(5);
+
+        TreeNode II3_1 = new TreeNode(2,III3_1,III3_2);
+        TreeNode II3_2 = new TreeNode(3);
+
+        TreeNode tree6 = new TreeNode(1,II3_1,II3_2);
+
+        
+
         //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree0);
@@ -139,6 +159,22 @@ public class TreeNode {
         System.out.println("Tree4 Result2: " + slt12.isSymmetric2(tree4));
         System.out.println("Tree4 Result3: " + slt12.isSymmetric3(tree3));
         System.out.println("Tree4 Result3: " + slt12.isSymmetric3(tree4));
+        System.out.println();
+
+        //
+        Solution9 slt91 = new Solution9();
+        Solution9 slt92 = new Solution9();
+        List<List<Integer>> result15 = slt91.levelOrder(tree5);
+        List<List<Integer>> result16 = slt92.levelOrder(tree6);
+        System.out.println("Tree5: " + Arrays.toString(result15.toArray()));
+        System.out.println("Tree6: " + Arrays.toString(result16.toArray()));
+        System.out.println();
+
+        //
+        Solution13 slt13 = new Solution13();
+        System.out.println("Tree4 Depth: " + slt13.maxDepth(tree4));
+        System.out.println("Tree5 Depth: " + slt13.maxDepth(tree5));
+        System.out.println("Tree6 Depth: " + slt13.maxDepth(tree6));
     }
 }
 
@@ -639,5 +675,28 @@ class Solution12 {
         }
         
         return true;
+    }
+}
+
+/*
+ * 二叉树：
+ * 
+ * 深度：从 根节点 到 最远叶子节点 的最长路径上的节点数
+ * 高度：从 某节点 到 最远叶子节点 的最长路径上的节点数
+ * 
+ * 根节点 的 高度 就是 二叉树的最大深度
+ * 叶子节点 是指 没有子节点的节点
+ * 
+*/
+class Solution13 {
+    //递归法
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+
+        return Math.max(leftDepth,rightDepth) + 1;
     }
 }
