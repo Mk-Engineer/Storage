@@ -175,6 +175,22 @@ public class TreeNode {
         System.out.println("Tree4 Depth: " + slt13.maxDepth(tree4));
         System.out.println("Tree5 Depth: " + slt13.maxDepth(tree5));
         System.out.println("Tree6 Depth: " + slt13.maxDepth(tree6));
+        System.out.println();
+
+        //
+        Solution14 slt14 = new Solution14();
+        System.out.println("Tree4 depth: " + slt14.maxDepth(tree4));
+        System.out.println("Tree5 depth: " + slt14.maxDepth(tree5));
+        System.out.println("Tree6 depth: " + slt14.maxDepth(tree6));
+        System.out.println();
+
+        //
+        Solution15 slt15 = new Solution15();
+        System.out.println("tree4 depth: " + slt15.maxDepth(tree4));
+        System.out.println("tree5 depth: " + slt15.maxDepth(tree5));
+        System.out.println("tree6 depth: " + slt15.maxDepth(tree6));
+        System.out.println();
+
     }
 }
 
@@ -698,5 +714,55 @@ class Solution13 {
         int rightDepth = maxDepth(root.right);
 
         return Math.max(leftDepth,rightDepth) + 1;
+    }
+}
+
+class Solution14 {
+    int maxnum = 0;
+
+    //递归法
+    public int maxDepth(TreeNode root) {
+        ans(root,0);
+        return maxnum;
+    }
+
+    private void ans(TreeNode tr, int tmp) {
+        if(tr == null)
+            return;
+        tmp++;
+        maxnum = maxnum < tmp ? tmp : maxnum;
+        ans(tr.left,tmp);
+        ans(tr.right,tmp);    
+        tmp--;
+    }
+}
+
+class Solution15 {
+    //迭代法，使用层序遍历
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offer(root);
+
+        int depth = 0;
+
+        while(!deque.isEmpty()) {
+            int size = deque.size();
+            depth++;
+            for(int i = 0; i < size; i++) {
+                TreeNode node = deque.poll();
+                if(node.left != null) {
+                    deque.offer(node.left);
+                }
+                if(node.right != null) {
+                    deque.offer(node.right);
+                }
+            }
+        }
+
+        return depth;
     }
 }
