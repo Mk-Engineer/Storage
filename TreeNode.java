@@ -92,16 +92,6 @@ public class TreeNode {
         
         TreeNode tree7 = new TreeNode(1,null,II4_2);
 
-        //Tree8
-        Node III5_1 = new Node(5);
-        Node III5_2 = new Node(6);
-
-        Node II5_1 = new Node(3, III5_1, III5_2);
-        Node II5_2 = new Node(2);
-        Node II5_3 = new Node(4);
-
-        Node tree8 = new Node(1, II5_1, II5_2, II5_3);
-
 
 
         //
