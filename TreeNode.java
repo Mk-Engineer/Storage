@@ -92,6 +92,16 @@ public class TreeNode {
         
         TreeNode tree7 = new TreeNode(1,null,II4_2);
 
+        //Tree8
+        Node III5_1 = new Node(5);
+        Node III5_2 = new Node(6);
+
+        Node II5_1 = new Node(3, III5_1, III5_2);
+        Node II5_2 = new Node(2);
+        Node II5_3 = new Node(4);
+
+        Node tree8 = new Node(1, II5_1, II5_2, II5_3);
+
 
 
         //
@@ -216,6 +226,9 @@ public class TreeNode {
         System.out.println("tree6 miniDepth: " + slt16.minDepth2(tree6));
         System.out.println("tree7 miniDepth: " + slt16.minDepth2(tree7));
         System.out.println();
+
+        //
+
 
     }
 }
@@ -793,8 +806,7 @@ class Solution15 {
     }
 }
 
-/* N叉树的最大深度 */
-
+/* N叉树的最大深度: 思路同二叉树 */
 
 /*
  * 二叉树的最小深度
