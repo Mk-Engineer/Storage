@@ -208,6 +208,15 @@ public class TreeNode {
         System.out.println("Tree7: " + Arrays.toString(result17.toArray()));
         System.out.println();
 
+        //
+        Solution16 slt16 = new Solution16();
+        System.out.println("Tree6 miniDepth: " + slt16.minDepth1(tree6));
+        System.out.println("Tree7 miniDepth: " + slt16.minDepth1(tree7));
+        System.out.println();
+        System.out.println("tree6 miniDepth: " + slt16.minDepth2(tree6));
+        System.out.println("tree7 miniDepth: " + slt16.minDepth2(tree7));
+        System.out.println();
+
     }
 }
 
@@ -793,7 +802,58 @@ class Solution15 {
 */
 class Solution16 {
     //递归法
-    
-    //迭代法
+    /*
+     * 如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。
+     * 如果右子树为空，左子树不为空，最小深度是 1 + 左子树的深度。 
+     * 最后如果左右子树都不为空，返回左右子树深度最小值 + 1 。
+    */
+    public int minDepth1(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int leftDepth = minDepth1(root.left);
+        int rightDepth = minDepth1(root.right);
+
+        if(root.left == null) {
+            return rightDepth + 1;
+        }
+
+        if(root.right == null) {
+            return leftDepth + 1;
+        }
+
+        return Math.min(leftDepth, rightDepth) + 1;
+    }
+
+    //迭代法：层序遍历
+    public int minDepth2(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offer(root);
+        int depth = 0;
+        
+        while(!deque.isEmpty()) {
+            int size = deque.size();
+            depth++;
+            for(int i = 0; i < size; i++) {
+                TreeNode poll = deque.poll();
+                if(poll.left == null && poll.right == null) {
+                    return depth;
+                }
+                if(poll.left != null) {
+                    deque.offer(poll.left);
+                }
+                if(poll.right != null) {
+                    deque.offer(poll.right);
+                }
+            }
+        }
+
+        return depth;
+    }
 
 }
