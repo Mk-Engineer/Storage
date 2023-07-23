@@ -81,7 +81,18 @@ public class TreeNode {
 
         TreeNode tree6 = new TreeNode(1,II3_1,II3_2);
 
+        //Tree7
+        TreeNode IIII4_7 = new TreeNode(6);
+        TreeNode IIII4_8 = new TreeNode(5);
+
+        TreeNode III4_3 = new TreeNode(4);
+        TreeNode III4_4 = new TreeNode(3,IIII4_7,IIII4_8);
+
+        TreeNode II4_2 = new TreeNode(2,III4_3,III4_4);
         
+        TreeNode tree7 = new TreeNode(1,null,II4_2);
+
+
 
         //
         Solution0 slt0 = new Solution0();
@@ -189,6 +200,12 @@ public class TreeNode {
         System.out.println("tree4 depth: " + slt15.maxDepth(tree4));
         System.out.println("tree5 depth: " + slt15.maxDepth(tree5));
         System.out.println("tree6 depth: " + slt15.maxDepth(tree6));
+        System.out.println();
+
+        //
+        Solution9 slt93 = new Solution9();
+        List<List<Integer>> result17 = slt93.levelOrder(tree7);
+        System.out.println("Tree7: " + Arrays.toString(result17.toArray()));
         System.out.println();
 
     }
@@ -765,4 +782,18 @@ class Solution15 {
 
         return depth;
     }
+}
+
+/* N叉树的最大深度 */
+
+
+/*
+ * 二叉树的最小深度
+ * 最小深度是从 根节点 到最近 叶子节点 的最短路径上的节点数量
+*/
+class Solution16 {
+    //递归法
+    
+    //迭代法
+
 }
