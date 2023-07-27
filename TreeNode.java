@@ -257,6 +257,14 @@ public class TreeNode {
         System.out.println("Tree9: " + Arrays.toString(result19.toArray()));
 		System.out.println("Tree10: " + Arrays.toString(result20.toArray()));
         System.out.println();
+		
+		//
+		Solution17 slt17 = new Solution17();
+		System.out.println("Tree10 nodes: " + slt17.countNodes(tree10));
+		System.out.println();
+		
+		Solution19 slt19 = new Solution19();
+		System.out.println("tree10 nodes: " + slt19.countNodes(tree10));		
 
 
     }
@@ -910,6 +918,71 @@ class Solution16 {
 */
 
 class Solution17 {
-	
+	//通用递归解法
+	public int countNodes(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		
+		return countNodes(root.left) + countNodes(root.right) + 1;
+	}
 	
 }	
+
+class Solution18 {
+	//迭代法
+	public int countNodes(TreeNode root) {
+		if(root == null)
+			return 0;
+		
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);	
+		int result = 0;
+		
+		while(!queue.isEmpty()) {
+			int size = queue.size();
+			
+			while(size-- > 0) {
+				TreeNode cur = queue.poll();
+				result++;
+				
+				if(cur.left != null)
+					queue.offer(cur.left);
+				
+				if(cur.right != null)
+					queue.offer(cur.right);	
+			}
+		}
+		
+		return result;
+	}
+}
+
+class Solution19 {
+	public int countNodes(TreeNode root) {
+		if(root == null)
+			return 0;
+			
+		TreeNode left = root.left;
+		TreeNode right = root.right;
+		
+		int leftDepth = 0, rightDepth = 0;
+		
+		while(left != null) {//求左子树深度
+			left = left.left;
+			leftDepth++;
+		}
+		
+		while(right != null) {//求右子树深度
+			right = right.right;
+			rightDepth++;
+		}
+		
+		if(leftDepth == rightDepth) {
+			return(2 << leftDepth) - 1;
+		}
+		
+		return countNodes(root.left) + countNodes(root.right) + 1;
+	}
+}
+
