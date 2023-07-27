@@ -261,10 +261,15 @@ public class TreeNode {
 		//
 		Solution17 slt17 = new Solution17();
 		System.out.println("Tree10 nodes: " + slt17.countNodes(tree10));
+		System.out.println("Tree9 nodes: " + slt17.countNodes(tree9));
+		System.out.println("Tree8 nodes: " + slt17.countNodes(tree8));
 		System.out.println();
 		
 		Solution19 slt19 = new Solution19();
-		System.out.println("tree10 nodes: " + slt19.countNodes(tree10));		
+		System.out.println("tree10 nodes: " + slt19.countNodes(tree10));
+		System.out.println("tree9 nodes: " + slt19.countNodes(tree9));
+		System.out.println("tree8 nodes: " + slt19.countNodes(tree8));
+		System.out.println();		
 
 
     }
@@ -978,7 +983,9 @@ class Solution19 {
 			rightDepth++;
 		}
 		
+		/* 相等为满二叉树，不等为非满完全二叉树*/
 		if(leftDepth == rightDepth) {
+			/* 满二叉树的节点数为：2^depth - 1 */
 			return(2 << leftDepth) - 1;
 		}
 		
