@@ -91,7 +91,36 @@ public class TreeNode {
         TreeNode II4_2 = new TreeNode(2,III4_3,III4_4);
         
         TreeNode tree7 = new TreeNode(1,null,II4_2);
+		
+		//Tree8 满二叉树
+		TreeNode III5_1 = new TreeNode(4);
+		TreeNode III5_2 = new TreeNode(5);
+		TreeNode III5_3 = new TreeNode(6);
+		TreeNode III5_4 = new TreeNode(7);
+		
+		TreeNode II5_1 = new TreeNode(2,III5_1,III5_2);
+		TreeNode II5_2 = new TreeNode(3,III5_3,III5_4);
+		
+		TreeNode tree8 = new TreeNode(1,II5_1,II5_2);
+		
+		//Tree9 完全二叉树
+		TreeNode III6_1 = new TreeNode(4);
+		TreeNode III6_2 = new TreeNode(5);
+		TreeNode III6_3 = new TreeNode(6);
+		
+		TreeNode II6_1 = new TreeNode(2,III6_1,III6_2);
+		TreeNode II6_2 = new TreeNode(3,III6_3,null);
 
+		TreeNode tree9 = new TreeNode(1,II6_1,II6_2);		
+		
+		//Tree10 不完全二叉树
+		TreeNode III7_2 = new TreeNode(5);
+		
+		TreeNode II7_1 = new TreeNode(2,null,III7_2);
+		TreeNode II7_2 = new TreeNode(3);
+
+		TreeNode tree10 = new TreeNode(1,II7_1,II7_2);		
+		
 
 
         //
@@ -218,6 +247,16 @@ public class TreeNode {
         System.out.println();
 
         //
+		Solution9 slt94 = new Solution9();
+        Solution9 slt95 = new Solution9();
+        Solution9 slt96 = new Solution9();		
+        List<List<Integer>> result18 = slt94.levelOrder(tree8);
+        List<List<Integer>> result19 = slt95.levelOrder(tree9);
+		List<List<Integer>> result20 = slt96.levelOrder(tree10);
+        System.out.println("Tree8: " + Arrays.toString(result18.toArray()));
+        System.out.println("Tree9: " + Arrays.toString(result19.toArray()));
+		System.out.println("Tree10: " + Arrays.toString(result20.toArray()));
+        System.out.println();
 
 
     }
@@ -859,3 +898,18 @@ class Solution16 {
     }
 
 }
+
+/* 
+* 完全二叉树的节点个数
+* 
+* 完全二叉树：
+* 	完全二叉树只有两种情况，情况一：就是满二叉树，情况二：最后一层叶子节点没有满
+* 	
+*	在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且
+* 	最下面一层的节点都集中在该层最左边的若干位置。
+*/
+
+class Solution17 {
+	
+	
+}	
