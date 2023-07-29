@@ -121,7 +121,26 @@ public class TreeNode {
 
 		TreeNode tree10 = new TreeNode(1,II7_1,II7_2);		
 		
-
+		//Tree11 高度平衡二叉树
+		TreeNode III8_3 = new TreeNode(15);
+		TreeNode III8_4 = new TreeNode(7);
+		
+		TreeNode II8_2 = new TreeNode(20,III8_3,III8_4);
+		TreeNode II8_1 = new TreeNode(9);
+		
+		TreeNode tree11 = new TreeNode(3,II8_1,II8_2);
+		
+		//Tree12 平衡二叉树
+		TreeNode IIII9_1 = new TreeNode(4);
+		TreeNode IIII9_2 = new TreeNode(4);
+		
+		TreeNode III9_1 = new TreeNode(3,IIII9_1,IIII9_2);
+		TreeNode III9_2 = new TreeNode(3);
+		
+		TreeNode II9_1 = new TreeNode(2,III9_1,III9_2);
+		TreeNode II9_2 = new TreeNode(2);
+		
+		TreeNode tree12 = new TreeNode(1,II9_1,II9_2);
 
         //
         Solution0 slt0 = new Solution0();
@@ -270,6 +289,15 @@ public class TreeNode {
 		System.out.println("tree9 nodes: " + slt19.countNodes(tree9));
 		System.out.println("tree8 nodes: " + slt19.countNodes(tree8));
 		System.out.println();		
+		
+		//
+		Solution9 slt97 = new Solution9();
+        Solution9 slt98 = new Solution9();
+        List<List<Integer>> result21 = slt97.levelOrder(tree11);
+        List<List<Integer>> result22 = slt98.levelOrder(tree12);
+        System.out.println("Tree11: " + Arrays.toString(result21.toArray()));
+        System.out.println("Tree12: " + Arrays.toString(result22.toArray()));
+        System.out.println();
 
 
     }
@@ -778,7 +806,7 @@ class Solution12 {
 /*
  * 二叉树：
  * 
- * 深度：从 根节点 到 最远叶子节点 的最长路径上的节点数
+ * 深度：从 根节点 到 某节点 的最长路径上的节点数
  * 高度：从 某节点 到 最远叶子节点 的最长路径上的节点数
  * 
  * 根节点 的 高度 就是 二叉树的最大深度
