@@ -1071,6 +1071,15 @@ class Solution20 {
 	}
 }
 
-
+class Solution21 {
+	/*
+	* 迭代法：
+	* 效率较低，计算高度时会重复遍历
+	* 时间复杂度：O(n^2)
+	*/
+	public boolean isBalanced(TreeNode root) {
+		
+	}
+}
 
 
