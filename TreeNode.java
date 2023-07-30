@@ -298,6 +298,12 @@ public class TreeNode {
         System.out.println("Tree11: " + Arrays.toString(result21.toArray()));
         System.out.println("Tree12: " + Arrays.toString(result22.toArray()));
         System.out.println();
+		
+		//
+		Solution20 slt20 = new Solution20();
+		System.out.println("Tree10 is balance? " + slt20.isBalanced(tree10));
+		System.out.println("Tree11 is balance? " + slt20.isBalanced(tree11));
+		System.out.println("Tree12 is balance? " + slt20.isBalanced(tree12));
 
 
     }
@@ -809,6 +815,9 @@ class Solution12 {
  * 深度：从 根节点 到 某节点 的最长路径上的节点数
  * 高度：从 某节点 到 最远叶子节点 的最长路径上的节点数
  * 
+ * 求深度 从上到下 去查，所以要 前序遍历（中左右）
+ * 求高度 从下到上 去查，所以要 后序遍历（左右中）
+ * 
  * 根节点 的 高度 就是 二叉树的最大深度
  * 叶子节点 是指 没有子节点的节点
  * 
@@ -1020,4 +1029,48 @@ class Solution19 {
 		return countNodes(root.left) + countNodes(root.right) + 1;
 	}
 }
+
+
+/*
+* 平衡二叉树
+* 	一棵高度平衡二叉树定义为：一个二叉树 每个节点 的 左右两个子树 的 高度差 的绝对值不超过 1。
+*
+* 求深度 从上到下 去查，所以要 前序遍历（中左右）
+* 求高度 从下到上 去查，所以要 后序遍历（左右中）
+* 
+*/
+class Solution20 {
+	//递归法
+	public boolean isBalanced(TreeNode root) {
+		return getHeight(root) != -1;
+	}
+	
+	private int getHeight(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		
+		int leftHeight = getHeight(root.left);
+		
+		if(leftHeight == -1) {
+			return -1;
+		}
+		
+		int rightHeight = getHeight(root.right);
+		
+		if(rightHeight == -1) {
+			return -1;
+		}
+		
+		//左右子树高度差大于1，return -1表示已经不是平衡二叉树了
+		if(Math.abs(leftHeight - rightHeight) > 1) {
+			return -1;
+		}
+		
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
+}
+
+
+
 
