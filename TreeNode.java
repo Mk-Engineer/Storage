@@ -304,6 +304,14 @@ public class TreeNode {
 		System.out.println("Tree10 is balance? " + slt20.isBalanced(tree10));
 		System.out.println("Tree11 is balance? " + slt20.isBalanced(tree11));
 		System.out.println("Tree12 is balance? " + slt20.isBalanced(tree12));
+        System.out.println();
+        
+        //
+        Solution21 slt21 = new Solution21();
+		System.out.println("tree10 is balance? " + slt21.isBalanced(tree10));
+		System.out.println("tree11 is balance? " + slt21.isBalanced(tree11));
+		System.out.println("tree12 is balance? " + slt21.isBalanced(tree12));
+        System.out.println();
 
 
     }
@@ -1078,6 +1086,61 @@ class Solution21 {
 	* 时间复杂度：O(n^2)
 	*/
 	public boolean isBalanced(TreeNode root) {
-		
+		if(root == null) {
+            return true;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            TreeNode inNode = stack.peek();
+            //右节点为null，或已经遍历过了
+            if(inNode.right == null || inNode.right == pre) {
+                //比较左右子树的高度差，输出
+                if(Math.abs(getHeight(inNode.left) - getHeight(inNode.right)) > 1) {
+                    return false;
+                }
+                stack.pop();
+                pre = inNode;
+                root = null;//当前节点下，没有要遍历的节点了
+            } else {
+                root = inNode.right;//右节点还没遍历，遍历右节点
+            }
+        }
+
+        return true;
 	}
+
+    /* 层序遍历，求节点高度 */
+    public int getHeight(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offer(root);
+        int depth = 0;
+
+        while(!deque.isEmpty()) {
+            int size = deque.size();
+            depth++;
+            for(int i = 0; i < size; i++) {
+                TreeNode poll = deque.poll();
+                if(poll.left != null) {
+                    deque.offer(poll.left);
+                }
+                if(poll.right != null) {
+                    deque.offer(poll.right);
+                }
+            }
+        }
+
+        return depth;
+    }
 }
