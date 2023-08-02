@@ -1238,7 +1238,7 @@ class Solution23 {
             return res;
         }
 
-        List<Integer> paths = new ArrayList<>();//作为结果中的路径
+        List<Integer> paths = new ArrayList<>();//记录单条路径
 
         traversal(root, paths, res);
         
