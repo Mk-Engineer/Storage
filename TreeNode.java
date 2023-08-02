@@ -142,6 +142,14 @@ public class TreeNode {
 		
 		TreeNode tree12 = new TreeNode(1,II9_1,II9_2);
 
+        //Tree13 二叉树的所有路径
+        TreeNode III10_2 = new TreeNode(5);
+
+        TreeNode II10_1 = new TreeNode(2, null, III10_2);
+        TreeNode II10_2 = new TreeNode(3);
+
+        TreeNode tree13 = new TreeNode(1, II10_1, II10_2);
+
         //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree0);
@@ -312,8 +320,28 @@ public class TreeNode {
 		System.out.println("tree11 is balance? " + slt21.isBalanced(tree11));
 		System.out.println("tree12 is balance? " + slt21.isBalanced(tree12));
         System.out.println();
+        
+        //        
+        Solution22 slt22 = new Solution22();
+		System.out.println("tree10 is balance? " + slt22.isBalanced(tree10));
+		System.out.println("tree11 is balance? " + slt22.isBalanced(tree11));
+		System.out.println("tree12 is balance? " + slt22.isBalanced(tree12));
+        System.out.println();
 
+        //
+        Solution9 slt99 = new Solution9();
+        List<List<Integer>> result23 = slt99.levelOrder(tree13);
+        System.out.println("Tree13: " + Arrays.toString(result23.toArray()));
+        System.out.println();
 
+        //
+        Solution23 slt23 = new Solution23();
+        System.out.println("Tree8 path is :" + slt23.binaryTreePaths(tree8));
+        System.out.println("Tree9 path is :" + slt23.binaryTreePaths(tree9));
+        // System.out.println("Tree11 path is :" + slt23.binaryTreePaths(tree11));
+        // System.out.println("Tree12 path is :" + slt23.binaryTreePaths(tree12));
+        System.out.println("Tree13 path is :" + slt23.binaryTreePaths(tree13));
+        System.out.println();
     }
 }
 
@@ -1142,5 +1170,106 @@ class Solution21 {
         }
 
         return depth;
+    }
+}
+
+class Solution22 {
+    /*
+     * 优化迭代法，针对暴力迭代法的getHeight方法做优化，利用TreeNode.val来保存当前节点高度，这样就不会有重复遍历
+     * 获取高度算法时间复杂度可以降到O(1)，总的时间复杂度降为O(0)
+     * 时间复杂度：O(n)
+    */
+    public boolean isBalanced(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            TreeNode inNode = stack.peek();
+
+            //右节点为null或已经遍历过
+            if(inNode.right == null || inNode.right == pre) {
+                //输出
+                if(Math.abs(getHeight(inNode.left) - getHeight(inNode.right)) > 1) {
+                    return false;
+                }
+                stack.pop();
+                pre = inNode;
+                root = null;// 当前节点没有要遍历的节点了
+            } else {
+                root = inNode.right;
+            }
+        }
+
+        return true;
+    }
+
+    /* 求节点高度 */
+    public int getHeight(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int leftHeight = root.left != null ? root.left.val : 0;
+        int rightHeight = root.right != null ? root.right.val : 0;
+        int height = Math.max(leftHeight, rightHeight) + 1;
+
+        root.val = height;
+
+        return height;
+    }
+}
+
+/* 二叉树的所有路径 */
+class Solution23 {
+    //递归法
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<>();//存最终结果
+        
+        if(root == null) {
+            return res;
+        }
+
+        List<Integer> paths = new ArrayList<>();//作为结果中的路径
+
+        traversal(root, paths, res);
+        
+        return res;
+    }
+
+    private void traversal(TreeNode root, List<Integer> paths, List<String> res) {
+        paths.add(root.val);//前序遍历，中
+
+        //遇到叶子节点
+        if(root.left == null && root.right == null) {
+            //输出
+            StringBuilder sb = new StringBuilder();//StringBuilder用来拼接字符串，速度更快
+            for(int i = 0; i < paths.size() - 1; i++) {
+                sb.append(paths.get(i)).append("->");
+            }
+
+            sb.append(paths.get(paths.size() - 1));//记录最后一个节点
+            res.add(sb.toString());//收集一个路径
+            return;
+        }
+
+        //递归和回溯是同时进行，所以要放在同一个花括号里
+        if(root.left != null) {//左
+            traversal(root.left, paths, res);
+            paths.remove(paths.size() - 1);//回溯
+        }
+
+        if(root.right != null) {//右
+            traversal(root.right, paths, res);
+            paths.remove(paths.size() - 1);//回溯
+        }
     }
 }
