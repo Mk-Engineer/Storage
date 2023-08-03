@@ -345,23 +345,25 @@ public class TreeNode {
         Solution23 slt23 = new Solution23();
         // System.out.println("Tree8 path is :" + slt23.binaryTreePaths(tree8));
         // System.out.println("Tree9 path is :" + slt23.binaryTreePaths(tree9));
-        // System.out.println("Tree11 path is :" + slt23.binaryTreePaths(tree11));
-        // System.out.println("Tree12 path is :" + slt23.binaryTreePaths(tree12));
-        System.out.println("Tree13 path is :" + slt23.binaryTreePaths(tree13));
+        System.out.println("Tree11 path is :" + slt23.binaryTreePaths(tree11));
+        System.out.println("Tree12 path is :" + slt23.binaryTreePaths(tree12));
+        // System.out.println("Tree13 path is :" + slt23.binaryTreePaths(tree13));
         System.out.println();
 
         //
         Solution24 slt24 = new Solution24();
         // System.out.println("tree8 path is :" + slt24.binaryTreePaths(tree8));
         // System.out.println("tree9 path is :" + slt24.binaryTreePaths(tree9));
-        // System.out.println("tree11 path is :" + slt24.binaryTreePaths(tree11));
-        // System.out.println("tree12 path is :" + slt24.binaryTreePaths(tree12));
-        System.out.println("tree13 path is :" + slt24.binaryTreePaths(tree13));
+        System.out.println("tree11 path is :" + slt24.binaryTreePaths(tree11));
+        System.out.println("tree12 path is :" + slt24.binaryTreePaths(tree12));
+        // System.out.println("tree13 path is :" + slt24.binaryTreePaths(tree13));
         System.out.println();
 
         //
         Solution25 slt25 = new Solution25();
-        System.out.println("TREE13 path is :" + slt25.binaryTreePaths(tree13));
+        System.out.println("TREE11 path is :" + slt25.binaryTreePaths(tree11));
+        System.out.println("TREE12 path is :" + slt25.binaryTreePaths(tree12));
+        // System.out.println("TREE13 path is :" + slt25.binaryTreePaths(tree13));
         System.out.println();
 
         //Tree12 [X]
@@ -380,7 +382,7 @@ public class TreeNode {
         // System.out.println("Postorder: " + Arrays.toString(result26.toArray()));
         // System.out.println();
 
-        // //
+        //
         // Solution0 slt0_1 = new Solution0();
         // List result27 = slt0_1.preorderTraversal(tree12);
         // System.out.println("PREORDER: " + Arrays.toString(result27.toArray()));
@@ -394,10 +396,10 @@ public class TreeNode {
         // System.out.println("POSTORDER: " + Arrays.toString(result29.toArray()));
         // System.out.println(); 
 
-        // //
-        // Solution3 slt3_1 = new Solution3();
-        // List result30 = slt3_1.preorderTraversal(tree12);
-        // System.out.println("preorder: " + Arrays.toString(result30.toArray()));
+        //
+        Solution3 slt3_1 = new Solution3();
+        List result30 = slt3_1.preorderTraversal(tree12);
+        System.out.println("preorder: " + Arrays.toString(result30.toArray()));
 
         // Solution4 slt4_1 = new Solution4();
         // List resul31 = slt4_1.inorderTraversal(tree12);
@@ -408,7 +410,17 @@ public class TreeNode {
         // System.out.println("postorder: " + Arrays.toString(resul32.toArray()));
         // System.out.println();
 
+
         //
+        Solution3 slt3_2 = new Solution3();
+        List result33 = slt3_2.preorderTraversal(tree11);
+        System.out.println("preorder: " + Arrays.toString(result33.toArray()));
+        System.out.println();
+        
+        //
+        Solution26 slt26 = new Solution26();
+        System.out.println("Tree11 leftleave sum = " + slt26.sumOfLeftLeaves(tree11));
+        System.out.println();
 
     }
 }
@@ -1413,5 +1425,31 @@ class Solution25 {
         }
 
         return result;
+    }
+}
+
+/* 计算给定二叉树的所有 左叶子之和 */
+/*
+ * 左叶子的定义：
+ *  节点A的左孩子不为空，且左孩子的左右孩子都为空(说明是叶子节点)，那么A节点的 左孩子节点 为 左叶子节点
+*/
+//递归
+class Solution26 {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null) 
+            return 0;
+
+        int leftValue = sumOfLeftLeaves(root.left);
+        int rightValue = sumOfLeftLeaves(root.right);
+
+        int midValue = 0;
+
+        if(root.left != null && root.left.left == null && root.left.right == null) {
+            midValue = root.left.val;
+        }
+
+        int sum = midValue + leftValue + rightValue;
+
+        return sum;
     }
 }
