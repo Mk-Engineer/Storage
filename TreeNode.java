@@ -17,7 +17,7 @@ public class TreeNode {
         this.right = right;
     }
 
-    public static void main(String args[]) {
+    public static void  main(String args[]) {
        // System.out.println("Hello TreeNode iSH!");
 
 		//Tree0
@@ -199,26 +199,33 @@ public class TreeNode {
         System.out.println();
 
         //
+        Solution9 slt910 = new Solution9();
         Solution10 slt10 = new Solution10();
-        List<List<Integer>> result10 = slt9.levelOrder(tree2);
+        List<List<Integer>> result10 = slt910.levelOrder(tree2);
         System.out.println("Before Invert: " + Arrays.toString(result10.toArray()));
         slt10.invertTree(tree2);
-        List<List<Integer>> result11 = slt9.levelOrder(tree2);
+        Solution9 slt911 = new Solution9();
+        List<List<Integer>> result11 = slt911.levelOrder(tree2);
         System.out.println("After Invert: " + Arrays.toString(result11.toArray()));
         System.out.println();
 
         //
         Solution11 slt11 = new Solution11();
+        Solution9 slt912 = new Solution9();
         slt11.invertTree(tree2);
-        List<List<Integer>> result12 = slt9.levelOrder(tree2);
+        List<List<Integer>> result12 = slt912.levelOrder(tree2);
         System.out.println("Invert Tree: " + Arrays.toString(result12.toArray()));
+        System.out.println();
     
         //
         Solution12 slt12 = new Solution12();
-        List<List<Integer>> result13 = slt9.levelOrder(tree3);
+        Solution9 slt913 = new Solution9();
+        List<List<Integer>> result13 = slt913.levelOrder(tree3);
         System.out.println("Tree3: " + Arrays.toString(result13.toArray()));
-        List<List<Integer>> result14 = slt9.levelOrder(tree4);
+        Solution9 slt914 = new Solution9();
+        List<List<Integer>> result14 = slt914.levelOrder(tree4);
         System.out.println("Tree4: " + Arrays.toString(result14.toArray()));
+        System.out.println();
 
         System.out.println("Tree3 Result1: " + slt12.isSymmetric1(tree3));
         System.out.println("Tree4 Result1: " + slt12.isSymmetric1(tree4));
@@ -356,6 +363,53 @@ public class TreeNode {
         Solution25 slt25 = new Solution25();
         System.out.println("TREE13 path is :" + slt25.binaryTreePaths(tree13));
         System.out.println();
+
+        //Tree12 [X]
+        // System.out.println("TREE12:");
+
+        // Solution6 slt61 = new Solution6();
+        // List result24 = slt61.preorderTraversal(tree12);
+        // System.out.println("Preorder: " + Arrays.toString(result24.toArray()));
+    
+        // Solution7 slt71 = new Solution7();
+        // List result25 = slt71.inorderTraversal(tree12);
+        // System.out.println("Inorder: " + Arrays.toString(result25.toArray()));
+        
+        // Solution8 slt81 = new Solution8();
+        // List result26 = slt81.postorderTraversal(tree12);
+        // System.out.println("Postorder: " + Arrays.toString(result26.toArray()));
+        // System.out.println();
+
+        // //
+        // Solution0 slt0_1 = new Solution0();
+        // List result27 = slt0_1.preorderTraversal(tree12);
+        // System.out.println("PREORDER: " + Arrays.toString(result27.toArray()));
+
+        // Solution1 slt1_1 = new Solution1();
+        // List result28 = slt1_1.inorderTraversal(tree12);
+        // System.out.println("INORDER: " + Arrays.toString(result28.toArray()));
+
+        // Solution2 slt2_1 = new Solution2();
+        // List result29 = slt2_1.postorderTraversal(tree12);
+        // System.out.println("POSTORDER: " + Arrays.toString(result29.toArray()));
+        // System.out.println(); 
+
+        // //
+        // Solution3 slt3_1 = new Solution3();
+        // List result30 = slt3_1.preorderTraversal(tree12);
+        // System.out.println("preorder: " + Arrays.toString(result30.toArray()));
+
+        // Solution4 slt4_1 = new Solution4();
+        // List resul31 = slt4_1.inorderTraversal(tree12);
+        // System.out.println("inorder: " + Arrays.toString(resul31.toArray()));
+    
+        // Solution5 slt5_1 = new Solution5();
+        // List resul32 = slt5_1.postorderTraversal(tree12);
+        // System.out.println("postorder: " + Arrays.toString(resul32.toArray()));
+        // System.out.println();
+
+        //
+
     }
 }
 
