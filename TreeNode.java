@@ -363,6 +363,7 @@ public class TreeNode {
         Solution25 slt25 = new Solution25();
         System.out.println("TREE11 path is :" + slt25.binaryTreePaths(tree11));
         System.out.println("TREE12 path is :" + slt25.binaryTreePaths(tree12));
+        System.out.println("TREE8 path is :" + slt25.binaryTreePaths(tree8));
         // System.out.println("TREE13 path is :" + slt25.binaryTreePaths(tree13));
         System.out.println();
 
@@ -418,10 +419,25 @@ public class TreeNode {
         System.out.println();
         
         //
-        Solution26 slt26 = new Solution26();
-        System.out.println("Tree11 leftleave sum = " + slt26.sumOfLeftLeaves(tree11));
+        Solution3 slt3_3 = new Solution3();
+        List result34 = slt3_3.preorderTraversal(tree8);
+        System.out.println("preorder: " + Arrays.toString(result34.toArray()));
         System.out.println();
 
+        //
+        Solution26 slt26 = new Solution26();
+        System.out.println("Tree8 leftleave sum = " + slt26.sumOfLeftLeaves(tree8));
+        System.out.println();
+
+        //
+        Solution27 slt27 = new Solution27();
+        System.out.println("tree8 leftleave sum = " + slt27.sumOfLeftLeaves(tree8));
+        System.out.println();
+
+        //
+        Solution28 slt28 = new Solution28();
+        System.out.println("TREE8 leftleave sum = " + slt28.sumOfLeftLeaves(tree8));
+        System.out.println();
     }
 }
 
@@ -1449,6 +1465,68 @@ class Solution26 {
         }
 
         int sum = midValue + leftValue + rightValue;
+
+        return sum;
+    }
+}
+
+//迭代
+class Solution27 {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        int result = 0;
+
+        while(!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+
+            if(node.left != null && node.left.left == null && node.left.right == null) {
+                result += node.left.val;
+            }
+
+            if(node.right != null)
+                stack.add(node.right);
+
+            if(node.left != null)
+                stack.add(node.left);
+        }
+
+        return result;
+    }
+}
+
+//层序遍历：迭代法
+class Solution28 {
+    public int sumOfLeftLeaves(TreeNode root) {
+        int sum = 0;
+        
+        if(root == null)
+            return 0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+
+            while(size-- > 0) {
+                TreeNode node = queue.poll();
+
+                if(node.left != null) {//左节点不为空
+                    queue.offer(node.left);
+                    /* 求左叶子和 */
+                    if(node.left.left == null && node.left.right == null) {
+                        sum += node.left.val;
+                    }
+                }
+
+                if(node.right != null)
+                    queue.offer(node.right);
+            }
+        }
 
         return sum;
     }
