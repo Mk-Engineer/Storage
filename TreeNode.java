@@ -351,6 +351,11 @@ public class TreeNode {
         // System.out.println("tree12 path is :" + slt24.binaryTreePaths(tree12));
         System.out.println("tree13 path is :" + slt24.binaryTreePaths(tree13));
         System.out.println();
+
+        //
+        Solution25 slt25 = new Solution25();
+        System.out.println("TREE13 path is :" + slt25.binaryTreePaths(tree13));
+        System.out.println();
     }
 }
 
@@ -1240,6 +1245,7 @@ class Solution22 {
 }
 
 /* 二叉树的所有路径 */
+//解法一
 class Solution23 {
     //递归法：方式一
     public List<String> binaryTreePaths(TreeNode root) {
@@ -1285,7 +1291,7 @@ class Solution23 {
     }
 }
 
-//[X]
+//[O]
 class Solution24 {
     //递归法：方式二
 
@@ -1310,5 +1316,48 @@ class Solution24 {
 
         deal(node.left, tmp);//左
         deal(node.right, tmp);//右
+    }
+}
+
+//解法二
+class Solution25 {
+    /* 迭代法 */
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+
+        if(root == null) {
+            return result;
+        }
+
+        Stack<Object> stack = new Stack<>();
+
+        //节点和路径同时入栈
+        stack.push(root);
+        stack.push(root.val + "");
+
+        while(!stack.isEmpty()) {
+            //节点和路径同时出栈
+            String path = (String)stack.pop();
+            TreeNode node = (TreeNode)stack.pop();
+
+            //若找到叶子节点
+            if(node.left == null && node.right == null) {
+                result.add(path);
+            }
+
+            //右子节点不为空
+            if(node.right != null) {
+                stack.push(node.right);
+                stack.push(path + "->" + node.right.val);
+            }
+
+            //左子节点不为空
+            if(node.left != null) {
+                stack.push(node.left);
+                stack.push(path + "->" + node.left.val);
+            }
+        }
+
+        return result;
     }
 }
