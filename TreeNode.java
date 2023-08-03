@@ -1297,17 +1297,18 @@ class Solution24 {
     }
 
     public void deal(TreeNode node, String s) {
+        //递归终止条件
         if(node == null)
-            return;
+            return;//回溯
 
         if(node.left == null && node.right == null) {
             result.add(new StringBuilder(s).append(node.val).toString());
             return;
         }    
 
-        String tmp = new StringBuilder(s).append(node.val).append("->").toString();
+        String tmp = new StringBuilder(s).append(node.val).append("->").toString();//中
 
-        deal(node.left, tmp);
-        deal(node.right, tmp);
+        deal(node.left, tmp);//左
+        deal(node.right, tmp);//右
     }
 }
