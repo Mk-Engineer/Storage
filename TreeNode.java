@@ -336,11 +336,20 @@ public class TreeNode {
 
         //
         Solution23 slt23 = new Solution23();
-        System.out.println("Tree8 path is :" + slt23.binaryTreePaths(tree8));
-        System.out.println("Tree9 path is :" + slt23.binaryTreePaths(tree9));
+        // System.out.println("Tree8 path is :" + slt23.binaryTreePaths(tree8));
+        // System.out.println("Tree9 path is :" + slt23.binaryTreePaths(tree9));
         // System.out.println("Tree11 path is :" + slt23.binaryTreePaths(tree11));
         // System.out.println("Tree12 path is :" + slt23.binaryTreePaths(tree12));
         System.out.println("Tree13 path is :" + slt23.binaryTreePaths(tree13));
+        System.out.println();
+
+        //
+        Solution24 slt24 = new Solution24();
+        // System.out.println("tree8 path is :" + slt24.binaryTreePaths(tree8));
+        // System.out.println("tree9 path is :" + slt24.binaryTreePaths(tree9));
+        // System.out.println("tree11 path is :" + slt24.binaryTreePaths(tree11));
+        // System.out.println("tree12 path is :" + slt24.binaryTreePaths(tree12));
+        System.out.println("tree13 path is :" + slt24.binaryTreePaths(tree13));
         System.out.println();
     }
 }
@@ -1107,6 +1116,7 @@ class Solution20 {
 	}
 }
 
+//[X]
 class Solution21 {
 	/*
 	* 迭代法：
@@ -1173,6 +1183,7 @@ class Solution21 {
     }
 }
 
+//[X]
 class Solution22 {
     /*
      * 优化迭代法，针对暴力迭代法的getHeight方法做优化，利用TreeNode.val来保存当前节点高度，这样就不会有重复遍历
@@ -1230,7 +1241,7 @@ class Solution22 {
 
 /* 二叉树的所有路径 */
 class Solution23 {
-    //递归法
+    //递归法：方式一
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<>();//存最终结果
         
@@ -1271,5 +1282,32 @@ class Solution23 {
             traversal(root.right, paths, res);
             paths.remove(paths.size() - 1);//回溯
         }
+    }
+}
+
+//[X]
+class Solution24 {
+    //递归法：方式二
+
+    List<String> result = new ArrayList<>();
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        deal(root,"");
+        return result;
+    }
+
+    public void deal(TreeNode node, String s) {
+        if(node == null)
+            return;
+
+        if(node.left == null && node.right == null) {
+            result.add(new StringBuilder(s).append(node.val).toString());
+            return;
+        }    
+
+        String tmp = new StringBuilder(s).append(node.val).append("->").toString();
+
+        deal(node.left, tmp);
+        deal(node.right, tmp);
     }
 }
