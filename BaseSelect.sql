@@ -13,6 +13,8 @@ DCL:数据控制语言
 
 */
 
+# SELECT 列 FROM 表;
+
 USE dbtest;
 
 SELECT * FROM employees;
