@@ -16,7 +16,7 @@ USE dbtest;
 
 SELECT * FROM employees;
 
-INSERT INTO employees VALUES(1003,'Jack');
+/*INSERT INTO employees VALUES(1003,'Jack');*/
 
 
 # 2. 列的别名
@@ -43,3 +43,7 @@ DESCRIBE employees; /* 显示表中 字段 的 详细信息 */
 DESC employees;
 
 
+# 7. 过滤数据
+SELECT *
+FROM employees
+WHERE id = 1003;
