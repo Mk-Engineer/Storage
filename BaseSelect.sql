@@ -131,5 +131,90 @@ WHERE ISNULL(name);
 SELECT LEAST('g','b','t','m'),GREATEST('g','b','t','m')
 FROM DUAL;
 
-SELECT LEAST(id, name), LEAST(LENGTH(id), LENGTH(name)), id, name
+
+#BETWEEN 条件1 AND 条件2
+SELECT id, name
 FROM employees
+WHERE id BETWEEN 1002 AND 1003;
+/*WHERE id >= 1002 && id <= 1003*/
+/* 查询条件1和条件2范围内的数据，包含边界 */
+/* 条件1必须是下限，条件2必须是上界，不能交换 */
+
+SELECT id, name
+FROM employees
+WHERE id NOT BETWEEN 1002 AND 1003;
+/*WHERE id < 1002 OR id > 1003*/
+
+
+#IN \ NOT IN
+SELECT id, name
+FROM employees
+WHERE id IN (1001,1002,1003);
+/*WHERE id = 10 OR id = 20 OR id = 30;*/
+
+SELECT id, name
+FROM employees
+WHERE id NOT IN (1002,1003);
+
+
+#LIKE 模糊查询
+SELECT name
+FROM employees
+WHERE name LIKE '%J%'; /* % 代表不确定个数的字符(0个或多个) */
+
+SELECT name
+FROM employees
+WHERE name LIKE 'J%'; /* 查询以字符'J'开头的name */
+
+SELECT name
+FROM employees
+WHERE name LIKE '%e%' AND name LIKE '%r%';
+/*WHERE name LIKE '%a%e%' OR name LIKE '%e%a%'*/
+
+SELECT name
+FROM employees
+WHERE name LIKE '_e%';
+
+SELECT name
+FROM employees
+WHERE name LIKE '_\_e%';/* 转义字符 \ */
+/*WHERE name LIKE '_$_e%' ESCAPE '$';*/
+
+
+#REGEXP \ RLIKE 正则表达式
+/*
+(1)''匹配以该字符后面的字符开头的字符串。
+(2)'$'匹配以该字符前面的字符结尾的字符串。
+(3)''匹配任何一个单字符。
+(4)“[...]"匹配在方括号内的任何字符。例如，“[abc]"匹配“a”或“b”或“c”。为了命名字符的范围，使用一个''。“[a- z]"匹配任何字母，而“[0-9]"匹配任何数字。
+(5)'*'匹配零个或多个在它前面的字符。例如，“x*"匹配任何数量的'x'字符， “[0-9]*"匹配任何数量的数字，而“*”匹配任何数量的任何字符。
+*/
+SELECT 'shkstart' REGEXP '^s', 'shkstart' REGEXP 't$', 'shkstart' REGEXP 'hk'
+FROM DUAL;
+
+SELECT 'atguigu' REGEXP 'gu.gu', 'atguigu' REGEXP 'gu', 'atguigu' REGEXP '[ab]'
+FROM DUAL;
+
+
+# 10. 逻辑运算符 'OR ||' / 'AND &&' / 'NOT !' / 'XOR'
+/* 注意：AND 的优先级 高于 OR */
+/* 异或 XOR ：
+    两侧的true false一致，结果为true
+    两侧的true false不一致，结果为false    
+*/
+SELECT id, name
+FROM employees
+WHERE id < 1008 XOR name LIKE '%e%';
+
+SELECT * FROM employees;
+
+
+# 11. 位运算符
+/*
+    &   按位与
+    |   按位或
+    ^   按位异或
+    ~   按位取反
+    >>  按位右移
+    <<  按位左移
+*/ 
