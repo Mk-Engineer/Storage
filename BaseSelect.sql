@@ -108,3 +108,28 @@ FROM DUAL;
 
 
 # 9.2 关键字比较
+#IS NULL \ IS NOT NULL \ ISNULL()
+SELECT id, name
+FROM employees
+WHERE name IS NULL; 
+
+/* 判断表中name不为NULL的2种方法 */
+SELECT id, name
+FROM employees
+WHERE name IS NOT NULL; 
+
+SELECT id, name
+FROM employees
+WHERE NOT name <=> NULL; 
+
+SELECT id, name
+FROM employees
+WHERE ISNULL(name); 
+
+
+#LEAST() \ GREATEST()
+SELECT LEAST('g','b','t','m'),GREATEST('g','b','t','m')
+FROM DUAL;
+
+SELECT LEAST(id, name), LEAST(LENGTH(id), LENGTH(name)), id, name
+FROM employees
