@@ -251,4 +251,36 @@ SELECT id,name
 FROM employees
 ORDER BY id DESC, name ASC;
 
-# 12.3 分页
+# 12.3 分页 LIMIT
+/* LIMIT 偏移量，每页条数 */
+/* LIMIT 条目数 */
+/* 每页显示3条记录，此时显示第1页 */
+SELECT id, name
+FROM employees
+ORDER BY id
+LIMIT 0,3;
+
+/* 每页显示3条记录，此时显示第2页 */
+SELECT id, name
+FROM employees
+ORDER BY id
+LIMIT 3,3;
+
+/* 公式：LIMIT (pageNum - 1) * pageSize, pageSize*/
+
+# 12.4 \ WHERE \ ORDER BY \ LIMIT \ 的声明顺序
+SELECT id, name
+FROM employees
+WHERE id > 1003
+ORDER BY id
+LIMIT 0,5;
+/* 注意：LIMIT 必须放在整个SELECT语句的最后 */
+
+/* MySQL8.0新特性 */
+SELECT id, name
+FROM employees
+WHERE id > 1003
+ORDER BY id
+LIMIT 5 OFFSET 0;
+/* LIMIT 条目数 OFFSET 偏移量 */
+
