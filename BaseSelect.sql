@@ -246,10 +246,11 @@ WHERE id IN(1003,1004,1005) /* WHERE 必须声明在 FROM 之后，ORDER BY 之�
 ORDER BY id DESC;
 
 # 12.2 二级排序
+/* 只有一级排序数值相同，才会触发二级排序 */
 /* 按照id降序排列，name升序排列 */
 SELECT id,name 
 FROM employees
-ORDER BY id DESC, name ASC;
+ORDER BY name ASC, id DESC;
 
 # 12.3 分页 LIMIT
 /* LIMIT 偏移量，每页条数 */
@@ -283,4 +284,3 @@ WHERE id > 1003
 ORDER BY id
 LIMIT 5 OFFSET 0;
 /* LIMIT 条目数 OFFSET 偏移量 */
-
