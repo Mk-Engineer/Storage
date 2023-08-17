@@ -1,5 +1,5 @@
 # 基本的SELECT语句
-
+/* 多行注释（块注释）：' Alt+Shift+A ' */
 # 1.SQL的分类
 /*
 DDL:数据定义语言
@@ -206,7 +206,6 @@ SELECT id, name
 FROM employees
 WHERE id < 1008 XOR name LIKE '%e%';
 
-SELECT * FROM employees;
 
 
 # 11. 位运算符
@@ -218,3 +217,38 @@ SELECT * FROM employees;
     >>  按位右移
     <<  按位左移
 */ 
+
+# 12. 排序与分页
+# 12.1 排序
+/* 默认是按照 添加顺序 显示的 */
+/* SELECT * FROM employees; */
+
+/* 
+ORDER BY
+ASC  (ascend)  升序
+DESC (descend) 降序
+*/
+
+SELECT id,name 
+FROM employees
+ORDER BY id DESC;/* 默认以ASC排序 */
+
+/* 使用列的别名，进行排序 */
+SELECT id,name,id * 10 'pid'
+FROM employees
+ORDER BY pid;
+
+/* 注意：列的别名只能在 ORDER BY 中使用，不能在 WHERE 中使用 */
+
+SELECT id,name
+FROM employees
+WHERE id IN(1003,1004,1005) /* WHERE 必须声明在 FROM 之后，ORDER BY 之前 */
+ORDER BY id DESC;
+
+# 12.2 二级排序
+/* 按照id降序排列，name升序排列 */
+SELECT id,name 
+FROM employees
+ORDER BY id DESC, name ASC;
+
+# 12.3 分页
