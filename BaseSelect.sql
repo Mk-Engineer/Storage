@@ -234,7 +234,7 @@ FROM employees
 ORDER BY id DESC;/* 默认以ASC排序 */
 
 /* 使用列的别名，进行排序 */
-SELECT id,name,id * 10 'pid'
+SELECT id,name,id * 10 pid
 FROM employees
 ORDER BY pid;
 
