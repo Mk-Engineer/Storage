@@ -150,6 +150,20 @@ public class TreeNode {
 
         TreeNode tree13 = new TreeNode(1, II10_1, II10_2);
 
+        //Tree14 求树左下角的值
+        TreeNode IIII11_5 = new TreeNode(7);
+
+        TreeNode III11_1 = new TreeNode(4);
+        TreeNode III11_3 = new TreeNode(5, IIII11_5, null);
+        TreeNode III11_4 = new TreeNode(6);
+
+        TreeNode II11_1 = new TreeNode(2, III11_1, null);
+        TreeNode II11_2 = new TreeNode(3, III11_3, III11_4);
+
+        TreeNode tree14 = new TreeNode(1, II11_1, II11_2);
+        
+
+
         //
         Solution0 slt0 = new Solution0();
         List result0 = slt0.preorderTraversal(tree0);
@@ -438,6 +452,22 @@ public class TreeNode {
         Solution28 slt28 = new Solution28();
         System.out.println("TREE8 leftleave sum = " + slt28.sumOfLeftLeaves(tree8));
         System.out.println();
+
+        //
+        Solution9 slt100 = new Solution9();
+        List<List<Integer>> result35 = slt100.levelOrder(tree14);
+        System.out.println("Tree14: " + Arrays.toString(result35.toArray()));
+    
+        //
+        Solution29 slt29 = new Solution29();
+        System.out.println("Tree14 left: " + slt29.findBottomLeftValue(tree14));
+        // System.out.println("Tree5 left: " + slt29.findBottomLeftValue(tree5));
+        // System.out.println("Tree3 left: " + slt29.findBottomLeftValue(tree3));
+        
+        //
+        Solution30 slt30 = new Solution30();
+        System.out.println("tree14 left: " + slt30.findBottomLeftValue(tree14));
+
     }
 }
 
@@ -1529,5 +1559,64 @@ class Solution28 {
         }
 
         return sum;
+    }
+}
+
+//递归
+class Solution29 {
+    private int Deep = -1;
+    private int value = 0;
+    
+    public int findBottomLeftValue(TreeNode root) {
+        value = root.val;
+        findLeftValue(root,0);
+        return value;
+    }
+
+    private void findLeftValue(TreeNode root, int deep) {
+        if(root == null)
+            return;
+        
+        //找到叶子节点
+        if(root.left == null && root.right == null) {
+            if(deep > Deep) {
+                value = root.val;
+                Deep = deep;
+            }
+        }
+
+        if(root.left != null)
+            findLeftValue(root.left, deep + 1);
+
+        if(root.right != null)
+            findLeftValue(root.right, deep + 1);    
+    }
+}
+
+//迭代法
+class Solution30 {
+    public int findBottomLeftValue(TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        int res = 0;
+
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode poll = queue.poll();
+                if(i == 0) {
+                    res = poll.val;
+                }
+                if(poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if(poll.right != null) {
+                    queue.offer(poll.right);
+                }
+            }
+        }
+
+        return res;
     }
 }
