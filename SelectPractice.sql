@@ -170,3 +170,25 @@ SELECT employee_id,department_name
 FROM employees e RIGHT JOIN departments d
 ON e.`department_id` = d.`department_id`
 WHERE e.`department_id` IS NULL;
+
+
+# 16 SQL99 新特性 NATURAL JOIN
+SELECT employee_id,last_name,department_name
+FROM employees e JOIN departments d
+ON e.`department_id` = d.`department_id`
+AND e.`manager_id` = d.`manager_id`;
+
+/* 等价 */
+
+SELECT employee_id,last_name,department_name
+FROM employees e NATURAL JOIN departments d;
+
+
+# 17 SQL99 新特性 USING
+SELECT employee_id,last_name,department_name
+FROM employees e JOIN departments d
+ON e.`department_id` = d.`department_id`;
+
+SELECT employee_id,last_name,department_name
+FROM employees e JOIN departments d
+USING (department_id);/* 注意：不适用于自连接, USING()内必须填写同名的字段 */
