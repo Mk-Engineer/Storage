@@ -192,3 +192,26 @@ ON e.`department_id` = d.`department_id`;
 SELECT employee_id,last_name,department_name
 FROM employees e JOIN departments d
 USING (department_id);/* 注意：不适用于自连接, USING()内必须填写同名的字段 */
+
+/* 可以查看employees表的所有Field */
+
+/* 注意：起别名用 "name" 符号修饰 */
+SELECT emp.last_name "employees",emp.employee_id "Emp#",mgr.last_name "manager",mgr.employee_id "Mgr#"
+FROM employees emp LEFT JOIN employees mgr /* FROM 后的别名吗，不能用 "name" 符号修饰 */
+ON emp.manager_id = mgr.employee_id;
+
+DESC employees;
+DESC departments;
+DESC locations;
+
+/* 练习：查询哪些城市没有部门 */
+SELECT d.department_name,l.city
+FROM departments d RIGHT JOIN locations l
+ON l.`location_id` = d.`location_id`
+WHERE d.department_id IS NULL; /* 存在NULL 的集合是较小集合 */
+
+/* 练习：查询哪些部门没有员工 */
+SELECT d.department_name,e.employee_id
+FROM departments d LEFT JOIN employees e
+ON d.`department_id` = e.`department_id`
+WHERE e.`department_id` IS NULL;
