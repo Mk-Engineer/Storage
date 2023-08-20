@@ -263,3 +263,78 @@ FROM DUAL;
 /* 进制转换 */
 SELECT BIN(10),HEX(10),OCT(10),CONV(10,2,8)/* CONV(X,F1,F2)：X为F1进制的数字，返回X的F2进制的转换结果 */
 FROM DUAL;
+
+# 18.2 字符串函数
+SELECT ASCII('Abc') /* 只返回第一个字符的 ASCII 值 */
+FROM DUAL;
+
+/* 一个字母占一个字节，一个汉字占3个字节 */
+SELECT CHAR_LENGTH('HELLO'),CHAR_LENGTH('我们'),LENGTH('HELLO'),LENGTH('我们')
+FROM DUAL;
+
+/* CONCAT() 连接字符 */
+SELECT CONCAT(emp.last_name,' worked for',mgr.last_name) "detials"
+FROM employees emp JOIN employees mgr
+WHERE emp.`manager_id` = mgr.`manager_id`;
+
+/* CONCAT_WS(分隔符，待连接字符1，待连接字符2，...) */
+SELECT CONCAT_WS('-','HELLO','WORLD','HELLO','BEIJING')
+FROM DUAL;
+
+/* INSERT('待替换字符',插入位置,替换个数,'替换内容') */
+/* REPLACE('待替换字符串','待替换字串','替换内容') */
+/* 注意：字符串的索引是从 1 开始的 */
+SELECT INSERT('HELLOWORLD',2,3,'aaaaa'),REPLACE('HELLO','LL','MM')
+FROM DUAL;
+
+SELECT UPPER('hello'),LOWER('WORLD')
+FROM DUAL;
+
+SELECT LEFT('HELLO',2),RIGHT('HELLO',3),RIGHT('HELLO',13)
+FROM DUAL;
+
+/* 右对齐 LPAD(待补充内容，补足位数，'填充符号') */
+/* 左对齐 RPAD(待补充内容，补足位数，'填充符号') */
+SELECT employee_id,last_name,LPAD(salary,10,'*')
+FROM employees;
+
+/* 去除空格 */
+SELECT TRIM('    H EL  LO   ') "result"/* 去除两端的空格 */
+FROM DUAL;
+SELECT LTRIM('    H EL  LO   ') "result"/* 去除左端的空格 */
+FROM DUAL;
+SELECT RTRIM('    H EL  LO   ') "result"/* 去除右端的空格 */
+FROM DUAL;
+
+SELECT TRIM('O' FROM 'OHEOLO') "RESULT" /* 去除两端的＇OO＇*/
+FROM DUAL;
+/* TRIM(LEADING s1 FROM s) */
+/* TRIM(TRAILING s1 FROM s) */
+
+/* 重复 */
+SELECT REPEAT('HELLO',4),SPACE(5) "12345",SPACE(10) "0123456789",STRCMP('abc','abe')/* STRCMP(s1,s2) 比较字符串s1和s2的ASCII码大小 */
+FROM DUAL;
+
+SELECT SUBSTR('HELLO',2,2)
+FROM DUAL;
+
+/* LOCATE(substr,str) 返回substr在str中首次出现的位置 */
+SELECT LOCATE('l','hello')
+FROM DUAL;
+
+/* 返回字符串列表中指定位置的字符串 */
+SELECT ELT(2,'A','B','C','D')
+FROM DUAL;
+
+/* 返回字符串s在字符串列表中第一次出现的位置 */
+SELECT FIELD('MM','GG','JJ','MM','DD','MM')
+FROM DUAL;
+
+SELECT FIND_IN_SET('MM','GG,JJ,MM,DD,MM')
+FROM DUAL;
+
+/* REVERSE(s) 反转字符串 */
+
+/* NULLIF(s1,s2) 如果s1=s2返回NULL，否饭返回s1 */
+SELECT employee_id,NULLIF(LENGTH(last_name),LENGTH(first_name))
+FROM employees;
