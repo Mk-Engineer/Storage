@@ -215,3 +215,51 @@ SELECT d.department_name,e.employee_id
 FROM departments d LEFT JOIN employees e
 ON d.`department_id` = e.`department_id`
 WHERE e.`department_id` IS NULL;
+
+
+# 18 单行函数
+# 18.1 数值函数
+/* CEIL(X)\CEILING(X) 天花板函数：取距X最近，比X大的整数。 */
+/* FLOOR(X) 地板函数：取距X最近，比X小的整数 */
+SELECT ABS(-123),ABS(32),SIGN(-23),SIGN(43),PI(),CEIL(32.32),CEILING(-43.23),FLOOR(32.32),FLOOR(-43.23),MOD(12,5)
+FROM DUAL;
+
+/* RAND(X) 两个RAND的X相等，取到的随机数也相等 */
+SELECT RAND(),RAND(),RAND(10),RAND(10),RAND(-1),RAND(-1)
+FROM DUAL;
+
+/* 四舍五入 */
+SELECT ROUND(123,456),ROUND(123.456,2),ROUND(123.456,-1) /* ROUND(小数，保留几位小数) */
+FROM DUAL;
+
+/* 截断操作 */
+SELECT TRUNCATE(123.456,2),TRUNCATE(123.456,-1)
+FROM DUAL;
+
+/* 单行函数嵌套 */
+SELECT TRUNCATE(ROUND(123.456,2),-1)
+FROM DUAL;
+
+/* 
+    角度与弧度换算:
+        RADIANS(X)：将X转化为弧度
+        DEGREES(X) ：将X转化为角度
+*/
+SELECT RADIANS(30),RADIANS(45),RADIANS(60),RADIANS(90),DEGREES(2*PI()),DEGREES(RADIANS(60)),DEGREES(PI()*3/4)
+FROM DUAL;
+
+/* 三角函数 */
+SELECT SIN(PI()/6),DEGREES(ASIN(1/2)),TAN(PI()/4),DEGREES(ATAN(1))
+FROM DUAL;
+
+/* 指数 */
+SELECT POW(2,5) "2^5",POWER(2,4) "2^4",EXP(2) "e^2"
+FROM DUAL;
+
+/* 对数 */
+SELECT LN(EXP(2)) "ln(e^2)",LOG(EXP(2)) "ln(e^2)",LOG10(POW(10,3)) "log10(10^3)",LOG2(4) "log2(4)"
+FROM DUAL;
+
+/* 进制转换 */
+SELECT BIN(10),HEX(10),OCT(10),CONV(10,2,8)/* CONV(X,F1,F2)：X为F1进制的数字，返回X的F2进制的转换结果 */
+FROM DUAL;
