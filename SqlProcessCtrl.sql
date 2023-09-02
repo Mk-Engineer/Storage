@@ -63,3 +63,44 @@ WHERE department_id IN(10,20,30);
 /* SELECT PASSWORD('mysql') */ /* 在MySQL8.0中被弃用 */
 SELECT MD5('mysql'),SHA('mysql')
 FROM DUAL;
+
+/* SELECT ENCODE('password','key') */
+/* SELECT DECODE(ENCODE('password','key'),'key') */
+/* 在MySQL8.0中被弃用 */
+
+
+# 22 MySQL信息函数
+SELECT VERSION(),CONNECTION_ID(),DATABASE(),SCHEMA(),USER(),CURRENT_USER(),CHARSET('English'),COLLATION('English')
+FROM DUAL;
+
+
+# 23 其他函数
+/* FORMAT(value,n)：对数字value进行格式化，n表示四舍五入后保留到小数点后n位，当n <= 0时，只保留整数部分。 */
+SELECT FORMAT(3.1415926,5),
+FROM DUAL;
+
+/* CONV(value,from,to)：将value从from进制转化为to进制 */
+SELECT CONV(16,10,2), CONV(8888,10,16), CONV(NULL,10,2)
+FROM DUAL;
+
+SELECT INET_ATON('192.168.1.100'),INET_NTOA(3232235876)
+FROM DUAL;
+
+/* BENCHMARK(n,表达式)：将表达式重复执行n次，用于测试MySQL处理表示所耗费的时间 */
+SELECT BENCHMARK(100000,MD5('mysql'))
+FROM DUAL;
+
+SELECT CHARSET('English'),CHARSET(CONVERT('English' USING 'utf8mb4'))
+FROM DUAL;
+
+
+/*
+#练习
+    查询公司各员工工作的年数、工作的天数，并按工作年数降序排列
+*/
+SELECT employee_id,DATEDIFF(CURDATE(),hire_date) / 365 "worked_years",DATEDIFF(CURDATE(),hire_date) "worked_days"
+FROM employees
+ORDER BY worked_years DESC;
+
+
+# 24 聚合函数
