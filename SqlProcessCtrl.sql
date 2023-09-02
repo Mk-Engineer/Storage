@@ -152,9 +152,27 @@ FROM employees;
 */
 
 
-
 #24.2 GROUP BY 的使用
+/* #需求：查询各个部门的平均工资，最高工资 */
+SELECT department_id,AVG(salary),MAX(salary)
+FROM employees
+GROUP BY department_id;
 
+/* #需求：查询各个department_id、job_id的平均工资 */
+SELECT department_id, job_id, AVG(salary)
+FROM employees
+GROUP BY department_id,job_id;
+
+/* 错误 */
+-- SELECT department_id, job_id, AVG(salary)
+-- FROM employees
+-- GROUP BY department_id;
+/* 结论1：SELECT中出现的非组函数的字段必须声明在GROUP BY中，GROUP BY中声明的字段可以不出现在SELECT中。 */
+/* 结论2：GROUP BY 声明在FROM后面、WHERE后面，ORDER BY前面，LIMIT前面 */
+/* 结论3：GOURP BY 中使用 WITH ROLLUP，会将所有的组再次看成一个组，算一个最终的总平均值*/
+SELECT department_id,AVG(salary)
+FROM employees
+GROUP BY department_id WITH ROLLUP;/* WITH ROLLUP 不能与 ORDER BY 同时使用 */
 
 
 #24.3 HAVING 的使用
