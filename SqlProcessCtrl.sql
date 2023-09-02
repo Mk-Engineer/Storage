@@ -57,3 +57,9 @@ CASE department_id WHEN 10 THEN salary * 1.1
                    END "details"
 FROM employees
 WHERE department_id IN(10,20,30);
+
+
+# 21 加密与解密
+/* SELECT PASSWORD('mysql') */ /* 在MySQL8.0中被弃用 */
+SELECT MD5('mysql'),SHA('mysql')
+FROM DUAL;
