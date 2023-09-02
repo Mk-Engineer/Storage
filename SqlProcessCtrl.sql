@@ -104,3 +104,63 @@ ORDER BY worked_years DESC;
 
 
 # 24 聚合函数
+
+#24.1 常见的聚合函数
+/* AVG/SUM */
+/* 适用于数值类型，不计算NULL值 */
+SELECT AVG(salary),SUM(salary),AVG(salary) * COUNT(salary)/* AVG = SUM x COUNT */
+FROM employees;
+
+/* MAX/MIN */
+/* 适用于数值类型、字符串类型、日期时间类型，不计算NULL值 */
+SELECT MAX(salary),MIN(salary)
+FROM employees;
+
+SELECT MAX(last_name),MIN(last_name)
+FROM employees;
+
+SELECT MAX(hire_date),MIN(hire_date)
+FROM employees;
+
+/* COUNT */
+/* 计算指定字段在查询结构中出现的个数，不计算NULL值 */
+SELECT COUNT(employee_id),COUNT(salary),COUNT(commission_pct),COUNT(1)/* COUNT(1)：用 1 来充当每条数据。计算表中有多少条记录，column不确定时，可以用此方法代替。 */
+FROM employees;
+
+SELECT AVG(commission_pct),SUM(commission_pct)/COUNT(commission_pct),SUM(commission_pct)/107
+FROM employees;
+
+/* #需求：查询公司中的平均奖金率 */
+/* 错误的 */
+SELECT AVG(commission_pct)
+FROM employees;
+
+/* 正确的 */
+SELECT SUM(commission_pct) / COUNT(IFNULL(commission_pct,0)), AVG(IFNULL(commission_pct,0))
+FROM employees;
+
+/* 
+    #统计表中的记录数
+        1.COUNT(*)
+        2.COUNT(1)
+        3.COUMT(具体字段)
+        
+        Q:哪种效率更高?
+
+        A:如果使用MyISAM存储引擎，则三者效率相同，都是O(1)
+          如果使用InnoDB存储引擎，则COUNT(*) = COUNT(1) > COUNT(具体字段)
+*/
+
+
+
+#24.2 GROUP BY 的使用
+
+
+
+#24.3 HAVING 的使用
+
+
+
+#24.4 SQL底层执行原理
+
+
