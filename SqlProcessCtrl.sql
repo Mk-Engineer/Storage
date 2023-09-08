@@ -59,6 +59,7 @@ FROM employees
 WHERE department_id IN(10,20,30);
 
 
+
 # 21 加密与解密
 /* SELECT PASSWORD('mysql') */ /* 在MySQL8.0中被弃用 */
 SELECT MD5('mysql'),SHA('mysql')
@@ -69,9 +70,11 @@ FROM DUAL;
 /* 在MySQL8.0中被弃用 */
 
 
+
 # 22 MySQL信息函数
 SELECT VERSION(),CONNECTION_ID(),DATABASE(),SCHEMA(),USER(),CURRENT_USER(),CHARSET('English'),COLLATION('English')
 FROM DUAL;
+
 
 
 # 23 其他函数
@@ -101,6 +104,7 @@ FROM DUAL;
 SELECT employee_id,DATEDIFF(CURDATE(),hire_date) / 365 "worked_years",DATEDIFF(CURDATE(),hire_date) "worked_days"
 FROM employees
 ORDER BY worked_years DESC;
+
 
 
 # 24 聚合函数
@@ -152,6 +156,7 @@ FROM employees;
 */
 
 
+
 #24.2 GROUP BY 的使用
 /* #需求：查询各个部门的平均工资，最高工资 */
 SELECT department_id,AVG(salary),MAX(salary)
@@ -175,6 +180,7 @@ FROM employees
 GROUP BY department_id WITH ROLLUP;/* WITH ROLLUP 不能与 ORDER BY 同时使用 */
 
 
+
 #24.3 HAVING 的使用
 /* 用来过滤数据 */
 /* #练习：查询各个部门中最高工资比10000高的部门信息 */
@@ -188,6 +194,29 @@ HAVING MAX(salary) > 10000;
 /* 要求2：HAVING 必须声明在 GROUP BY 的后面 */
 /* 要求3：开发中使用 HAVING 的前提是SQL中使用了 GROUP BY */
 
+/* #练习：查询部门id为10、20、30、40中最高工资比10000高的部门信息 */
+-- 方式一：
+SELECT department_id,MAX(salary)
+FROM employees
+WHERE department_id IN(10,20,30,40)
+GROUP BY department_id
+HAVING MAX(salary) > 10000;
+/* 推荐：使用方式一，方式一的执行效率高于方式二 */
+
+-- 方式二：
+SELECT department_id,MAX(salary)
+FROM employees
+GROUP BY department_id
+HAVING MAX(salary) > 10000 AND department_id IN(10,20,30,40);
+
+/* 结论1：当过滤条件中有聚合函数时，此过滤条件必须声明在HAVING中 */
+/* 结论2：当过滤条件中无聚合函数时，此过滤条件声明在WHERE和HAVING中均可，但建议声明在HAVING中 */
+
+/* 
+    # WHERE 与 HAVING 对比
+        1.HAVING适用范围更广
+        2.如果过滤条件中无聚合函数，此时WHERE的效率更高 
+*/
 
 #24.4 SQL底层执行原理
 
