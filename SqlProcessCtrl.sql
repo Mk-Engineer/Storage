@@ -176,7 +176,17 @@ GROUP BY department_id WITH ROLLUP;/* WITH ROLLUP 不能与 ORDER BY 同时使�
 
 
 #24.3 HAVING 的使用
+/* 用来过滤数据 */
+/* #练习：查询各个部门中最高工资比10000高的部门信息 */
+SELECT department_id,MAX(salary)
+FROM employees
+/* WHERE MAX(salary) > 10000 */
+GROUP BY department_id
+HAVING MAX(salary) > 10000;
 
+/* 要求1：如果过滤条件中使用了聚合函数，则必须使用 HAVING 来替换 WHERE */
+/* 要求2：HAVING 必须声明在 GROUP BY 的后面 */
+/* 要求3：开发中使用 HAVING 的前提是SQL中使用了 GROUP BY */
 
 
 #24.4 SQL底层执行原理
