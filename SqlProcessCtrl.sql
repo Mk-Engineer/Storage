@@ -218,6 +218,41 @@ HAVING MAX(salary) > 10000 AND department_id IN(10,20,30,40);
         2.如果过滤条件中无聚合函数，此时WHERE的效率更高 
 */
 
-#24.4 SQL底层执行原理
+#25 SQL底层执行原理
+
+#25.1 SELECT 语句的完整结构
+/* 
+    #sql92语法
+        SELECT .., .., .. (存在聚合函数)
+        FROM .., .., ..
+        WHERE 多表连接条件 AND 不含聚合函数的过滤条件
+        GROUP BY .., ..
+        HAVING 含聚合函数的过滤条件
+        ORDER BY .., ..(ASC/DESC)
+        LIMIT .., ..
+    
+    #sql99语法   
+        SELECT .., .., .. (存在聚合函数)
+        FROM .. (LEFT / RIGHT) JOIN.. ON 多表的连接条件
+        WHERE 不含聚合函数的过滤条件
+        GROUP BY .., ..
+        HAVING 含聚合函数的过滤条件
+        ORDER BY .., ..(ASC/DESC)
+        LIMIT .., ..
+*/
 
 
+
+#25.2 SQL 语句的执行过程
+/*
+    #sql99语法   
+        SELECT .., .., .. (存在聚合函数)                [5]
+
+        FROM .. (LEFT / RIGHT) JOIN.. ON 多表的连接条件 [1]
+        WHERE 不含聚合函数的过滤条件                     [2]
+        GROUP BY .., ..                                [3]
+        HAVING 含聚合函数的过滤条件                      [4]
+
+        ORDER BY .., ..(ASC/DESC)                      [6]
+        LIMIT .., ..                                   [7]
+*/
