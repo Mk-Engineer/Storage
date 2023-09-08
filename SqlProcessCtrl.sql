@@ -256,3 +256,4 @@ HAVING MAX(salary) > 10000 AND department_id IN(10,20,30,40);
         ORDER BY .., ..(ASC/DESC)                      [6]
         LIMIT .., ..                                   [7]
 */
+/* 注意：SELECT 中起的别名，只能在 [6]、[7] 中使用 */
