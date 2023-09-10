@@ -211,3 +211,18 @@ ORDER BY (
         LIMIT .., ..                                   [7]
 
 */        
+
+/* 题目：若employees表中的employee_id与job_history表中的employee_id相同的数目不小于2，输出这些相同id的员工的employee_id，last_name和job_id */
+SELECT * FROM job_history;
+
+SELECT employee_id,last_name,job_id
+FROM employees e
+WHERE 2 <= (
+            SELECT COUNT(employee_id)
+            FROM job_history j
+            WHERE e.`employee_id` = j.`employee_id`    
+            );
+
+
+/* 关键字：EXISTS / NOT EXISTS */
+/* 关联子查询 和 EXISTS 关键字一起使用，用来检查子查询中 是否存在 满足条件的行。 */
