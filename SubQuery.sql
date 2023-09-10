@@ -224,5 +224,50 @@ WHERE 2 <= (
             );
 
 
-/* 关键字：EXISTS / NOT EXISTS */
-/* 关联子查询 和 EXISTS 关键字一起使用，用来检查子查询中 是否存在 满足条件的行。 */
+/* # 关键字：EXISTS / NOT EXISTS */
+/*   关联子查询 和 EXISTS 关键字一起使用，用来检查子查询中 是否存在 满足条件的行。 */
+
+/* 题目：查询公司管理者的employee_id、last_name、job_id、department_id信息 */
+/* 方式1：自连接 */
+SELECT DISTINCT m.employee_id, m.last_name, m.job_id, m.department_id
+FROM employees e JOIN employees m 
+ON e.`manager_id` = m.`employee_id`;
+
+/* 方式2：子查询 */
+SELECT DISTINCT manager_id
+FROM employees;
+
+SELECT employee_id, last_name, job_id, department_id
+FROM employees
+WHERE employee_id IN (
+                    SELECT DISTINCT manager_id
+                    FROM employees    
+                    );
+
+/* 方式3：EXISTS */                    
+SELECT employee_id, last_name, job_id, department_id
+FROM employees e1
+WHERE EXISTS (
+            SELECT *  
+            FROM employees e2
+            WHERE e1.`employee_id` = e2.`manager_id` /* TRUE / FALSE */
+            );
+
+
+/* 题目：查询departments表中，不存在与employees表中的部门的department_id和department_name */
+/* 方式1：右外连接 */
+SELECT d.department_id, d.department_name
+FROM employees e RIGHT JOIN departments d
+ON e.`department_id` = d.`department_id`
+WHERE e.`department_id` IS NULL;
+
+/* 方式2：EXISTS */
+SELECT department_id, department_name
+FROM departments d
+WHERE NOT EXISTS (
+            SELECT *
+            FROM employees e
+            WHERE d.`department_id` = e.`department_id`
+            );
+
+            
