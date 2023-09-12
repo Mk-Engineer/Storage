@@ -288,4 +288,158 @@ WHERE salary > (
                 FROM employees    
                 );
 
-                
+/* 3.选择工资大于所有job_id = 'SA_MAN'的员工的工资的员工的last_name, job_id, salary */
+SELECT last_name, job_id, salary
+FROM employees e1
+WHERE salary > (
+                SELECT MAX(salary)
+                FROM employees e2
+                WHERE job_id = 'SA_MAN'   
+                );     
+
+SELECT last_name, job_id, salary
+FROM employees e1
+WHERE salary > ALL (
+                    SELECT MAX(salary)
+                    FROM employees e2
+                    WHERE job_id = 'SA_MAN'   
+                    );                            
+
+/* 4.查询和姓名中包含字母u的员工在相同部门的员工的员工号和姓名 */
+SELECT employee_id, last_name
+FROM employees e1
+WHERE department_id IN (
+                        SELECT department_id
+                        FROM employees e2
+                        WHERE last_name LIKE '%u%'
+                        );
+
+/* 5.查询在部门的location_id为1700的部门工作的员工的员工号 */
+SELECT employee_id
+FROM employees
+WHERE department_id IN (
+                        SELECT department_id
+                        FROM departments
+                        WHERE location_id = 1700
+                        );         
+
+/* 6.查询管理者是King的员工姓名和工资 */
+SELECT last_name, salary
+FROM employees
+WHERE manager_id IN (
+                    SELECT employee_id
+                    FROM employees
+                    WHERE last_name = 'King'    
+                    );
+
+/* 7.查询工资最低的员工信息:last_name, salary */                    
+SELECT last_name, salary
+FROM employees
+WHERE salary = (
+                SELECT MIN(salary)
+                FROM employees    
+                );
+
+/* 8.查询平均工资最低的部门信息 */ 
+/* 方式1 */
+SELECT * 
+FROM departments
+WHERE department_id = (
+                        SELECT department_id
+                        FROM employees
+                        GROUP BY department_id
+                        HAVING AVG(salary) = (
+                                            SELECT MIN(avg_sal)
+                                            FROM (
+                                                SELECT AVG(salary) avg_sal
+                                                FROM employees
+                                                GROUP BY department_id    
+                                                )t_dept_avg_sal
+                                            )
+                        );                    
+/* 方式2 */
+SELECT * 
+FROM departments
+WHERE department_id = (
+                        SELECT department_id
+                        FROM employees
+                        GROUP BY department_id
+                        HAVING AVG(salary) <= ALL (
+                                                    SELECT AVG(salary)
+                                                    FROM employees
+                                                    GROUP BY department_id    
+                                                    )
+                        );  
+/* 方式3 */
+SELECT * 
+FROM departments
+WHERE department_id = (
+                        SELECT department_id
+                        FROM employees
+                        GROUP BY department_id
+                        HAVING AVG(salary) =(
+                                            SELECT AVG(salary) avg_sal
+                                            FROM employees
+                                            GROUP BY department_id 
+                                            ORDER BY avg_sal ASC
+                                            LIMIT 0,1
+                                            )
+                      );
+/* 方式4 */
+SELECT d.* 
+FROM departments d, (
+                    SELECT department_id, AVG(salary) avg_sal
+                    FROM employees
+                    GROUP BY department_id
+                    ORDER BY avg_sal ASC
+                    LIMIT 0,1    
+                    )t_dept_avg_sal
+WHERE d.`department_id` = t_dept_avg_sal.`department_id`;                    
+
+/* 9.查询平均工资最低的部门信息和该部门的平均工资 */
+/* 方式1 */
+SELECT d.*, (SELECT AVG(salary) FROM employees WHERE department_id = d.`department_id`) avg_sal /* SELECT内的子查询 */
+FROM departments d
+WHERE department_id = (
+                        SELECT department_id
+                        FROM employees
+                        GROUP BY department_id
+                        HAVING AVG(salary) = (
+                                            SELECT MIN(avg_sal)
+                                            FROM (
+                                                SELECT AVG(salary) avg_sal
+                                                FROM employees
+                                                GROUP BY department_id    
+                                                )t_dept_avg_sal
+                                            )
+                        ); 
+/* 方式2 */
+SELECT d.*, AVG(e.salary)
+FROM departments d,employees e
+WHERE e.`department_id` = d.`department_id` AND d.`department_id` = (
+                                                                    SELECT department_id
+                                                                    FROM employees
+                                                                    GROUP BY department_id
+                                                                    HAVING AVG(salary) = (
+                                                                                        SELECT MIN(avg_sal)
+                                                                                        FROM (
+                                                                                            SELECT AVG(salary) avg_sal
+                                                                                            FROM employees
+                                                                                            GROUP BY department_id
+                                                                                            ) t_dept_avg_sal
+                                                                                        )
+                                                                    );
+
+
+
+/* 10.查询平均工资最高的 job 信息 */
+
+/* 11.查询平均工资高于公司平均工资的部门有哪些 */
+
+/* 12.查询出公司中所有manager的详细信息 */
+
+/* 13.各个部门中，最高工资中最低的那个部门的最低工资是多少 */
+
+/* 14.查询平均工资最高的部门的manager的详细信息：last_name, department_id, email, salary */
+
+/* 15.查询部门的部门号，其中不包括job_id是"ST_CLERK"的部门号 */
