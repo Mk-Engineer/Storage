@@ -559,7 +559,7 @@ WHERE department_id NOT IN (
 SELECT department_id
 FROM departments d
 WHERE NOT EXISTS (
-                SELECT department_id
+                SELECT * /* 不存在该条记录 */
                 FROM employees e
                 WHERE e.`department_id` = d.`department_id`
                 AND e.job_id = 'ST_CLERK'    
