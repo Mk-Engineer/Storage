@@ -466,13 +466,101 @@ WHERE job_id = (
                                         )
 );
 
-
 /* 11.查询平均工资高于公司平均工资的部门有哪些 */
-
+SELECT *
+FROM departments
+WHERE department_id IN (
+                        SELECT department_id
+                        FROM employees
+                        WHERE department_id IS NOT NULL
+                        GROUP BY department_id
+                        HAVING AVG(salary) > (
+                                            SELECT AVG(salary)
+                                            FROM employees
+                                            )
+                        );
 /* 12.查询出公司中所有manager的详细信息 */
+SELECT DISTINCT m.*
+FROM employees e, employees m
+WHERE e.manager_id = m.employee_id;
 
-/* 13.各个部门中，最高工资中最低的那个部门的最低工资是多少 */
+SELECT *
+FROM employees e1
+WHERE EXISTS (
+            SELECT *
+            FROM employees e2
+            WHERE e1.`employee_id` = e2.`manager_id`    
+            );/* 所有 IN 的写法，都可以用 EXISTS 替换 */            
+
+/* 13.各个部门中最高工资中最低的那个部门的最低工资是多少 */
+/* 求各个部门的最高工资 */
+SELECT department_id, MAX(salary) max_sal
+FROM employees
+GROUP BY department_id
+ORDER BY max_sal ASC;
+
+/* 求最高工资中最低的部门 */
+SELECT department_id
+FROM employees
+GROUP BY department_id
+HAVING MAX(salary) <= ALL(
+                        SELECT MAX(salary)
+                        FROM employees
+                        GROUP BY department_id    
+                        );
+
+/* 求该部门的最低工资 */
+SELECT MIN(salary)
+FROM employees
+WHERE department_id = (
+                    SELECT department_id
+                    FROM employees
+                    GROUP BY department_id
+                    HAVING MAX(salary) <= ALL(
+                                            SELECT MAX(salary)
+                                            FROM employees
+                                            GROUP BY department_id    
+                                            )
+                    );
 
 /* 14.查询平均工资最高的部门的manager的详细信息：last_name, department_id, email, salary */
+SELECT department_id, AVG(salary) avg_sal
+FROM employees
+GROUP BY department_id
+ORDER BY avg_sal DESC;
+
+SELECT last_name, department_id, email, salary
+FROM employees
+WHERE employee_id = ANY ( /* '= ANY' 相当于 'IN' */
+                        SELECT manager_id
+                        FROM employees
+                        WHERE department_id = (
+                                                SELECT department_id
+                                                FROM employees
+                                                GROUP BY department_id
+                                                HAVING AVG(salary) >= ALL (
+                                                                            SELECT AVG(salary)
+                                                                            FROM employees
+                                                                            GROUP BY department_id
+                                                                            )
+                                                )
+                        );
 
 /* 15.查询部门的部门号，其中不包括job_id是"ST_CLERK"的部门号 */
+/* 方式1 */
+SELECT department_id
+FROM departments /* 注意：有的部门没有员工 */
+WHERE department_id NOT IN (
+                            SELECT department_id
+                            FROM employees
+                            WHERE job_id = 'ST_CLERK'
+                            );
+/* 方式2 */                            
+SELECT department_id
+FROM departments d
+WHERE NOT EXISTS (
+                SELECT department_id
+                FROM employees e
+                WHERE e.`department_id` = d.`department_id`
+                AND e.job_id = 'ST_CLERK'    
+                );
