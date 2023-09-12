@@ -1,3 +1,19 @@
+# SQL 语句的执行过程
+/*
+    #sql99语法   
+        SELECT .., .., .. (存在聚合函数)                [5]
+
+        FROM .. (LEFT / RIGHT) JOIN.. ON 多表的连接条件 [1]
+        WHERE 不含聚合函数的过滤条件                     [2]
+        GROUP BY .., ..                                [3]
+        HAVING 含聚合函数的过滤条件                      [4]
+
+        ORDER BY .., ..(ASC/DESC)                      [6]
+        LIMIT .., ..                                   [7]
+*/
+/* 注意：SELECT 中起的别名，只能在 [6]、[7] 中使用 */
+
+
 # 26 子查询
 /* 需求：查询谁的工资比Abel高 */
 /* 方式1：*/
@@ -45,7 +61,6 @@ WHERE salary > (
                          );
                a 和 b 相关 / 不相关
 */
-
 
 
 # 26.2 多行子查询
@@ -270,6 +285,7 @@ WHERE NOT EXISTS (
             WHERE d.`department_id` = e.`department_id`
             );
 
+
 # 26.4 子查询课后练习            
 /* 1. 查询和Zlotkey相同部门的员工姓名和工资 */
 SELECT last_name, salary
@@ -431,8 +447,25 @@ WHERE e.`department_id` = d.`department_id` AND d.`department_id` = (
                                                                     );
 
 
-
 /* 10.查询平均工资最高的 job 信息 */
+SELECT job_id, AVG(salary) avg_sal 
+FROM employees
+GROUP BY job_id
+ORDER BY avg_sal ASC;
+
+SELECT *
+FROM jobs
+WHERE job_id = (
+                SELECT job_id
+                FROM employees
+                GROUP BY job_id
+                HAVING AVG(salary) >= ALL(
+                                        SELECT AVG(salary) 
+                                        FROM employees
+                                        GROUP BY job_id
+                                        )
+);
+
 
 /* 11.查询平均工资高于公司平均工资的部门有哪些 */
 
