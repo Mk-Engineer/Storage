@@ -270,4 +270,22 @@ WHERE NOT EXISTS (
             WHERE d.`department_id` = e.`department_id`
             );
 
-            
+# 26.4 子查询课后练习            
+/* 1. 查询和Zlotkey相同部门的员工姓名和工资 */
+SELECT last_name, salary
+FROM employees e1
+WHERE department_id IN ( /* 有可能存在一个员工隶属多个部门，因此用 IN 代替 = */
+                        SELECT department_id
+                        FROM employees e2
+                        WHERE last_name = 'Zlotkey'   
+                        );
+
+/* 2.查询工资比公司平均工资高的员工的员工号，姓名和工资 */
+SELECT employee_id, last_name, salary
+FROM employees
+WHERE salary > (
+                SELECT AVG(salary)
+                FROM employees    
+                );
+
+                
