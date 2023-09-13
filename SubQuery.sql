@@ -564,3 +564,90 @@ WHERE NOT EXISTS (
                 WHERE e.`department_id` = d.`department_id`
                 AND e.job_id = 'ST_CLERK'    
                 );
+
+/* 16.选择所有没有管理者的员工的last_name */
+SELECT last_name
+FROM employees
+WHERE manager_id IS NULL;
+
+SELECT last_name
+FROM employees e
+WHERE NOT EXISTS (
+                SELECT *
+                FROM employees m 
+                WHERE e.manager_id = m.employee_id   
+                );
+
+/* 17.查询员工号、姓名、雇佣时间、工资，其中员工的管理者为‘De Haan’ */
+/* 方式1 */
+SELECT employee_id, last_name, hire_date, salary
+FROM employees
+WHERE manager_id IN (
+                    SELECT employee_id
+                    FROM employees
+                    WHERE last_name = 'De Haan'   
+                    );
+
+SELECT employee_id, last_name, hire_date, salary
+FROM employees e
+WHERE EXISTS (
+            SELECT employee_id
+            FROM employees m
+            WHERE e.`manager_id` = m.`employee_id` 
+            AND last_name = 'De Haan'   
+            );                    
+
+/* 18.查询各部门中工资比本部门平均工资高的员工的员工号，姓名和工资 (相关子查询) */
+SELECT department_id, AVG(salary)
+FROM employees
+GROUP BY department_id;
+
+SELECT employee_id, last_name, salary, department_id
+FROM employees e1
+WHERE salary > (
+                SELECT AVG(salary)
+                FROM employees e2
+                WHERE e1.`department_id` = e2.`department_id`
+                );
+
+/* 19.查询每个部门下的部门人数大于 5 的部门名称 (相关子查询) */
+SELECT department_id, COUNT(employee_id)
+FROM employees
+GROUP BY department_id;
+
+SELECT department_id, department_name
+FROM departments
+WHERE department_id IN (
+                        SELECT department_id
+                        FROM employees
+                        GROUP BY department_id
+                        HAVING COUNT(employee_id) > 5
+                        );
+
+/* 相关子查询 */
+SELECT department_id, department_name
+FROM departments d       
+WHERE 5 < (
+            SELECT COUNT(employee_id)
+            FROM employees e
+            WHERE e.`department_id` = d.`department_id`
+            );                
+
+/* 20.查询每个国家下的部门个数大于 2 的国家编号 (相关子查询) */
+SELECT country_id
+FROM locations l
+WHERE EXISTS (
+            SELECT *
+            FROM departments d
+            WHERE d.`location_id` = l.`location_id`
+            GROUP BY location_id
+            HAVING COUNT(department_id) > 2
+            );
+
+SELECT country_id
+FROM locations l
+WHERE 2 < (
+            SELECT COUNT(department_id)
+            FROM departments d
+            WHERE d.`location_id` = l.`location_id`
+            );            
