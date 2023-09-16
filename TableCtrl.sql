@@ -117,7 +117,7 @@ DESC employees_copy;
 
 /* 
     # DDL 和 DML 的说明：
-    1.DDL操作一旦执行，不可回滚。
+    1.DDL操作一旦执行，不可回滚，不受 SET autocommit = FALSE 影响。
     2.DML操作默认情况，一旦执行，也不可回滚。
       但是如果在执行 DML 之前，执行了 SET autocommit = FALSE ，则执行的 DML操作 可以实现回滚。
 */
