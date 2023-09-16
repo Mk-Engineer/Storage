@@ -90,6 +90,7 @@ DROP TABLE IF EXISTS employees_struct;
 
 SHOW TABLES;
 
+
 # 清空表
 /* 清空表数据，保留表结构 */
 SELECT * FROM employees_copy;
@@ -99,3 +100,41 @@ TRUNCATE TABLE employees_copy;
 SELECT * FROM employees_copy;
 
 DESC employees_copy;
+
+
+# COMMIT & ROLLBACK
+/* COMMIT：提交数据。一旦执行COMMIT，则数据就被永久的保存在了数据库中，意味着数据不可以回滚。 */
+
+/* ROLLBACK：回滚数据。一旦执行ROLLBACK，可以实现数据的回滚，回滚到最近的一次COMMIT之后 */
+
+
+# 对比 TRUNCATE TABLE 和 DELETE FROM
+/* 相同点：都可以实现对表中所有数据的删除，同时保留表结构 */
+
+/* 不同点： */
+/*      TRUNCATE TABLE：一旦执行此操作，表数据全部清除。同时，数据不可以回滚。 */
+/*      DELETE FROM：一旦执行此操作，表数据可以全部清除。同时，数据可以回滚。 */
+
+/* 
+    # DDL 和 DML 的说明：
+    1.DDL操作一旦执行，不可回滚。
+    2.DML操作默认情况，一旦执行，也不可回滚。
+      但是如果在执行 DML 之前，执行了 SET autocommit = FALSE ，则执行的 DML操作 可以实现回滚。
+*/
+
+/* 演示：DELETE FROM */
+CREATE TABLE IF NOT EXISTS employees_bkup
+AS
+SELECT * FROM employees;
+
+SHOW TABLES;
+
+COMMIT;
+SELECT * FROM employees_bkup;
+SET autocommit = FALSE;
+
+DELETE FROM employees_bkup;
+SELECT * FROM employees_bkup;
+
+ROLLBACK;
+SELECT * FROM employees_bkup;
