@@ -32,11 +32,17 @@ VALUES
 
 
 /* 方式2：将查询结果插入表中 */
+/* I */
 INSERT INTO emp(id,`name`,salary,hire_date)
 SELECT employee_id,last_name,salary,hire_date
 FROM employees
 WHERE department_id IN (50,60);
+/* II */
+INSERT INTO emp(id,`name`,salary,hire_date)
+SELECT 5,'Mike',3500,'1997-09-09' UNION ALL
+SELECT 6,'Mark',6500,'1993-12-05';
 
+SELECT * FROM emp;
 
 # 2.更新数据
 SHOW TABLES;
@@ -78,7 +84,7 @@ SELECT * FROM emp;
 # 4. MySQL8新特性：计算列
 /* 某一列的值是通过别的列的计算得来的 */
 USE dbtest
-CREATE TABLE test(
+CREATE TABLE IF NOT EXISTS test(
 a INT,
 b INT,
 c INT GENERATED ALWAYS AS (a + b) VIRTUAL   
