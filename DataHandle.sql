@@ -72,3 +72,25 @@ SELECT * FROM emp;
 
 /* 小结：DML操作默认情况下，执行完以后都会自动commit */
 /*      如果希望执行完后不自动提交数据，需要使用 SET autocommit = FALSE */
+
+# 4. MySQL8新特性：计算列
+/* 某一列的值是通过别的列的计算得来的 */
+USE dbtest
+CREATE TABLE test(
+a INT,
+b INT,
+c INT GENERATED ALWAYS AS (a + b) VIRTUAL   
+);
+
+INSERT INTO test(a,b)
+VALUES (10,20);
+
+SELECT * FROM test;
+
+UPDATE test
+SET a = 100;
+
+SELECT * FROM test;
+
+SHOW TABLES;
+
