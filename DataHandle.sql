@@ -3,12 +3,14 @@
 /* DML(增删改查)*/
 USE dbtest;
 
+SHOW VARIABLES LIKE 'character_%';/* 查看默认字符集 */
+
 CREATE TABLE IF NOT EXISTS emp(
 id INT,
-`name` VARCHAR(15),
+`name` VARCHAR(15) CHARACTER SET 'uft8',/* 可以指明字段的字符集 */
 hire_date DATE,
 salary DOUBLE(10,2)
-);
+) CHARACTER SET 'uft8';/* 可以指明Table的字符集 */
 
 DESC emp;
 
@@ -265,3 +267,13 @@ SELECT *
 FROM books
 ORDER BY CHAR_LENGTH(REPLACE(`name`,' ','')) DESC
 LIMIT 0,1;
+
+/* 
+#数值类型
+
+    TINYINT: 一般用于枚举数据，比如系统设定取值范围很小且固定的场景
+    SMALLINT: 可以用于较小范围的统计数据，比如统计工厂的固定雌蝉库存数量等
+    MEDIUMINT: 用于较大的整数计算，比如车站每日的客流量等
+    INT/INTEGER: 取值范围足够大，一般情况下不用考虑超限问题，用得最多，比如商品编号
+    BIGINT: 只有当处理特别局的的整数时才会用到，比如双十一的交易量、大型门户网站的点击量、证券公司衍生产品持仓等
+*/
