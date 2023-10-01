@@ -1,4 +1,5 @@
 # 数据处理-增删改
+/* DML(增删改查)*/
 USE dbtest;
 
 CREATE TABLE IF NOT EXISTS emp(
@@ -34,4 +35,40 @@ SELECT employee_id,last_name,salary,hire_date
 FROM employees
 WHERE department_id IN (50,60);
 
+
+# 2.更新数据
+SHOW TABLES;
+
+UPDATE emp
+SET hire_date = CURDATE()
+WHERE id = 4;
+
+
+/* 同时修改一条数据的多个字段 */
+UPDATE emp
+SET hire_date = CURDATE(),salary = 6000
+WHERE id = 3;
+
+/* 将表中姓名中包含字符a的提薪 20% */
+UPDATE emp
+SET salary = salary * 1.2
+WHERE name LIKE '%a%';
+
+/* 修改不成功: 由于约束的影响造成的 */
+-- UPDATE employees
+-- SELECT department_id = 10000
+-- WHERE employee_id = 102;
+
+
+# 3.删除数据
+DELETE FROM emp
+WHERE id = 1;
+
+/* 删除失败: 由于约束的影响造成的 */
+-- DELETE FROM departments
+-- WHERE department_id = 50;
+
 SELECT * FROM emp;
+
+/* 小结：DML操作默认情况下，执行完以后都会自动commit */
+/*      如果希望执行完后不自动提交数据，需要使用 SET autocommit = FALSE */
