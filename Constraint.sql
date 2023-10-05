@@ -32,7 +32,7 @@ WHERE table_name = 'employees';
 DROP TABLE ConstraintTest;
 
 CREATE TABLE IF NOT EXISTS ConstraintTest (
-id INT PRIMARY KEY,/* 列级约束 */
+id INT PRIMARY KEY AUTO_INCREMENT,/* 列级约束 */
 last_name VARCHAR(15) NOT NULL,
 email VARCHAR(25),
 salary DECIMAL(10,2),    
@@ -50,6 +50,9 @@ VALUES (2,'Jerry','jerry@126.com',4300);
 
 INSERT INTO ConstraintTest(id,last_name,email,salary)
 VALUES (3,'Jack','jack@126.com',5000);
+
+INSERT INTO ConstraintTest(last_name,email)
+VALUES ('Mary','mary@126.com');/* 主键约束PRIMARY KEY / 自增长列AUTO_INCREMENT */
 
 -- UPDATE ConstraintTest
 -- SET last_name = NULL
@@ -177,3 +180,6 @@ WHERE table_name = 'ConstraintTest';
 
 /* 6. 主键约束 */
 /* 相当于唯一约束 UNIQUE + 非空约束 NOT NULL：不允许重复，也不允许出现NULL */
+
+/* 7. AUTO_INCREMENT */
+/* 自增长列，主要用于主键 */
