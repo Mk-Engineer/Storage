@@ -23,7 +23,35 @@
         ALTER TABLE时添加约束 / 删除约束
 */
 
-/* NOT NULL 非空约束的使用 */
-/* 如何查看表中的约束: */
+/* 1. 如何查看表中的约束: */
 SELECT * FROM information_schema.table_constraints
 WHERE table_name = 'employees';
+
+/* 2. NOT NULL 非空约束的使用 */
+/*  I 在CREATE TABLE时添加约束 */
+CREATE TABLE IF NOT EXISTS ConstraintTest (
+id INT NOT NULL,
+last_name VARCHAR(15) NOT NULL,
+email VARCHAR(25),
+salary DECIMAL(10,2)    
+);
+
+TRUNCATE TABLE ConstraintTest;
+
+INSERT INTO ConstraintTest(id,last_name,email,salary)
+VALUES (1,'Tom','tom@126.com',3400);
+
+INSERT INTO ConstraintTest(id,last_name,email,salary)
+VALUES (2,'Jerry','jerry@126.com',4300);
+
+UPDATE ConstraintTest
+SET last_name = NULL
+WHERE id = 1;
+
+ALTER TABLE ConstraintTest
+MODIFY email VARCHAR(25) NOT NULL;
+
+DESC ConstraintTest;
+
+SELECT * FROM ConstraintTest;
+
