@@ -183,3 +183,14 @@ WHERE table_name = 'ConstraintTest';
 
 /* 7. AUTO_INCREMENT */
 /* 自增长列，主要用于主键 */
+/* 手动添加 AUTO_INCREMENT */
+ALTER TABLE ConstraintTest
+MODIFY id INT AUTO_INCREMENT;
+
+DESC ConstraintTest;
+/* 删除 AUTO_INCREMENT */
+
+ALTER TABLE ConstraintTest
+MODIFY id INT;
+
+DESC ConstraintTest;
