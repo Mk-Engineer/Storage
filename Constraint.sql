@@ -153,3 +153,24 @@ INSERT INTO student_course VALUES
 SELECT * FROM student_course;
 
 -- INSERT INTO student_course VALUES (5, 1, 1001, 88);/* 失败 */
+
+
+/* 5. 删除唯一性约束 */
+/* 
+- 添加唯一性约束的列上也会自动创建唯一索引。
+- 删除唯一约束只能通过删除唯一索引的方式删除。
+- 删除时需要指定唯一索引名，唯一索引名就和唯一约束名一样。
+- 如果创建唯一约束时未指定名称，如果是单列，就默认和列名相同；如果是组合列，那么默认和()中排在第一个的列名相同。也可以自定义唯一性约束名。 
+*/
+
+/* 查询唯一性约束 */
+SELECT * FROM information_schema.table_constraints
+WHERE table_name = 'ConstraintTest';
+
+/* 删除唯一性约束 */
+ALTER TABLE ConstraintTest
+DROP INDEX uni_ConstraintTest_sal;
+
+SELECT * FROM information_schema.table_constraints
+WHERE table_name = 'ConstraintTest';
+
