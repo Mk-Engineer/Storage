@@ -32,7 +32,7 @@ WHERE table_name = 'employees';
 DROP TABLE ConstraintTest;
 
 CREATE TABLE IF NOT EXISTS ConstraintTest (
-id INT NOT NULL,/* 列级约束 */
+id INT PRIMARY KEY,/* 列级约束 */
 last_name VARCHAR(15) NOT NULL,
 email VARCHAR(25),
 salary DECIMAL(10,2),    
@@ -174,3 +174,6 @@ DROP INDEX uni_ConstraintTest_sal;
 SELECT * FROM information_schema.table_constraints
 WHERE table_name = 'ConstraintTest';
 
+
+/* 6. 主键约束 */
+/* 相当于唯一约束 UNIQUE + 非空约束 NOT NULL：不允许重复，也不允许出现NULL */
