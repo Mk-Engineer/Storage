@@ -53,5 +53,10 @@ MODIFY email VARCHAR(25) NOT NULL;
 
 DESC ConstraintTest;
 
+ALTER TABLE ConstraintTest
+MODIFY email VARCHAR(25) NULL;
+
+DESC ConstraintTest;
+
 SELECT * FROM ConstraintTest;
 
