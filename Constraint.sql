@@ -197,3 +197,30 @@ DESC ConstraintTest;
 
 
 /* 8. FOREIGN KEY约束 */
+/* 创建主表 */
+CREATE TABLE IF NOT EXISTS dept_test(
+dept_id INT,/* 必须有主键约束 / 唯一性约束 */
+dept_name VARCHAR(15)
+);
+
+/* 为主表添加主键约束 */
+ALTER TABLE dept_test
+ADD PRIMARY KEY (dept_id);
+
+DESC dept_test;
+
+/* 创建从表 */
+CREATE TABLE IF NOT EXISTS emp_test(
+emp_id INT PRIMARY KEY AUTO_INCREMENT,
+emp_name VARCHAR(15),
+department_id INT,
+
+/* 表级约束 */
+CONSTRAINT fk_emp_dept_id FOREIGN KEY(department_id) REFERENCES dept_test(dept_id)
+);
+
+DESC emp_test;
+
+/* 查询唯一性约束 */
+SELECT * FROM information_schema.table_constraints
+WHERE table_name = 'emp_test';
