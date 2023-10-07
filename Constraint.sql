@@ -194,3 +194,6 @@ ALTER TABLE ConstraintTest
 MODIFY id INT;
 
 DESC ConstraintTest;
+
+
+/* 8. FOREIGN KEY约束 */
