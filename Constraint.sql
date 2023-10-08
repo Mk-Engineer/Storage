@@ -280,3 +280,21 @@ WHERE dept_id = 1004;
 
 SELECT * FROM dept_test;
 SELECT * FROM emp_test;
+
+/* 删除外键约束 */
+/* 一个表中可以声明多个外键约束，删除时必须指明外键约束名 */
+ALTER TABLE emp_test
+DROP FOREIGN KEY fk_emp_dept_id;
+
+SELECT * FROM information_schema.table_constraints
+WHERE table_name = 'emp_test';
+
+/* 删除外键约束对应的普通索引 */
+SHOW INDEX FROM emp_test;
+
+ALTER TABLE emp_test
+DROP INDEX fk_emp_dept_id;
+
+SHOW INDEX FROM emp_test;
+
+/* 阿里规范：不使用外键与级联，一切外键概念在应用层解决 */
