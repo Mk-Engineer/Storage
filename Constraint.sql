@@ -159,12 +159,12 @@ SELECT * FROM student_course;
 
 
 /* 5. 删除唯一性约束 */
-/* 
-- 添加唯一性约束的列上也会自动创建唯一索引。
-- 删除唯一约束只能通过删除唯一索引的方式删除。
-- 删除时需要指定唯一索引名，唯一索引名就和唯一约束名一样。
-- 如果创建唯一约束时未指定名称，如果是单列，就默认和列名相同；如果是组合列，那么默认和()中排在第一个的列名相同。也可以自定义唯一性约束名。 
-*/
+
+-- 添加唯一性约束的列上也会自动创建唯一索引。
+-- 删除唯一约束只能通过删除唯一索引的方式删除。
+-- 删除时需要指定唯一索引名，唯一索引名就和唯一约束名一样。
+-- 如果创建唯一约束时未指定名称，如果是单列，就默认和列名相同；如果是组合列，那么默认和()中排在第一个的列名相同。也可以自定义唯一性约束名。 
+
 
 /* 查询唯一性约束 */
 SELECT * FROM information_schema.table_constraints
@@ -197,6 +197,9 @@ DESC ConstraintTest;
 
 
 /* 8. FOREIGN KEY约束 */
+/* 先删除从表，再删除主表 */
+DROP TABLE emp_test;
+DROP TABLE dept_test;
 /* 创建主表 */
 CREATE TABLE IF NOT EXISTS dept_test(
 dept_id INT,/* 必须有主键约束 / 唯一性约束 */
@@ -216,7 +219,7 @@ emp_name VARCHAR(15),
 department_id INT,
 
 /* 表级约束 */
-CONSTRAINT fk_emp_dept_id FOREIGN KEY(department_id) REFERENCES dept_test(dept_id)
+CONSTRAINT fk_emp_dept_id FOREIGN KEY(department_id) REFERENCES dept_test(dept_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 DESC emp_test;
@@ -224,3 +227,56 @@ DESC emp_test;
 /* 查询唯一性约束 */
 SELECT * FROM information_schema.table_constraints
 WHERE table_name = 'emp_test';
+
+/* 演示外键效果 */
+/* 先在主表中添加10号部门 */
+INSERT INTO dept_test
+VALUES(10,'IT');
+INSERT INTO emp_test
+VALUES(1001,'Tom',10);
+
+/* 在ALTER TABLE时，添加外键约束 */
+-- ALTER TABLE emp_test
+-- ADD CONSTRAINT fk_emp_dept_id FOREIGN KEY(department_id) REFERENCES (dept_id);
+
+
+/* 约束等级 */
+-- Cascade方式：在父表update/delete记录时，同步update/delete掉子表的匹配记录
+-- Set null方式：在父表上update/delete，将子表上匹配记录的列设为NULL，但是要注意子表的外键列不能为 NOT NULL
+-- No action方式：如果子表中有匹配的记录，则不允许父表对应候选键进行update/delete操作
+-- Restrict方式：同no action，都是立即检查外键约束
+-- Set default方式：父表中有变更时，子表将外键列设置成一个默认的值，但Innodb不能识别
+
+-- 如果没有指定等级，默认为Restrict方式
+-- 对于外键约束，最好是采用：ON UPDATE CASCADE ON DELETE RESTRICT 的方式
+
+INSERT INTO dept_test
+VALUES(1001,'Education');
+INSERT INTO dept_test
+VALUES(1002,'Treasury');
+INSERT INTO dept_test
+VALUES(1003,'Consultation');
+
+INSERT INTO emp_test
+VALUES(1,'Jack',1001);
+INSERT INTO emp_test
+VALUES(2,'Mary',1002);
+INSERT INTO emp_test
+VALUES(3,'Jerry',1003);
+
+SELECT * FROM dept_test;
+SELECT * FROM emp_test;
+
+/* ON UPDATE CASCADE ON DELETE SET NULL 演示 */
+UPDATE dept_test
+SET dept_id = 1004
+WHERE dept_id = 1002;
+
+SELECT * FROM dept_test;
+SELECT * FROM emp_test;
+
+DELETE FROM dept_test
+WHERE dept_id = 1004;
+
+SELECT * FROM dept_test;
+SELECT * FROM emp_test;
