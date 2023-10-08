@@ -197,6 +197,7 @@ DESC ConstraintTest;
 
 
 /* 8. FOREIGN KEY约束 */
+/* 外键约束不能跨引擎使用 */
 /* 先删除从表，再删除主表 */
 DROP TABLE emp_test;
 DROP TABLE dept_test;
@@ -217,6 +218,7 @@ CREATE TABLE IF NOT EXISTS emp_test(
 emp_id INT PRIMARY KEY AUTO_INCREMENT,
 emp_name VARCHAR(15),
 department_id INT,
+salary DECIMAL(10,2) CHECK(salary > 2000) DEFAULT 7000,
 
 /* 表级约束 */
 CONSTRAINT fk_emp_dept_id FOREIGN KEY(department_id) REFERENCES dept_test(dept_id) ON UPDATE CASCADE ON DELETE SET NULL
@@ -232,8 +234,8 @@ WHERE table_name = 'emp_test';
 /* 先在主表中添加10号部门 */
 INSERT INTO dept_test
 VALUES(10,'IT');
-INSERT INTO emp_test
-VALUES(1001,'Tom',10);
+INSERT INTO emp_test(emp_id,emp_name,department_id)
+VALUES(1001,'Tom',10);/* 自动补充 DEFAULT */
 
 /* 在ALTER TABLE时，添加外键约束 */
 -- ALTER TABLE emp_test
@@ -258,11 +260,11 @@ INSERT INTO dept_test
 VALUES(1003,'Consultation');
 
 INSERT INTO emp_test
-VALUES(1,'Jack',1001);
+VALUES(1,'Jack',1001,3500);
 INSERT INTO emp_test
-VALUES(2,'Mary',1002);
+VALUES(2,'Mary',1002,4000);
 INSERT INTO emp_test
-VALUES(3,'Jerry',1003);
+VALUES(3,'Jerry',1003,4500);
 
 SELECT * FROM dept_test;
 SELECT * FROM emp_test;
@@ -298,3 +300,18 @@ DROP INDEX fk_emp_dept_id;
 SHOW INDEX FROM emp_test;
 
 /* 阿里规范：不使用外键与级联，一切外键概念在应用层解决 */
+
+/* 9. CHECK 约束 */
+-- salary DECIMAL(10,2) CHECK(salary > 2000)
+
+/* 10. DEFAULT 约束 */
+ALTER TABLE emp_test
+MODIFY salary DECIMAL(8,2) DEFAULT 2700;
+
+DESC emp_test;
+
+/* 删除约束 */
+ALTER TABLE emp_test
+MODIFY salary DECIMAL(8,2);
+
+DESC emp_test;
