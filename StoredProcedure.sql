@@ -74,7 +74,7 @@ DELIMITER ;
 /* 方式1 */
 CALL show_someone_salary('Abel');
 /* 方式2 */
-SET @empname = 'Abel';
+SET @empname = 'Abel';/* @empname := 'Abel' */
 CALL show_someone_salary(@empname);
 
 /* IV. 参数 IN 和 OUT */
@@ -90,7 +90,7 @@ END //
 
 DELIMITER ;
 
-SET @empname = 'Abel';
+SET @empname = 'Abel';/* @empname := 'Abel' */
 CALL show_someone_sal(@empname,@empsalary);
 
 SELECT @empsalary;
@@ -112,7 +112,7 @@ END //
 
 DELIMITER ;
 
-SET @empname = 'Abel';
+SET @empname = 'Abel';/* @empname := 'Abel' */
 CALL show_mgr_name(@empname);
 
 SELECT @empname;
