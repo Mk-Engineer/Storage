@@ -155,9 +155,7 @@ SELECT * FROM vw_emp;
 -- 如果将视图a或者视图b删除，会导致视图c的查询失败。
 -- 这样视图c需要手动删除或修改，否则影响使用。
 SHOW TABLES;
-
 DROP VIEW IF EXISTS vw_emp;
-
 SHOW TABLES;
 
 /* 视图的缺点 */
