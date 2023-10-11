@@ -6,7 +6,7 @@ USE dbtest;
 
 /* 创建视图 */
 -- 针对单表
-/* I. 视图中的字段与基表中的字段一一对应 */
+/* I. 视图中的字段与基表中的字段存在一对一的关系 */
 CREATE VIEW vw_emp
 AS
 SELECT employee_id,last_name,salary
@@ -70,7 +70,7 @@ SELECT * FROM vw_emp_dept;
 DROP VIEW IF EXISTS vw_emp_dept;
 
 /* 基于视图创建视图 */
-CREATE VIEW vw_emp
+CREATE OR REPLACE VIEW vw_emp
 AS
 SELECT employee_id,last_name,salary
 FROM employees; 
@@ -97,5 +97,70 @@ SHOW TABLE STATUS LIKE 'vw_emp'\G;
 SHOW CREATE VIEW vw_emp;
 SHOW CREATE VIEW vw_emp\G;
 
-DROP VIEW IF EXISTS vw_emp;
+/* 增删改视图数据 */
+/* 更新视图 */
+SELECT * FROM vw_emp;
+
+SELECT employee_id,last_name,salary
+FROM employees;
+
+/* 更新视图中的数据，会导致基表中的数据改变 */
+UPDATE vw_emp
+SET salary = 20000
+WHERE employee_id = 101;/* salary = 17000 */
+
+SELECT * FROM vw_emp;
+
+SELECT employee_id,last_name,salary
+FROM employees;
+
+/* 更新基表中的数据，会导致视图中的数据改变 */
+UPDATE employees
+SET salary = 17000
+WHERE employee_id = 101;
+
+SELECT employee_id,last_name,salary
+FROM employees;
+
+SELECT * FROM vw_emp;
+
+/* 视图数据 更新失败 的情况 */
+/* 要视图可更新，视图中的行和基表中的行必须存在一对一的关系 */
+-- UPDATE vw_dept_sal
+-- SET avg_sal = 5000 /* 基表中不存在 avg_sal COLUMN */
+-- WHERE department_id = 30;
+
+/* 修改视图 */
+DESC vw_emp;
+
+-- 方式1
+CREATE OR REPLACE VIEW vw_emp
+AS
+SELECT employee_id,last_name,salary,email
+FROM employees
+WHERE salary > 7000;
+
+SELECT * FROM vw_emp;
+
+-- 方式2
+ALTER VIEW vw_emp
+AS
+SELECT employee_id,last_name,salary,email,hire_date
+FROM employees;
+
+SELECT * FROM vw_emp;
+
+/* 删除视图 */
+-- 基于视图a视图b创建了新的视图c，
+-- 如果将视图a或者视图b删除，会导致视图c的查询失败。
+-- 这样视图c需要手动删除或修改，否则影响使用。
 SHOW TABLES;
+
+DROP VIEW IF EXISTS vw_emp;
+
+SHOW TABLES;
+
+/* 视图的缺点 */
+-- 如果我们在实际数据表的基础上创建了视图，如果实际数据表的结构变更了，我们就需要及时对相关的视图进行相应的维护。
+-- 特别是嵌套的视图（就是在视图的基础上创建视图），维护会变得比较复杂，可读性不好，容易变成系统的潜在隐患。
+-- 因为创建视图的 SQL 查询可能会对字段重命名，也可能包含复杂的逻辑，这些都会增加维护的成本。
