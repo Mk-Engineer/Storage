@@ -1,4 +1,4 @@
-/* 存储函数 */
+# 存储函数
 USE dbtest;
 -- SET GLOBAL log_bin_trust_function_creators = 1;/* 代替DETERMINISTIC */
 
@@ -53,3 +53,40 @@ DELIMITER ;
 
 SET @dept_id = 30; /* SET @dept_id := 30 */
 SELECT count_by_id(@dept_id);
+
+
+# 存储过程和函数的查看、修改、删除
+/* 创建 */
+/* I.查看 存储过程、存储函数的 创建信息 */
+-- SHOW CREATE PROCEDURE show_mgr_name;
+-- SHOW CREATE FUNCTION count_by_id;
+SHOW CREATE PROCEDURE show_mgr_name\G;
+SHOW CREATE FUNCTION count_by_id\G;
+
+/* II.查看 存储过程、存储函数的 状态信息 */
+-- SHOW PROCEDURE STATUS;/* 全部信息 */
+-- SHOW PROCEDURE STATUS LIKE 'show_max_salary';
+SHOW PROCEDURE STATUS LIKE 'show_max_salary'\G;
+-- SHOW FUNCTION STATUS LIKE 'email_by_id';
+SHOW FUNCTION STATUS LIKE 'email_by_id'\G;
+
+/* III.从information_schema.Routines表中查看存储过程和函数的信息 */
+-- SELECT * FROM information_schema.Routines
+-- WHERE ROUTINE_NAME='email_by_id' AND ROUTINE_TYPE = 'FUNCTION';
+SELECT * FROM information_schema.Routines
+WHERE ROUTINE_NAME='email_by_id' AND ROUTINE_TYPE = 'FUNCTION'\G;/* AND ROUTINE_TYPE = 'FUNCTION' :用于 存储过程 和 存储函数 重名 */
+
+
+/* 修改 */
+-- 只修改相关的特性: [characteristic]
+SHOW PROCEDURE STATUS LIKE 'show_max_salary'\G;
+
+ALTER PROCEDURE show_max_salary
+SQL SECURITY INVOKER
+COMMENT 'Query Max Salary';
+
+SHOW PROCEDURE STATUS LIKE 'show_max_salary'\G;
+
+/* 删除 */
+DROP FUNCTION IF EXISTS count_by_id;
+DROP PROCEDURE IF EXISTS show_min_salary;
