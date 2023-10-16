@@ -67,7 +67,6 @@ SELECT @x,@prc_value;/* 根据`@x`的值判断语句执行到了哪一条 */
 
 # 案例2解决
 DROP PROCEDURE IF EXISTS InsertDataWithCondition;
-
 DELIMITER //
 
 CREATE PROCEDURE InsertDataWithCondition()
