@@ -507,3 +507,118 @@ SELECT AVG(salary) FROM employees;
 -- LOOP：一般用于实现简单的"死"循环
 -- WHILE：先判断后执行
 -- REPEAT：先执行后判断，无条件至少执行一次
+
+
+/* LEAVE */
+/* break */
+-- 除循环结构外，在BEGIN-END结构中也可以使用 LEAVE / ITERATE
+-- 如果循环中添加了循环控制语句（LEAVE或ITERATE）则必须添加名称
+
+-- 举例：创建存储过程 “leave_begin()”，声明INT类型的IN参数num。
+--      给BEGIN...END加标记名，并在BEGIN...END中使用IF语句判断num参数的值。
+--      如果num<=0，则使用LEAVE语句退出BEGIN...END；
+--      如果num=1，则查询“employees”表的平均薪资；
+--      如果num=2，则查询“employees”表的最低薪资；
+--      如果num>2，则查询“employees”表的最高薪资。
+--      IF语句结束后查询“employees”表的总人数。
+
+DELIMITER //
+
+CREATE PROCEDURE leave_begin(IN num INT)
+begin_label:BEGIN
+    IF num <= 0 
+        THEN LEAVE begin_label;
+    ELSEIF num = 1
+        THEN SELECT AVG(salary) FROM employees;
+    ELSEIF num = 2        
+        THEN SELECT MIN(salary) FROM employees;
+    ELSE        
+        SELECT MAX(salary) FROM employees;
+    END IF;
+
+    SELECT COUNT(*) FROM employees;        
+
+END //
+
+DELIMITER ;
+
+CALL leave_begin(0);
+CALL leave_begin(1);
+CALL leave_begin(2);
+CALL leave_begin(3);
+
+DROP PROCEDURE leave_begin;
+
+-- 举例：当市场环境不好时，公司为了渡过难关，决定暂时降低大家的薪资。
+--      声明存储过程“leave_while()”，声明OUT参数num，输出循环次数，
+--      存储过程中使用WHILE循环给大家降低薪资为原来薪资的90%，直到全公司的平均薪资小于等于10000，并统计循环次数。
+DELIMITER //
+
+CREATE PROCEDURE leave_while(OUT num INT)
+BEGIN
+    DECLARE avg_sal DOUBLE;
+    DECLARE count INT DEFAULT 0;
+    SELECT AVG(salary) INTO avg_sal FROM employees;
+
+    while_label:WHILE TRUE
+                DO
+                    IF avg_sal <= 5000/* 10000 */ 
+                        THEN LEAVE while_label;
+                    END IF;
+
+                    UPDATE employees SET salary = salary * 0.9;
+                    SELECT AVG(salary) INTO avg_sal FROM employees;
+                    SET count = count + 1;
+                END WHILE;
+
+    SET num = count; 
+
+END //
+
+DELIMITER ;
+
+SELECT AVG(salary) FROM employees;
+
+SET @result = 0;
+CALL leave_while(@result);
+SELECT @result;
+
+SELECT AVG(salary) FROM employees;
+DROP PROCEDURE leave_while;
+
+/* 复原 */
+SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
+SELECT AVG(salary) FROM employees;
+
+
+/* ITERATE */
+/* continue */
+-- 举例：定义局部变量num，初始值为0。循环结构中执行num + 1操作。
+--      如果num < 10，则继续执行循环；
+--      如果num > 15，则退出循环结构；
+DELIMITER //
+
+CREATE PROCEDURE test_iterate()
+BEGIN
+    DECLARE num INT DEFAULT 0;
+    loop_label:LOOP
+                    SET num = num + 1;
+                    IF num < 10
+                        THEN ITERATE loop_label;
+                    END IF;
+                    
+                    IF num > 15
+                        THEN LEAVE loop_label;
+                    END IF;
+                END LOOP;
+
+    SELECT num;            
+END //
+
+DELIMITER ;
+
+CALL test_iterate();
+DROP PROCEDURE test_iterate;
+
+
+/* CURSOR */
