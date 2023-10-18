@@ -357,7 +357,7 @@ BEGIN
     loop_label:LOOP
                 /* (结束)循环条件 */
                 IF avg_sal >= 12000 /* 先判断！ */
-                    THEN LEAVE loop_label;
+                    THEN LEAVE loop_label;/* 如果循环中添加了循环控制语句（LEAVE或ITERATE）则必须添加名称 */
                 END IF;
 
                 /* 循环体 */
@@ -442,3 +442,68 @@ SELECT AVG(salary) FROM employees;
 
 
 /* REPEAT */
+DELIMITER //
+
+CREATE PROCEDURE test_repeat()
+BEGIN
+    DECLARE num INT DEFAULT 1;
+
+    REPEAT
+        SET num = num + 1;
+        SELECT 'REPEAT RUNNING';
+        UNTIL num >= 5/* UNTIL后无 `;` */
+    END REPEAT;    
+
+END //
+
+DELIMITER ;
+
+CALL test_repeat();
+DROP PROCEDURE test_repeat;
+
+-- 举例：当市场环境变好时，公司为了奖励大家，决定给大家涨工资。
+--       声明存储过程“update_salary_repeat()”，声明OUT参数num，输出循环次数。
+--       存储过程中实现循环给大家涨薪，薪资涨为原来的1.15倍。直到全公司的平均薪资达到13000结束。并统计循环次数。
+
+DELIMITER //
+
+CREATE PROCEDURE update_salary_repeat(OUT num INT)
+BEGIN
+    DECLARE count INT DEFAULT 0;
+    DECLARE avg_sal DOUBLE;
+
+    SELECT AVG(salary) INTO avg_sal FROM employees;
+
+    REPEAT 
+        UPDATE employees SET salary = salary * 1.15;
+        SELECT AVG(salary) INTO avg_sal FROM employees;
+        SET count = count + 1;
+        UNTIL avg_sal >= 13000
+    END REPEAT;    
+
+    SET num = count;
+END //
+
+DELIMITER ;
+
+SELECT AVG(salary) FROM employees;
+
+SET @result = 0;
+CALL update_salary_repeat(@result);
+SELECT @result;
+
+SELECT AVG(salary) FROM employees;
+DROP PROCEDURE update_salary_repeat;
+
+/* 复原 */
+SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
+SELECT AVG(salary) FROM employees;
+
+
+/* 对比三种循环结构： */
+
+-- 1：这三种循环都可以省略名称，但如果循环中添加了循环控制语句（LEAVE或ITERATE）则必须添加名称。
+-- 2：
+-- LOOP：一般用于实现简单的"死"循环
+-- WHILE：先判断后执行
+-- REPEAT：先执行后判断，无条件至少执行一次
