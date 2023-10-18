@@ -356,7 +356,7 @@ BEGIN
 
     loop_label:LOOP
                 /* (结束)循环条件 */
-                IF avg_sal >= 12000 
+                IF avg_sal >= 12000 /* 先判断！ */
                     THEN LEAVE loop_label;
                 END IF;
 
@@ -381,8 +381,64 @@ DROP PROCEDURE update_salary_loop;
 
 SELECT AVG(salary) FROM employees;
 
+/* 复原 */
 SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
 SELECT AVG(salary) FROM employees;
 
 
 /* WHILE */
+DELIMITER //
+
+CREATE PROCEDURE test_while()
+BEGIN
+    DECLARE num INT DEFAULT 1;
+
+    WHILE num <= 10 DO 
+        SELECT 'WHILE RUNNING';
+        SET num = num + 1;
+    END WHILE;    
+END //
+
+DELIMITER ;
+
+CALL test_while();
+DROP PROCEDURE test_while;
+
+-- 举例：市场环境不好时，公司为了渡过难关，决定暂时降低大家的薪资。
+--       声明存储过程“update_salary_while()”，声明OUT参数num，输出循环次数。
+--       存储过程中实现循环给大家降薪，薪资降为原来的90%。直到全公司的平均薪资达到5000结束。并统计循环次数。
+DELIMITER //
+
+CREATE PROCEDURE update_salary_while(OUT num INT)
+BEGIN
+    DECLARE count INT DEFAULT 0;
+    DECLARE avg_sal DOUBLE;
+
+    SELECT AVG(salary) INTO avg_sal FROM employees;
+
+    WHILE avg_sal >= 5000 DO 
+        UPDATE employees SET salary = salary * 0.9;
+        SELECT AVG(salary) INTO avg_sal FROM employees;
+        SET count = count + 1;
+    END WHILE;    
+
+    SET num = COUNT;
+END //
+
+DELIMITER ;
+
+SELECT AVG(salary) FROM employees;
+
+SET @result = 0;
+CALL update_salary_while(@result);
+SELECT @result;
+
+SELECT AVG(salary) FROM employees;
+DROP PROCEDURE update_salary_while;
+
+/* 复原 */
+SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
+SELECT AVG(salary) FROM employees;
+
+
+/* REPEAT */
