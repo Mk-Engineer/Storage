@@ -622,3 +622,50 @@ DROP PROCEDURE test_iterate;
 
 
 /* CURSOR */
+-- 创建存储过程“get_count_by_limit_total_salary()”，声明IN参数 limit_total_salary，DOUBLE类型；声明OUT参数total_count，INT类型。
+-- 函数的功能可以实现累加薪资最高的几个员工的薪资值，直到薪资总和达到limit_total_salary参数的值，返回累加的人数给total_count。
+DELIMITER //
+
+CREATE PROCEDURE get_count_by_limit_total_salary(IN limit_total_salary DOUBLE,OUT total_count INT)
+
+BEGIN
+    DECLARE sum_sal DOUBLE DEFAULT 0;
+    DECLARE cur_sal DOUBLE DEFAULT 0;
+    DECLARE emp_count INT DEFAULT 0;
+
+    /* 定义游标 */
+    /* 游标声明 需要在 变量声明 的 后面 */
+    DECLARE emp_cursor CURSOR FOR SELECT salary FROM employees ORDER BY salary DESC;
+    /* 打开游标 */
+    OPEN emp_cursor;
+
+    REPEAT
+        /* 使用游标 */
+        FETCH emp_cursor INTO cur_sal;/* INTO 前后变量的数量要 逐一对应 */
+
+        SET sum_sal = sum_sal + cur_sal;
+        SET emp_count = emp_count + 1;
+
+        UNTIL sum_sal >= limit_total_salary
+    END REPEAT;
+
+    SET total_count = emp_count;
+
+    /* 关闭游标 */
+    CLOSE emp_cursor;   
+
+    SELECT 'My Cursor Running'; 
+     
+END //
+
+DELIMITER ;
+
+SET @limit = 50000;
+SET @count;
+
+CALL get_count_by_limit_total_salary(@limit,@count);
+
+SELECT @count;
+SELECT salary FROM employees ORDER BY salary DESC;
+
+DROP PROCEDURE get_count_by_limit_total_salary;
