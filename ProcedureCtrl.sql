@@ -308,3 +308,81 @@ ORDER BY ROUND(DATEDIFF(CURDATE(),hire_date)/365) DESC;
 /* 复原 */
 DROP PROCEDURE IF EXISTS update_salary_by_eid;
 SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
+
+
+/* 循环结构 */
+-- 循环结构的4要素：
+-- 1. 初始化条件
+-- 2. 循环条件
+-- 3. 循环体
+-- 4. 迭代条件
+
+/* LOOP */
+DELIMITER //
+
+CREATE PROCEDURE test_loop()
+BEGIN
+    DECLARE num INT DEFAULT 1;
+
+    loop_label:LOOP
+                SET num = num + 1;
+                IF num >= 10 THEN LEAVE loop_label;
+                END IF;
+    END LOOP loop_label;
+
+    SELECT num;
+END //
+
+DELIMITER ;
+
+CALL test_loop();
+
+DROP PROCEDURE test_loop;
+
+-- 举例：当市场环境变好时，公司为了奖励大家，决定给大家涨工资。
+--       声明存储过程“update_salary_loop()”，声明OUT参数num，输出循环次数。
+--       存储过程中实现循环给大家涨薪，薪资涨为原来的1.1倍。直到全公司的平均薪资达到12000结束。并统计循环次数。
+SELECT AVG(salary) FROM employees;
+
+DELIMITER //
+
+CREATE PROCEDURE update_salary_loop(OUT num INT)
+BEGIN
+    DECLARE avg_sal DOUBLE;
+    DECLARE count INT DEFAULT 0;
+
+    /* 初始化条件 */
+    SELECT AVG(salary) INTO avg_sal FROM employees;
+
+    loop_label:LOOP
+                /* (结束)循环条件 */
+                IF avg_sal >= 12000 
+                    THEN LEAVE loop_label;
+                END IF;
+
+                /* 循环体 */
+                UPDATE employees SET salary = salary * 1.1;
+                /* 迭代条件 */
+                SELECT AVG(salary) INTO avg_sal FROM employees;/* 注意：更新 avg_sal ！ */
+
+                SET count = count + 1;
+    END LOOP loop_label;
+
+    SET num = count;/* 防止num传入的初始值不是0 */
+END //
+
+DELIMITER ;
+
+SET @result = 0;
+CALL update_salary_loop(@result);
+SELECT @result;
+
+DROP PROCEDURE update_salary_loop;
+
+SELECT AVG(salary) FROM employees;
+
+SOURCE C:\Users\User\Documents\Storage\MutiTable.sql
+SELECT AVG(salary) FROM employees;
+
+
+/* WHILE */
