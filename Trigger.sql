@@ -105,3 +105,22 @@ SELECT * FROM employees_copy;
 
 DELETE FROM employees_copy WHERE employee_id = 300;
 SELECT * FROM employees_copy;
+
+DROP TABLE employees_copy;
+
+
+/* 查看触发器 */
+-- 查看当前数据库的所有触发器
+SHOW TRIGGERS\G
+
+/* 查看当前数据库中某个触发器的定义 */
+SHOW CREATE TRIGGER  before_insert_test_tri\G
+
+/* 从系统库information_schema的TRIGGERS表中查看 */
+SELECT * FROM information_schema.TRIGGERS\G
+
+
+/* 删除触发器 */
+DROP TRIGGER before_insert_test_tri;
+DROP TRIGGER after_insert_test_tri;
+SELECT * FROM information_schema.TRIGGERS\G
