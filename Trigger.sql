@@ -119,7 +119,6 @@ SHOW CREATE TRIGGER  before_insert_test_tri\G
 /* 从系统库information_schema的TRIGGERS表中查看 */
 SELECT * FROM information_schema.TRIGGERS\G
 
-
 /* 删除触发器 */
 DROP TRIGGER before_insert_test_tri;
 DROP TRIGGER after_insert_test_tri;
