@@ -9,7 +9,5 @@
 int main()
 {
     printf("Hello, C language!");
-    printf("Macbook  changed");
-    printf("Macbook upload");
     return 0;
 }
