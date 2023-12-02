@@ -163,15 +163,106 @@ CREATE UNIQUE INDEX uk_idx_bname ON book_exist(book_name);
 CREATE INDEX mult_bid_bname_info ON book_exist(book_id,book_name,info);
 SHOW INDEX FROM book_exist\G;
 
-SHOW TABLES;
-DROP TABLE emp_index;
-DROP TABLE dept_index;
-DROP TABLE book;
-DROP TABLE book_bkup;
-DROP TABLE book_auto;
-DROP TABLE book_single;
-DROP TABLE book_union;
-DROP TABLE emp_full;
-DROP TABLE book_finish;
-DROP TABLE book_exist;
-SHOW TABLES;
+
+-- 索引的删除
+SHOW INDEX FROM book_finish\G;
+/* 方式1 */
+ALTER TABLE book_finish
+DROP INDEX idx_cmt;
+SHOW INDEX FROM book_finish\G;/* 唯一性索引不能删除 */
+
+/* 方式2 */
+DROP INDEX uk_idx_bname ON book_finish;
+SHOW INDEX FROM book_finish\G;
+
+/* 删除联合索引 */
+ALTER TABLE book_finish
+DROP COLUMN book_name;/* 联合索引的中间字段 */
+SHOW INDEX FROM book_finish\G;
+
+
+
+-- 创建升序降序索引
+CREATE TABLE IF NOT EXISTS ts1(a INT,b INT,INDEX idx_a_b(a ASC,b DESC));
+SHOW CREATE TABLE ts1;
+
+DELIMITER //
+CREATE PROCEDURE ts_insert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i < 800
+    DO
+        INSERT INTO ts1 SELECT RAND()*80000,RAND()*80000;
+        SET i = i + 1;
+    END WHILE;
+    COMMIT;
+END //        
+DELIMITER ;
+
+CALL ts_insert();
+
+SELECT COUNT(*) FROM ts1;
+
+EXPLAIN SELECT * FROM ts1 ORDER BY a,b DESC LIMIT 5;
+EXPLAIN SELECT * FROM ts1 ORDER BY a DESC,b DESC LIMIT 5;/* Using filesort 不推荐*/
+
+
+
+-- 隐藏索引
+-- 作用：删除前先隐藏索引以便恢复，或测试隐藏索引前后的性能
+/* 创建表时，隐藏索引 */
+CREATE TABLE IF NOT EXISTS book_hide( 
+    book_id INT,
+    book_name VARCHAR(100), 
+    authors VARCHAR(100), 
+    info VARCHAR(100), 
+    comment VARCHAR(100), 
+    year_publication YEAR,
+    /* 创建隐藏索引 */
+    INDEX idx_cmt(comment) INVISIBLE
+);
+
+SHOW INDEX FROM book_hide\G;
+EXPLAIN SELECT * FROM book_hide WHERE comment = 'mysql';
+
+/* 创建表以后，创建隐藏索引 */
+ALTER TABLE book_hide
+ADD UNIQUE INDEX uk_idx_bname(book_name) INVISIBLE;
+
+CREATE INDEX idx_year_pub ON book_hide(year_publication) /* INVISIBLE */;
+EXPLAIN SELECT * FROM book_hide WHERE year_publication = '2023';
+
+/* 修改索引的可见性 */
+ALTER TABLE book_hide ALTER INDEX idx_year_pub INVISIBLE;
+EXPLAIN SELECT * FROM book_hide WHERE year_publication = '2023';
+
+ALTER TABLE book_hide ALTER INDEX idx_cmt VISIBLE;
+SHOW INDEX FROM book_hide\G;
+EXPLAIN SELECT * FROM book_hide WHERE comment = 'mysql';
+
+
+
+-- 使隐藏索引对优化器可见(了解)
+SELECT @@optimizer_switch\G;
+SET SESSION optimizer_switch='use_invisible_indexes=on';
+SELECT @@optimizer_switch\G;
+EXPLAIN SELECT * FROM book_hide WHERE year_publication = '2023';
+
+SET SESSION optimizer_switch='use_invisible_indexes=off';
+SELECT @@optimizer_switch\G;
+
+
+-- SHOW TABLES;
+-- DROP TABLE emp_index;
+-- DROP TABLE dept_index;
+-- DROP TABLE book;
+-- DROP TABLE book_bkup;
+-- DROP TABLE book_auto;
+-- DROP TABLE book_single;
+-- DROP TABLE book_union;
+-- DROP TABLE emp_full;
+-- DROP TABLE book_finish;
+-- DROP TABLE book_exist;
+-- DROP TABLE ts1;
+-- DROP TABLE book_hide;
+-- SHOW TABLES;
