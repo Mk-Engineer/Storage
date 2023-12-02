@@ -252,6 +252,183 @@ SET SESSION optimizer_switch='use_invisible_indexes=off';
 SELECT @@optimizer_switch\G;
 
 
+
+# 索引的设计原则
+
+CREATE TABLE IF NOT EXISTS `student_info`(
+`id` INT(11) NOT NULL AUTO_INCREMENT,
+`student_id` INT NOT NULL,
+`name` VARCHAR(20) DEFAULT NULL,
+`course_id` INT NOT NULL,
+`class_id` INT(11) DEFAULT NULL,
+`create_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(`ID`)    
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `course`(
+`id` INT(11) NOT NULL AUTO_INCREMENT,
+`course_id` INT NOT NULL,
+`course_name` VARCHAR(40) DEFAULT NULL,
+PRIMARY KEY(`id`)    
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+SELECT @@log_bin_trust_function_creators;/* 0 */
+SET GLOBAL log_bin_trust_function_creators = 1;
+SELECT @@log_bin_trust_function_creators;/* 1 */
+
+/* 函数1：创建随机产生字符串函数 */
+DELIMITER //
+CREATE FUNCTION rand_string(n INT)
+    RETURNS VARCHAR(255) /* 该函数会返回一个字符串 */
+BEGIN
+    DECLARE chars_str VARCHAR(100) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    DECLARE return_str VARCHAR(255) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    WHILE i < n DO
+        SET return_str =CONCAT(return_str,SUBSTRING(chars_str,FLOOR(1+RAND()*52),1));
+        SET i = i + 1;
+    END WHILE;
+    RETURN return_str;    
+END //    
+DELIMITER ;
+
+/* 函数2：创建随机数函数 */
+DELIMITER //
+CREATE FUNCTION rand_num(from_num INT,to_num INT) RETURNS INT(11)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET i = FLOOR(from_num+RAND()*(to_num - from_num+1));
+    RETURN i;
+END //
+DELIMITER ;
+
+/* 创建插入数据的存储过程 */
+DELIMITER //
+CREATE PROCEDURE insert_course(max_num INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0; /* 设置手动提交事务 */
+    
+    REPEAT
+        SET i = i + 1;
+        INSERT INTO course (course_id,course_name) VALUES (rand_num(10000,10100),rand_string(6));
+        UNTIL i = max_num
+    END REPEAT;
+
+    COMMIT;/* 提交事务 */
+END //
+DELIMITER ;
+
+/* 创建插入学生信息表存储过程 */
+DROP PROCEDURE insert_stu;
+DELIMITER //
+CREATE PROCEDURE insert_stu(max_num INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0;
+
+    REPEAT
+        SET i = i + 1;
+        INSERT INTO student_info(course_id,class_id,student_id,`name`)
+        VALUES(rand_num(10000,10100),rand_num(10000,10200),rand_num(1,200000),rand_string(6));
+        UNTIL i = max_num
+    END REPEAT;
+
+    COMMIT;
+END //
+DELIMITER ;
+
+-- TRUNCATE TABLE course;
+-- CALL insert_course(100);
+-- TRUNCATE TABLE student_info;
+-- CALL insert_stu(1000000);
+
+SELECT COUNT(*) FROM course;
+SELECT COUNT(*) FROM student_info;
+
+/* 哪些情况适合创建索引 */
+-- 1 字段有唯一性限制
+-- 2 频繁作为WHERE查询条件的字段
+
+-- SHOW INDEX FROM student_info;
+
+-- student_id字段上无索引
+SELECT course_id,class_id,`name`,create_time,student_id
+FROM student_info
+WHERE student_id = 123110;/* 360ms */
+
+-- 为student_id字段添加索引
+ALTER TABLE student_info
+ADD INDEX idx_sid(student_id);
+
+SELECT course_id,class_id,`name`,create_time,student_id
+FROM student_info
+WHERE student_id = 123110;/* 0ms */
+
+
+-- 3 经常GROUP BY / ORDER BY 的列
+/* 有索引 */
+SELECT student_id,COUNT(*) AS num 
+FROM student_info GROUP BY student_id LIMIT 100;/* 0ms */
+
+/* 无索引 */
+DROP INDEX idx_sid ON student_info;
+
+SELECT student_id,COUNT(*) AS num 
+FROM student_info GROUP BY student_id LIMIT 100;/* 810ms */
+
+/* 分别创建索引 */
+/* 修改sql_mode */
+-- SELECT @@sql_mode;
+-- SET @@sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+/* 添加单列索引 */
+-- ALTER TABLE student_info
+-- ADD INDEX idx_sid(student_id);
+
+-- ALTER TABLE student_info
+-- ADD INDEX idx_ct(create_time);
+
+-- SELECT student_id,COUNT(*) AS num FROM student_info
+-- GROUP BY student_id/* 根据查询顺序，仅使用了idx_sid索引 */
+-- ORDER BY create_time DESC
+-- LIMIT 100;/* 1 min 53.05 sec */
+
+/* 创建联合索引 */
+/* 1 */
+ALTER TABLE student_info
+ADD INDEX idx_sid_ct(student_id,create_time DESC);
+
+SELECT student_id,COUNT(*) AS num FROM student_info
+GROUP BY student_id
+ORDER BY create_time DESC
+LIMIT 100;/* 0.34 sec */
+
+/* 2 */
+DROP INDEX idx_sid_ct ON student_info;
+
+ALTER TABLE student_info
+ADD INDEX idx_ct_sid(create_time DESC,student_id);/* 建议：先写GROUP BY,后写ORDER BY */
+
+SELECT student_id,COUNT(*) AS num FROM student_info
+GROUP BY student_id /* 优先用了idx_sid索引，最左前缀原则 */
+ORDER BY create_time DESC
+LIMIT 100;/* 0.77 sec */
+
+
+
+-- 4 UPDATE、DELETE、的WHERE条件列
+UPDATE student_info SET student_id = 10002
+WHERE `name` = 'uwXBNkk';/* 1.00 sec */
+
+/* 添加索引 */
+ALTER TABLE student_info
+ADD INDEX idx_name(`name`);
+
+UPDATE student_info SET student_id = 10002
+WHERE `name` = 'uwXBNkk';/* 0.00 sec */
+
+
+
 -- SHOW TABLES;
 -- DROP TABLE emp_index;
 -- DROP TABLE dept_index;
