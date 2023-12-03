@@ -429,6 +429,46 @@ WHERE `name` = 'uwXBNkk';/* 0.00 sec */
 
 
 
+-- 5 DISTINCT字段需要创建索引
+
+-- 6 多表JOIN连接操作时，创建索引注意事项:
+-- 首先，连接表的数量尽量不要超过 3 张，因为每增加一张表就相当于增加了一次嵌套的循环，数量级增长会非常快，严重影响查询的效率。
+-- 其次，对 WHERE 条件创建索引，因为 WHERE 才是对数据条件的过滤。如果在数据量非常大的情况下，没有 WHERE 条件过滤是非常可怕的。
+-- 最后，对用于连接的字段创建索引，并且该字段在多张表中的类型必须一致。
+EXPLAIN SELECT s.course_id,s.`name`,s.student_id,c.course_name
+FROM student_info s JOIN course c
+ON s.course_id = c.course_id
+WHERE `name` = 'uwXBNkk';
+
+-- 7 使用小类型列的的创建索引(TINYINT/MEDIUMINT/INT/BIGINT)
+
+-- 8 使用字符串前缀创建索引
+-- CREATE TABLE shop(address varchar(20) NOT NULL);
+-- ALTER TABLE shop ADD INDEX(ADDRESS(12));
+/* 如何计算截取长度 */
+-- SELECT COUNT(DISTINCT address) / count(*) FROM shop;/* 结果越接近 1 区分度越大，截取范围越小 */
+
+/* 截取后的计算结果比 1 小，距离 1 越远，截取范围越大 */
+-- SELECT COUNT(DISTINCT LEFT(address,10)) / count(*) AS sub10,/* 截取前10个字符 */
+-- COUNT(DISTINCT LEFT(address,15)) / count(*) AS sub15,/* 截取前15个字符 */
+-- COUNT(DISTINCT LEFT(address,20)) / count(*) AS sub20,/* 截取前20个字符 */ /* 默认 */
+-- COUNT(DISTINCT LEFT(address,25)) / count(*) AS sub25/* 截取前25个字符 */
+-- FROM shop;
+/* 通常截取长度达到20时，区分度会高达 90% 以上 */
+
+
+-- 9 区分度高散列性高的适合作为索引
+/* 列的基数指的是某一列中不重复数据的个数，列的基数越大，该列中的值越分散；列的基数越小，该列的值越集中。 */
+
+-- 10 使用频繁的列放在联合索引的左侧
+/* 最左前缀原则 */
+
+-- 11 在多个字段都要创建索引的情况下，联合索引由于单值索引
+
+/* 限制索引的数目：单表不要超过6个 */
+
+
+
 -- SHOW TABLES;
 -- DROP TABLE emp_index;
 -- DROP TABLE dept_index;
