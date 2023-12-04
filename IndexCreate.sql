@@ -469,6 +469,33 @@ WHERE `name` = 'uwXBNkk';
 
 
 
+# 哪些情况下不适合创建索引
+
+-- 1 在WHERE中使用不到的字段，不要使用索引
+
+-- 2 数据量小的表最好不要使用索引
+
+-- 3 有大量重复数据的列上不要建立索引
+/* 当数据重复度大，高于10%的时候，就不需要对该字段使用索引了 */
+
+-- 4 避免对经常更新的表创建过多的索引
+
+-- 5 不建议用无序的值作为索引
+
+-- 6 删除不再使用或很少使用的索引
+
+-- 7 不要定义冗余或重复的索引
+/* 冗余索引 */
+-- index(a,b,c)相当于index(a)、index(a,b)、index(a,b,c)
+/* 重复索引 */
+CREATE TABLE repeat_index(
+col1 INT PRIMARY KEY,/* 重复索引 */
+col2 INT,
+UNIQUE uk_index_c1 (col1),/* 重复索引 */
+INDEX idx_c1 (col1)/* 重复索引 */    
+);
+
+
 -- SHOW TABLES;
 -- DROP TABLE emp_index;
 -- DROP TABLE dept_index;
