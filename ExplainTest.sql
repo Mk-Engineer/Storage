@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS s2 (
     INDEX idx_key_part(key_part1,key_part2,key_part3)
 ) ENGINE=INNODB CHARSET=utf8;
 
+
 DELIMITER //
 CREATE FUNCTION rand_string1(n INT)
     RETURNS VARCHAR(255) # 该函数返回字符串
@@ -49,3 +50,48 @@ BEGIN
 END //
 DELIMITER ;
 
+SET GLOBAL log_bin_trust_function_creators=1;
+
+DELIMITER //
+CREATE PROCEDURE insert_s1 (IN min_num INT(10),IN max_num INT (10))
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0;
+    REPEAT
+        SET i = i + 1;
+        INSERT INTO s1 VALUES(
+            (min_num + i),
+            rand_string1(6),
+            (min_num + 30*i + 5),
+            rand_string1(6),
+            rand_string1(10),
+            rand_string1(5),
+            rand_string1(10),
+            rand_string1(10));
+        UNTIL i = max_num
+    END REPEAT;
+    COMMIT;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE insert_s2 (IN min_num INT(10),IN max_num INT (10))
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0;
+    REPEAT
+        SET i = i + 1;
+        INSERT INTO s2 VALUES(
+            (min_num + i),
+            rand_string1(6),
+            (min_num + 30*i + 5),
+            rand_string1(6),
+            rand_string1(10),
+            rand_string1(5),
+            rand_string1(10),
+            rand_string1(10));
+        UNTIL i = max_num
+    END REPEAT;
+    COMMIT;
+END //
+DELIMITER; 
