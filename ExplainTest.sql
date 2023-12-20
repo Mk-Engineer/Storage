@@ -43,7 +43,7 @@ BEGIN
      DECLARE return_str VARCHAR(255) DEFAULT '';
      DECLARE i INT DEFAULT 0;
      WHILE i < n DO
-        SET return_str=CONCAT(return_str,SBSTRING(chars_str,FLOOR(1+RAND()*52),1));
+        SET return_str=CONCAT(return_str,SUBSTRING(chars_str,FLOOR(1+RAND()*52),1));
         SET i = i + 1;
      END WHILE;
      RETURN return_str;
@@ -94,7 +94,7 @@ BEGIN
     END REPEAT;
     COMMIT;
 END //
-DELIMITER;
+DELIMITER ;
 
 CALL insert_s1(10001,10000);
 CALL insert_s2(10001,10000);
