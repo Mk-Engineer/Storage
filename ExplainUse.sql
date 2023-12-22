@@ -38,6 +38,27 @@ EXPLAIN SELECT * FROM s1 INNER JOIN s2;
 
 -- 对于包含‘UNION’或者‘UNION ALL’的大查询来说，它是由几个小查询组成的，其中除了最左边的那个小查询以外，其余的小查询的‘select_type’值就是‘UNION’
 
+-- MySQL选择使用临时表来完成‘UNION’查询的去重工作，针对该临时表的查询的‘select_type’就是‘UNION RESULT’
 
+EXPLAIN SELECT * FROM s1 UNION SELECT * FROM s2;
+EXPLAIN SELECT * FROM s1 UNION ALL SELECT * FROM s2;
 
+# 子查询
+-- 如果包含子查询的查询语句不能够转为对应的‘semi-join’的形式，并且该子查询是不相关子查询
+-- 该子查询的第一个‘SELECT’关键字代表的那个子查询的‘select_type’是‘SUBQUERY’
+EXPLAIN SELECT * FROM s1 WHERE key1 IN (SELECT key1 FROM s2) OR key3 = 'a';
+
+-- 如果包含子查询的查询语句不能够转为对应的‘semi-join’的形式，并且该子查询是相关子查询
+-- 该子查询的第一个‘SELECT’关键字代表的那个子查询的‘select_type’是‘DEPENDENT SUBQUERY’
+EXPLAIN SELECT * FROM s1
+WHERE key1 IN (SELECT key1 FROM s2 WHERE s1.key2 = s2.key2) OR key3 = 'a';
+-- 注意的是，select_type为‘DEPENDENT SUBQUERY’的查询可能被执行多次
+
+-- 在包含‘UNION’或者‘UNION ALL’的大查询中，如果各个小查询都依赖于外层查询的话，那除了最左边的那个小查询之外，其余小查询的‘select_type’就是‘DEPENDENT UNION’
+EXPLAIN SELECT * FROM s1
+WHERE key1 IN (SELECT key1 FROM s2 WHERE key1 = 'a' UNION SELECT key1 FROM s1 WHERE key1 = 'b');
+
+-- 对于包含‘派生表’的查询，该派生表对应的子查询的‘select_type’是‘DERIVED’
+EXPLAIN SELECT * 
+FROM (SELECT key1,COUNT(*) AS c FROM s1 GROUP BY key1) AS derived_s1 WHERE c > 1; 
 
