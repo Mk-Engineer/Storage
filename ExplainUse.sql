@@ -30,3 +30,14 @@ EXPLAIN SELECT * FROM s1 UNION SELECT * FROM s2;
 EXPLAIN SELECT * FROM s1 UNION ALL SELECT * FROM s2;
 
 # 3 select type:SELECT关键字对应的那个查询类型，确定小查询在整个大查询中扮演了一个什么样的角色
+-- 查询语句中不包含‘UNION’或者子查询的都算是‘SIMPLE’类型
+EXPLAIN SELECT * FROM s1;
+-- 连接查询也算是SIMPLE类型
+EXPLAIN SELECT * FROM s1 INNER JOIN s2;
+-- 对于包含‘UNION’或者子查询的大查询来说，它是由几个小查询组成的，其中最左边的查询的‘select_type’就是‘PRIMARY’
+
+-- 对于包含‘UNION’或者‘UNION ALL’的大查询来说，它是由几个小查询组成的，其中除了最左边的那个小查询以外，其余的小查询的‘select_type’值就是‘UNION’
+
+
+
+
