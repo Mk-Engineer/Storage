@@ -66,3 +66,20 @@ FROM (SELECT key1,COUNT(*) AS c FROM s1 GROUP BY key1) AS derived_s1 WHERE c > 1
 -- 该子查询对应的‘select_type’属性是‘MATERRIALIZED’
 EXPLAIN SELECT * FROM s1 WHERE key1 IN (SELECT key1 FROM s2);# 子查询被物化成了表
 
+-- 4 Partition分区（了解）
+-- 创建分区表
+-- 按照id分区，id<100 p0分区，其他p1分区
+CREATE TABLE IF NOT EXISTS user_partitions(
+    id INT auto_increment,
+    `name` VARCHAR(12),
+    PRIMARY KEY(id))
+
+    PARTITION BY RANGE(id)(
+        PARTITION p0 VALUES less than (100),
+        PARTITION p1 VALUES less than MAXVALUE
+);
+
+DESC SELECT * FROM user_partitions WHERE id > 200;
+
+-- 5 type
+
