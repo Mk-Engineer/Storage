@@ -81,5 +81,10 @@ CREATE TABLE IF NOT EXISTS user_partitions(
 
 DESC SELECT * FROM user_partitions WHERE id > 200;
 
--- 5 type
+-- 5 type(重要)
+-- 执行计划的一条记录就代表着MySQL对某个表的‘执行查询时的访问方法’，又称为‘访问类型’，
+-- 其中的type列就表明了这个访问方法是什么，是较为重要的一个指标。
+-- 比如，看到type列的值是ref，表明MySQL即将使用ref访问方法来执行对s1表的查询。
+
+-- 完整的访问方法如下：system,const,,eq_ref,ref,fulltext,ref_or_null,index_merge,unique_subquery,index_subquery,range,index,ALL 
 
