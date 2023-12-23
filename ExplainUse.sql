@@ -60,5 +60,9 @@ WHERE key1 IN (SELECT key1 FROM s2 WHERE key1 = 'a' UNION SELECT key1 FROM s1 WH
 
 -- 对于包含‘派生表’的查询，该派生表对应的子查询的‘select_type’是‘DERIVED’
 EXPLAIN SELECT * 
-FROM (SELECT key1,COUNT(*) AS c FROM s1 GROUP BY key1) AS derived_s1 WHERE c > 1; 
+FROM (SELECT key1,COUNT(*) AS c FROM s1 GROUP BY key1) AS derived_s1 WHERE c > 1;
+
+-- 当查询优化其在执行包含子查询的语句时，选择将子查询物化之后与外层查询进行连接查询时，
+-- 该子查询对应的‘select_type’属性是‘MATERRIALIZED’
+EXPLAIN SELECT * FROM s1 WHERE key1 IN (SELECT key1 FROM s2);# 子查询被物化成了表
 
