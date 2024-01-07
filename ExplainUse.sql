@@ -88,3 +88,11 @@ DESC SELECT * FROM user_partitions WHERE id > 200;
 
 -- 完整的访问方法如下：system,const,,eq_ref,ref,fulltext,ref_or_null,index_merge,unique_subquery,index_subquery,range,index,ALL 
 
+
+-- 当表中只有一条记录，并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory
+-- 那么对该表的访问方法就是`system`
+CREATE TABLE IF NOT EXISTS t(i INT) ENGINE=MYISAM;
+INSERT INTO t VALUES(1);
+
+EXPLAIN SELECT * FROM t;
+DROP TABLE t;
