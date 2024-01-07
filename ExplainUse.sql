@@ -92,7 +92,20 @@ DESC SELECT * FROM user_partitions WHERE id > 200;
 -- 当表中只有一条记录，并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory
 -- 那么对该表的访问方法就是`system`
 CREATE TABLE IF NOT EXISTS t(i INT) ENGINE=MYISAM;
-INSERT INTO t VALUES(1);
+INSERT INTO t VALUES(1);#只有1条记录
 
 EXPLAIN SELECT * FROM t;
 DROP TABLE t;
+
+-- 换成InnoDB
+-- InnoDB统计数据不是精确的
+CREATE TABLE IF NOT EXISTS tt(i INT) ENGINE=INNODB;
+INSERT INTO tt VALUES(1);
+
+EXPLAIN SELECT * FROM tt;
+DROP TABLE tt;
+
+-- 当我们根据主键或者唯一二级索引列与常数进行等值匹配时，对单表的访问方法就是`const`
+EXPLAIN SELECT * FROM s1 WHERE id = 10005;#PRIMARY KEY
+
+EXPLAIN SELECT * FROM s1 WHERE key2 = 10066;#UNIQUE INDEX
