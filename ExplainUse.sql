@@ -137,3 +137,9 @@ EXPLAIN SELECT *  FROM s1 WHERE key1 IN ('a','b','c');
 
 EXPLAIN SELECT * FROM s1 WHERE key1 > 'a' AND key1 < 'b';
 
+-- 当我们可以使用索引覆盖，但需要扫描全部的索引记录时，该表的访问方法就是`index`
+EXPLAIN SELECT key_part2 FROM s1 WHERE key_part3 = 'a';
+
+-- 全盘扫描
+EXPLAIN SELECT * FROM s1;
+
