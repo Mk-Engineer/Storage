@@ -119,4 +119,8 @@ EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
 -- 当通过普通二级索引列与常量进行等值匹配时来查询某个表，那么对该表的访问方法就可能是`ref`
 EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
 
+-- 当对普通二级索引进行等值匹配查询，该索引列的值也可以是`NULL`值时，
+-- 那么对该表的访问方法就是`ref_or_null`
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a' OR key1 IS NULL;
+
 
