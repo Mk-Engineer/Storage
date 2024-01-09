@@ -109,3 +109,10 @@ DROP TABLE tt;
 EXPLAIN SELECT * FROM s1 WHERE id = 10005;#PRIMARY KEY
 
 EXPLAIN SELECT * FROM s1 WHERE key2 = 10066;#UNIQUE INDEX
+
+
+-- 在连接查询时，如果被驱动表是通过主键或者唯一二级索引列等值匹配的方式进行访问的
+-- （如果该主键或者唯一二级索引是联合索引的话，所有的索引都必须进行等值比较）
+-- 则对该被驱动表的访问就是`eq_ref`
+EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
+
