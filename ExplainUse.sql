@@ -116,3 +116,7 @@ EXPLAIN SELECT * FROM s1 WHERE key2 = 10066;#UNIQUE INDEX
 -- 则对该被驱动表的访问就是`eq_ref`
 EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
 
+-- 当通过普通二级索引列与常量进行等值匹配时来查询某个表，那么对该表的访问方法就可能是`ref`
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
+
+
