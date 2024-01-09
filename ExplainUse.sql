@@ -143,3 +143,22 @@ EXPLAIN SELECT key_part2 FROM s1 WHERE key_part3 = 'a';
 -- 全盘扫描
 EXPLAIN SELECT * FROM s1;
 
+
+-- 6 possible_keys和key：可能用到的索引 和 实际上使用的索引
+EXPLAIN SELECT * FROM s1 WHERE key1 > 'z' AND key3 = 'a';
+
+-- 7 key_len：实际使用到的索引长度（字节数）
+-- 帮你检查“是否充分的利用上了索引”，值越大越好
+-- 主要针对“联合索引”
+EXPLAIN SELECT * FROM s1 WHERE id = 10005;
+
+EXPLAIN SELECT * FROM s1 WHERE key2 = 10126;
+
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
+
+EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a';
+
+EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a' AND key_part2 = 'b';
+
+EXPLAIN SELECT * FROM s1 WHERE key_part3 = 'a';
+
