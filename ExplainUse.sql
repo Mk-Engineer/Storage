@@ -160,5 +160,5 @@ EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a';
 
 EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a' AND key_part2 = 'b';
 
-EXPLAIN SELECT * FROM s1 WHERE key_part3 = 'a';
+EXPLAIN SELECT * FROM s1 WHERE key_part3 = 'a';#最左前缀原则，先考虑key_part1
 
