@@ -123,4 +123,17 @@ EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
 -- 那么对该表的访问方法就是`ref_or_null`
 EXPLAIN SELECT * FROM s1 WHERE key1 = 'a' OR key1 IS NULL;
 
+-- 单表访问方法时在某些场景下可以使用`Intersection`、`Union`、`Sort-Union`
+-- 这三种索引合并的方式来执行查询
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a' OR key3 = 'a';
+
+-- `unique_subquery`是针对在一些包含`IN`子查询的查询语句中，如果查询优化其决定将`IN`子查询
+-- 转换为`EXISTS`子查询，而且子查询可以使用到主键进行等值匹配的话，那么该子查询执行计划的`type`列的值是`unique_subquery`
+EXPLAIN SELECT * FROM s1
+WHERE key2 IN (SELECT id FROM s2 WHERE s1.key1 = s2.key1) OR key3 = 'a';
+
+-- 如果使用索引获取某些`范围区间`的记录，那么就可能使用到`range`访问方法
+EXPLAIN SELECT *  FROM s1 WHERE key1 IN ('a','b','c');
+
+EXPLAIN SELECT * FROM s1 WHERE key1 > 'a' AND key1 < 'b';
 
