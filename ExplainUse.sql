@@ -162,3 +162,26 @@ EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a' AND key_part2 = 'b';
 
 EXPLAIN SELECT * FROM s1 WHERE key_part3 = 'a';#最左前缀原则，先考虑key_part1
 
+-- 8.ref：当使用索引列等值查询时，与索引列进行等值匹配的对象信息。
+-- 比如只是一个常数或者时某个列
+
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
+EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
+EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s2.key1 = UPPER(s1.key1);
+
+-- 9.rows：预估的需要读取的记录条数
+-- 	   值越小越好
+EXPLAIN SELECT * FROM s1 WHERE key1 > 'z';
+
+-- 10.filtered：某个表经过搜索条件过滤后生于记录条数的百分比
+
+-- 如果使用的时索引执行的单表扫描，那么计算时需要估计出满足除使用
+-- 到对应索引的搜索条件外的其他搜索条件的记录有多少条
+-- 百分比越高越好
+EXPLAIN SELECT * FROM s1 WHERE key1 > 'z' AND common_field = 'a';
+
+-- 对于单表查询来说，这个filtered列的值没什么意义，我们更关注在连接查询中
+-- 驱动表对应的执行计划记录的filtered值，它决定了被驱动表要执行的次数（即：rows * filtered）
+EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.key1 = s2.key1 WHERE s1.common_field = 'a';
+
+-- 11.Extra：一些额外信息
