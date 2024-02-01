@@ -162,8 +162,3 @@ EXPLAIN SELECT * FROM s1 WHERE key_part1 = 'a' AND key_part2 = 'b';
 
 EXPLAIN SELECT * FROM s1 WHERE key_part3 = 'a';#最左前缀原则，先考虑key_part1
 
--- 8.ref：当使用索引列等值查询时，与索引列进行等值匹配的对象信息。
--- 比如只是一个常数或者时某个列
-
-EXPLAIN SELECT * FROM s1 WHERE key1 = 'a';
-EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
