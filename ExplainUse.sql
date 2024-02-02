@@ -185,3 +185,4 @@ EXPLAIN SELECT * FROM s1 WHERE key1 > 'z' AND common_field = 'a';
 EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.key1 = s2.key1 WHERE s1.common_field = 'a';
 
 -- 11.Extra：一些额外信息
+-- 更准确的理解MySQL到底将如何执行给定的查询语句
