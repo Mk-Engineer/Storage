@@ -226,3 +226,48 @@ EXPLAIN SELECT * FROM s1 WHERE key1 > 'z' AND key1 LIKE '%a';
 -- 提示：Using WHERE; Using join buffer (hash join)
 EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.common_field = s2.common_field;
 
+-- 当使用（左）外连接时，如果`WHERE`子句中包含要求被驱动表的某个列等于`NULL`值的搜索条件，
+-- 并且此列又不允许存储`NULL`值，那么Extra会提示：Not exists
+EXPLAIN SELECT * FROM s1 LEFT JOIN s2 ON s1.key1 = s2.key1 WHERE s2.id IS NULL;
+
+-- 如果执行计划的`Extra`列出现`Using intersect(...)`提示，说明准备使用`Intersect`索引
+-- 合并的方式执行查询，括号中的`...`表示需要进行索引合并的索引名称：
+-- 如果出现`Using union(...)`提示，说明准备使用`Union`索引合并的方式执行查询：
+-- 如果出现`Using sort_union(...)`提示，说明准备使用`Sort-Union`索引合并的方式执行查询
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a' OR key3 = 'a';
+
+-- 当我们的`LIMIT`子句的参数为`0`时，表示不打算从表中读出任何记录，将会提示：Zero limit
+EXPLAIN SELECT * FROM s1 LIMIT 0;
+
+
+-- 有一些情况下对结果集中的记录进行排序时可以使用索引的
+EXPLAIN SELECT * FROM s1 ORDER BY key1 LIMIT 10;
+
+-- 很多情况下排序操作无法使用到索引，只能在内存中（记录较少的时候）或者在磁盘中（记录较多的时候）
+-- 进行排序，MySQL把这种在内存中或者磁盘上进行排序的方式统称为文件排序：filesort
+-- 如果某个查询需要使用文件排序的方式执行查询，就会在执行计划的`Extra`列中显示`Using filesort`
+EXPLAIN SELECT * FROM s1 ORDER BY common_field LIMIT 10;
+
+-- 在许多查询的执行过程中，MySQL可能会借助临时表来完成一些功能，比如去重、排序等
+-- 比如在执行许多包含`DISTINCT`、`GROUP BY`、`UNION`等子句的查询过程中，如果不能
+-- 有效利用索引来完成查询，MySQL很有可能寻求通过建立内部的临时表来执行查询。如果
+-- 查询中使用到了内部的临时表，在执行计划的`Extra`会显示`Using temporary`
+EXPLAIN SELECT DISTINCT common_field FROM s1;
+
+EXPLAIN SELECT common_field, COUNT(*) AS amount FROM s1 GROUP BY common_field;
+
+-- 执行计划中出现`Using temporary`并不好，因为建立与维护临时表要付出很大成本
+-- 所以我们`最好能使用索引来替代使用临时表`。比如：扫描指定索引idx_key1即可
+EXPLAIN SELECT key1, COUNT(*) AS amount FROM s1 GROUP BY key1;
+
+
+
+
+
+
+
+
+
+
+
+
