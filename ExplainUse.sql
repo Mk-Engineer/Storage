@@ -186,3 +186,43 @@ EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.key1 = s2.key1 WHERE s1.common_fiel
 
 -- 11.Extra：一些额外信息
 -- 更准确的理解MySQL到底将如何执行给定的查询语句
+
+-- 当查询语句没有`FROM`子句时会提示:no table used;
+-- EXPLAIN SELECT 1；
+
+-- 查询语句的`WHERE`子句永远为`FALSE`时将会提示:Impossible WHERE
+-- EXPLAIN SELECT * FROM s1 WHERE 1 != 1;
+
+-- 当使用全表扫描来执行对某个表的查询，并且该语句`WHERE`
+-- 子句中有针对该表的搜索条件时，会提示:Using WHERE
+EXPLAIN SELECT * FROM s1 WHERE common_field = 'a';
+
+-- 当使用索引访问来执行对某个表的查询，并且该语句的`WHERE`子句中
+-- 有除该索引包含的列之外的其他搜索条件时，会提示:Using WHERE
+-- 无除该索引包含的列之外的其他搜索条件时，会提示:(NULL)
+EXPLAIN SELECT * FROM s1 WHERE key1 = 'a' AND common_field = 'a';
+
+-- 当查询列表处有`MIN`或`MAX`聚合函数，但是并没有符合`WHERE`子句中
+-- 的搜索条件的记录时，会提示:no matching min/max row
+-- 如有符合搜索条件的记录时，会提示：Select tables optimized away
+EXPLAIN SELECT MIN(key1) FROM s1 WHERE key1 = 'abcdefg';
+EXPLAIN SELECT MIN(key1) FROM s1 WHERE key1 = 'eEZsEk';#表中存在的子段数据
+
+-- 当查询列表以及搜索条件中只包含属于某个索引的列，也就是可以
+-- 使用覆盖索引的情况下，会提示:Using index 
+-- 比如下方的查询只需要用到`idx_key1`而不需要回表操作
+EXPLAIN SELECT key1 FROM s1 WHERE key1 = 'a';
+
+-- 有些搜索条件中虽然出现了索引列，但却不能使用到索引,提示：Using index condition
+-- 索引条件下推:(Index Condition Pushdown)
+-- 先根据`key1 > 'z'`这个条件，定位到二级索引idx_key中对应的二级索引记录
+-- 先检测该记录 是否满足`key1 LIKE '%a'`这个条件
+-- 在对于满足`key1 LIKE '%a'`这个条件的二级索引记录，执行回表操作
+EXPLAIN SELECT * FROM s1 WHERE key1 > 'z' AND key1 LIKE '%a';
+
+-- 在连接查询执行过程中，当被驱动表不能有效的利用索引加快访问速度，
+-- MySQL一般会为其分配一块名叫`join buffer`的内存块来加快查询速度
+-- 也就是所谓的`基于块的嵌套循环算法` 
+-- 提示：Using WHERE; Using join buffer (hash join)
+EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.common_field = s2.common_field;
+
