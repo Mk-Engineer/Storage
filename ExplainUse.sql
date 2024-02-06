@@ -261,13 +261,27 @@ EXPLAIN SELECT common_field, COUNT(*) AS amount FROM s1 GROUP BY common_field;
 EXPLAIN SELECT key1, COUNT(*) AS amount FROM s1 GROUP BY key1;
 
 
+#EXPLAIN的进一步使用
+
+-- 输出格式：
+-- 1 传统格式 2 JSON格式 3 TREE格式 4 可视化输出
+
+-- 传统格式
+EXPLAIN SELECT s1.key1, s2.key1 FROM s1 LEFT JOIN s2 ON s1.key1 = s2.key1 WHERE s2.common_field IS NOT NULL;
+
+-- JSON格式:4种格式里输出最详尽的，包含了执行成本信息
+EXPLAIN FORMAT=JSON SELECT * FROM s1 INNER JOIN s2 ON s1.key1 = s2.key2 WHERE s1.common_field = 'a';
+
+-- TREE格式:主要根据查询的`各个部分之间的关系`和`各个部分的执行顺序`来描述如何查询
+EXPLAIN FORMAT=TREE SELECT * FROM s1 INNER JOIN s2 ON s1.key1 = s2.key2 WHERE s1.common_field = 'a';
+
+-- 可视化输出
+-- 使用MySQL Workbench 点击`放大镜图标`
 
 
+-- SHOW WARNINGS 的使用
+EXPLAIN SELECT s1.key1, s2.key1 FROM s1 LEFT JOIN s2 ON s1.key1 = s2.key1 WHERE s2.common_field IS NOT NULL;
+SHOW WARNINGS\G
 
-
-
-
-
-
-
-
+EXPLAIN SELECT * FROM s1 WHERE key1 IN (SELECT key2 FROM s2 WHERE common_field = 'a');
+SHOW WARNINGS\G
