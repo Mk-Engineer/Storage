@@ -132,3 +132,48 @@ DELIMITER ;
 
 
 #索引失效的案例
+-- 全值匹配
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age=30;
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age=30 AND classId = 4;
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age=30 AND classId = 4 AND NAME = 'abcd';
+
+-- 执行时间
+SELECT SQL_NO_CACHE * FROM student WHERE age=30 AND classId = 4 AND NAME = 'abcd';
+-- 添加索引
+CREATE INDEX idx_age ON student(age);
+CREATE INDEX idx_age_classid ON student(age,classId);
+CREATE INDEX idx_age_classid_name ON student(age,classId,name);#联合索引效率最高
+-- 执行时间
+SELECT SQL_NO_CACHE * FROM student WHERE age=30 AND classId = 4 AND NAME = 'abcd';
+
+
+#最佳左前缀匹配规则
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.age=30 AND student.name='abcd';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.classid=1 AND student.name='abcd';#age最左，没有成功使用索引
+-- 索引idx_age_classid_name还能否正常使用？
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE classid=4 AND student.age=30 AND student.name='abcd';#成功使用索引
+
+DROP INDEX idx_age ON student;
+DROP INDEX idx_age_classid ON student;
+
+-- 对于多列索引，过滤条件要使用索引必须按照索引建立时的顺序，依次满足，一旦跳过某个字段，索引后面的字段都无法被使用
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.age=30 AND student.name = 'abcd';#最左前缀原则：age -> classid -> name
+
+-- 计算、函数、类型转化(手动或自动)导致索引失效
+-- 函数
+CREATE INDEX idx_name ON student(name);
+
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.name LIKE 'abc%';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE LEFT(student.name,3)='abc';
+EXPLAIN SELECT id,stuno,name FROM student WHERE SUBSTRING(name,1,3)='abc';
+
+-- 计算
+CREATE INDEX idx_sno ON student(stuno);
+
+EXPLAIN SELECT SQL_NO_CACHE id,stuno,name FROM student WHERE stuno+1 = 900001;
+EXPLAIN SELECT SQL_NO_CACHE id,stuno,name FROM student WHERE stuno = 900000;
+
+-- 类型转换
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name=123;
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name='123';
+
