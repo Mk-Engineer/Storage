@@ -106,6 +106,8 @@ SELECT COUNT(*) FROM student;
 
 
 #删除某表上的索引
+#每个游标必须使用不同的declare continue handler for not found set done=1来控制游标的结束
+#若没有数据返回，程序继续，并将变量done设为2
 DELIMITER //
 CREATE PROCEDURE `proc_drop_index`(dbname VARCHAR(200),tablename VARCHAR(200))
 BEGIN
@@ -113,9 +115,7 @@ BEGIN
 	DECLARE ct INT DEFAULT 0;
 	DECLARE _index VARCHAR(200) DEFAULT '';
 	DECLARE _cur CURSOR FOR SELECT index_name FROM information_schema.STATISTICS WHERE table_schema=dbname AND table_name=tablename AND seq_in_index=1 AND index_name<>'PRIMARY';
-#每个游标必须使用不同的declare continue handler for not found set done=1来控制游标的结束
 	DECLARE CONTINUE HANDLER FOR NOT FOUND set done=2;
-#若没有数据返回，程序继续，并将变量done设为2
 	OPEN _cur;
 	FETCH _cur INTO _index;
 	WHILE _index<>'' DO
@@ -176,4 +176,50 @@ EXPLAIN SELECT SQL_NO_CACHE id,stuno,name FROM student WHERE stuno = 900000;
 -- 类型转换
 EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name=123;
 EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name='123';
+
+-- 范围条件右边的列索引失效
+-- 准备工作
+SHOW INDEX FROM student;
+
+#CALL proc_drop_index('dbtest','student');
+DROP INDEX idx_age_classid_name ON student;
+DROP INDEX idx_name ON student;
+DROP INDEX idx_sno ON student;
+
+SHOW INDEX FROM student;
+
+-- 索引失效
+CREATE INDEX idx_age_classid_name ON student(age,classId,name);
+SHOW INDEX FROM student;
+
+EXPLAIN SELECT SQL_NO_CACHE * FROM student
+WHERE student.age=30 AND student.classId>20 AND student.name='abc';#name的索引没有用上
+
+-- 创建索引时先列等值关系，再列范围判断
+CREATE INDEX idx_age_name_classId ON student(age,name,classId);
+SHOW INDEX FROM student;
+
+EXPLAIN SELECT SQL_NO_CACHE * FROM student
+WHERE student.age=30 AND student.classId>20 AND student.name='abc';#name的索引没有用上
+
+
+-- 不等于(!=或<>)索引失效
+CREATE INDEX idx_name ON student(name);
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.name = 'abc';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.name != 'abc';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE student.name <> 'abc';
+
+-- IS NULL可以使用索引，IS NOT NULL无法使用索引
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age IS NULL;
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age IS NOT NULL;
+-- 说明：最好在设计数据表初就将字段设置为NOT NULL约束，必须有NULL的情况可以将INT默认设置为0，将字符串默认设置为‘’
+-- 同理：NOT LIKE 也无法使用索引，导致全表扫描
+
+
+-- LIKE以通配符%开头时，索引失效
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name LIKE 'ab%';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name LIKE '%ab';
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name LIKE '%ab%';
+-- 强制：页面搜索严禁`左模糊`或`全模糊`，如果需要请走搜索引擎来解决
+
 
