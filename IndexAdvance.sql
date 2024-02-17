@@ -223,3 +223,18 @@ EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE name LIKE '%ab%';
 -- 强制：页面搜索严禁`左模糊`或`全模糊`，如果需要请走搜索引擎来解决
 
 
+-- OR前后存在非索引的列，索引失效
+DROP INDEX idx_age_name_classId ON student;
+DROP INDEX idx_age_classid_name ON student;
+DROP INDEX idx_name ON student;
+
+CREATE INDEX idx_age ON student(age);
+CREATE INDEX idx_name ON student(name);
+SHOW INDEX FROM student;
+
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age = 10 OR classid = 100;
+EXPLAIN SELECT SQL_NO_CACHE * FROM student WHERE age = 10 OR name = 'Abel';
+
+
+-- 数据库和表的字符集使用不同的字符集，进行比较前需要进行转换，索引会失效
+
