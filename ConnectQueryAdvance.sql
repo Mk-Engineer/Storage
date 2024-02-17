@@ -115,18 +115,3 @@ EXPLAIN SELECT SQL_NO_CACHE * FROM `type` INNER JOIN book ON type.card = book.ca
 -- 对于内连接来说，在两个表的连接条件都存在索引的情况下，会选择数据两小的表作为驱动表：小表驱动大表
 EXPLAIN SELECT SQL_NO_CACHE * FROM `type` INNER JOIN book ON type.card = book.card;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
