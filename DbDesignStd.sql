@@ -82,3 +82,39 @@ END//
 DELIMITER ;
 
 #CALL batch_insert_class_comments(10000,1000000);
+
+SELECT p.comment_text,p.comment_time,stu.stu_name
+FROM class_comment AS p LEFT JOIN students AS stu
+ON p.stu_id = stu.stu_id
+WHERE p.class_id = 10001
+ORDER BY p.comment_id DESC
+LIMIT 10000;
+
+-- 进行反范式化的设计
+-- 复制表
+#CREATE TABLE IF NOT EXISTS class_comments
+#AS
+#SELECT * FROM class_comment;
+
+#ALTER TABLE class_comments
+#ADD PRIMARY KEY(comment_id);
+
+SHOW INDEX FROM class_comments;
+
+-- 向class_comments增加stu_name的字段
+#ALTER TABLE class_comments
+#ADD stu_name VARCHAR(25);
+
+#UPDATE class_comments c
+#SET stu_name = (
+#SELECT stu_name
+#FROM students s
+#WHRER c.stu_id = s.stu_id;
+#);
+
+-- 查询同样的需求
+SELECT comment_text,comment_time,stu_name
+FROM class_comments
+WHERE class_id = 10001
+ORDER BY comment_id DESC
+LIMIT 10000;
