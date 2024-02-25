@@ -118,3 +118,14 @@ FROM class_comments
 WHERE class_id = 10001
 ORDER BY comment_id DESC
 LIMIT 10000;
+
+-- 巴斯范式
+-- 在3NF上进行改进
+-- 各候选键之间不能存在相互依赖的关系
+
+-- 第四范式(4th NF)
+-- 把同一表中多对多关系删除
+
+-- 第五范式(5th NF)
+-- 了解
+
