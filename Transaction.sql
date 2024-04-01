@@ -151,3 +151,69 @@ SELECT * FROM person;
 ROLLBACK;#事务结束
 
 SELECT * FROM person;
+
+
+#事务的隔离级别
+
+-- 1 脏写
+--	对于两个事务A、B，如果事务A修改了另一个未提交事务B修改过的数据，意味着发生了脏写
+
+-- 2 脏读
+--	对于两个事务A、B，A读取了已经被B更新但还没有提交的字段。之后若B回滚，A读取的内容就是临时且无效的
+
+-- 3 不可重复读
+--	对于两个事务A、B，A读取了一个字段，然后B更新了该字段，之后A再次读取同一字段，值不同了，意味着发生了不可重复读
+
+-- 4 幻读
+--	对于两个事务A、B，A从一个表中读取了一个字段，然后B在该表中插入了一些新的行。之后如果A再次读取同一个表，就会多处几行，意味着发生幻读
+
+
+#SQL的四种隔离级别
+-- 问题严重程度：脏写>脏读>不可重复读>幻读
+
+-- READ UNCOMMITTED：读未提交
+-- READ COMMITED：   读已提交
+-- REPEATABLE TEAD： 可重复读
+-- SERIALIZABLE：    可串行化
+-- 越向下隔离级别越高，并发性越差
+
+-- 四种隔离级别都解决了`脏写`
+
+
+#MySQL的四种隔离级别
+-- MySQL支持全部四种隔离级别
+-- 默认隔离级别：REPETABLE(可重复读)，解决了脏读、不可重复读
+
+-- 查看当前隔离级别
+SHOW VARIABLES LIKE 'transaction_isolation';
+SELECT @@transaction_isolation;
+
+-- 设置隔离级别
+
+-- 1:
+-- SET [GLOBAL|SESSION] TRANSACTION ISOLATION LEVEL 隔离级别;
+-- READ UNCOMMITTED
+-- READ COMMITTED
+-- REPEATABLE READ
+-- SERIALIZABLE
+
+-- 2:
+-- SET [GLOBAL|SESSION] TRANSACTION_ISOLATION = '隔离级别';
+-- READ-UNCOMMITTED
+-- READ-COMMITTED
+-- REPEATABLE-READ
+-- SERIALIZABLE
+
+-- 关于设置时使用GLOBAL或SESSION的影响
+-- 1 GLOBAL
+-- SET GLOBAL TRANSACTION_ISOLATION = 'SERIALIZABLE';
+-- 当前已经存在的会话无效
+-- 只对执行完该语句之后产生的会话起作用
+
+-- 2 SESSION
+-- SET GLOBAL TRANSACTION_ISOLATION = 'SERIALIZABLE';
+-- 对当前会话的所有后续的事务有效
+-- 如果在事务之间执行，则对后续事务有效
+-- 该语句可以在已经开启的事务中间执行，但不会影响正在执行的事务
+
+
