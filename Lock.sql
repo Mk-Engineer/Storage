@@ -25,3 +25,4 @@ SELECT * FROM performance_schema.data_lock_waits\G
 
 -- 检查InnoDB_row_lock
 SHOW status LIKE 'innodb_row_lock%';
+
