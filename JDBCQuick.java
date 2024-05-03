@@ -1,5 +1,7 @@
 package com.omen.base;
 
+import com.mysql.cj.jdbc.Driver;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,8 +13,9 @@ import java.sql.Statement;
  */
 public class JDBCQuick {
     public static void main(String[] args) throws Exception {
-        //1.注册驱动
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        //1.注册驱动（从JDK6开始自动注册驱动）
+//      Class.forName("com.mysql.cj.jdbc.Driver");
+//      DriverManager.registerDriver(new Driver());
 
         //2.获取连接对象
         String url = "jdbc:mysql://localhost:3306/dbtest";
