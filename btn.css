@@ -1,0 +1,11 @@
+/* 元素选择器：通过标签名确定样式的作用元素 */
+input{
+    width: 60px;
+    height: 40px;
+    background-color: rgb(166,232,66);
+    color: white;
+    font-size: 20px;
+    font-family: '微软雅黑';
+    border: solid green;
+    border-radius: 5px;
+}
