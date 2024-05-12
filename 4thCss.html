@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS浮动</title>
+        <style>
+            .outerDiv{
+                width: 500px;
+                height: 300px;
+                border: 1px solid rgb(112, 136, 112);
+                background-color: beige;
+            }
+            .innerDiv{
+                width: 100px;
+                height: 100px;
+                border: 1px solid blue;
+                /* display: inline; */
+            }
+            .d1{
+                background-color: red;
+                float: left;
+            }
+            .d2{
+                background-color: blue;
+                float: left;
+            }
+            .d3{
+                background-color: green;
+                float: left;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="outerDiv">
+            <div class="innerDiv d1">A</div>
+            <div class="innerDiv d2">B</div>
+            <div class="innerDiv d3">C</div>
+        </div>
+
+    </body>
+</html>
