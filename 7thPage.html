@@ -6,10 +6,34 @@
     </head>
     <body>
         <!--  
+            表单标签
+            <form>
+                action：定义数据的提交地址
+                        1 URL
+                        2 相对路径
+                        3 绝对路径
+                method：定义数据的提交方式
+                        1 GET
+                            参数会以键值对方式放在URL后提交
+                            url?key=value&key=value&key=value
+                        2 POST
             
+            表单项标签
+            表单项标签一定要定义name属性，该属性用于明确提交时的参数名
+            表单项标签还需要明确value属性，该属性用于明确提交时的实参
+            <input>
+                type 输入信息的表单项类型
+                    text     单行普通文本框
+                    password 密码框
+                    submit   提交按钮
+                    reset    重置按钮
         -->
-        <form action="">
-
+        <form action="8thServer.html" method="get">
+            <!-- 添加表单项标签 用户输入信息的标签 -->
+            用户名:<input type="text" name="username" value=""/> <br>
+            密码<input type="password" name="userpwd" value=""/> <br>
+            <input type="submit" value="登录"/>
+            <input type="reset" value="清空"/>
         </form>
     </body>
 </html>
