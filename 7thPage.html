@@ -35,11 +35,52 @@
                     password 密码框
                     submit   提交按钮
                     reset    重置按钮
+                    radio    单选框
+                             多个选项选其一
+                             多个单选框使用相同的name属性值，会有互斥效果
+                    checkbox 复选框
+                             多个选项选多个
+                    hidden   隐藏域
+                             不显示在页面上，提交时会携带  
+                    file     文件上传框          
+            <textArea> 文本域 / 多行文本框  
+            <select> 下拉框
+                    option 定义选项                     
         -->
-        <form action="8thServer.html" method="post">
+        <form action="8thServer.html" method="get">
             <!-- 添加表单项标签 用户输入信息的标签 -->
-            用户名:<input type="text" name="username" value=""/> <br>
-            密码<input type="password" name="userpwd" value=""/> <br>
+            <!-- 希望用提交一些特定的信息，当时考虑到安全问题或用户操作问题，不希望该数据发生改变 
+                readonly 只读   提交时 携带
+                disabled 不可用 提交时 不携带
+            -->
+            <input type="hidden" name="id" value="314159">
+            <input type="text" name="pid" value="READONLY" readonly> <br>
+            <input type="text" name="tid" value="DISABLED" disabled> <br>
+
+            ID: <input type="text" name="username" value=""/>    <br>
+            Pwd:<input type="password" name="userpwd" value=""/> <br>
+            Gender:
+                  <input type="radio" name="gender" value="1" checked/> Male
+                  <input type="radio" name="gender" value="0"/> Female
+                  <br>
+            Hobby:
+                  <input type="checkbox" name="hobby" value="1" checked/> 篮球      
+                  <input type="checkbox" name="hobby" value="2"/> 足球 
+                  <input type="checkbox" name="hobby" value="3"/> 羽毛球      
+                  <input type="checkbox" name="hobby" value="4"/> 乒乓球    
+                  <br>     
+            SelfIntroduction: <br>
+                  <textarea style="width: 300px; height: 100px;" name="intro"></textarea> <br>
+            Location: <br>
+                  <select name="loc">
+                    <option value="1">京</option>
+                    <option value="2">津</option>
+                    <option value="3">冀</option>
+                    <option value="0" selected>-请选择-</option>
+                  </select>
+                  <br>
+            Avatar: <br>
+                  <input type="file"/> <br>
             <input type="submit" value="登录"/>
             <input type="reset" value="清空"/>
         </form>
