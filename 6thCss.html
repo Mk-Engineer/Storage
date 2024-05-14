@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>盒子模型</title>
+        <style>
+            .outerDiv{
+                width: 500px;
+                height: 300px;
+                border: 1px solid rgb(112, 136, 112);
+                background-color: beige;
+                /* 居中 */
+                margin: 0px auto;
+            }
+            .innerDiv{
+                width: 100px;
+                height: 100px;
+                border: 1px solid blue;
+                float: left;
+            }
+            /* 
+            padding 内边距
+            margin  外边距
+            */
+            .d1{
+                background-color: red;
+                /* 
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 10px; 
+                */
+                /* 顺时针 */
+                margin: 10px 20px 30px 40px;
+                /* 
+                padding-top: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 20px;
+                */
+                /* 顺时针 */
+                padding: 40px 30px 20px 10px;
+            }
+            .d2{
+                background-color: blue;
+                margin-left: 10px;
+            }
+            .d3{
+                background-color: green;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="outerDiv">
+            <div class="innerDiv d1">A</div>
+            <div class="innerDiv d2">B</div>
+            <div class="innerDiv d3">C</div>
+        </div>
+
+    </body>
+</html>
