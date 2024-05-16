@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS的分支结构</title>
+        <script>
+            /*  
+            if
+            switch
+            */
+
+            /* 根据月份输出季节 */
+            var month = prompt("Enter Month")//prompt返回的结果就是用户在窗口上输入的值，以string类型返回
+            console.log(typeof month);
+
+            var month = Number.parseInt(month);
+            console.log(typeof month);
+
+            if(month == 12 || month == 1 || month == 2){
+                console.log("winter")
+            }else if(month >=3 && month <= 5){
+                console.log("spring")
+            }else if(month >= 6 && month <= 8){
+                console.log("summer")
+            }else if(month >= 9 && month <= 11){
+                console.log("autumn")
+            }else{
+                console.log("wrong season")
+            }
+
+            if('false'){//if后的非空字符串会判断为true
+                console.log(true)
+            }else{
+                console.log(false)
+            }
+
+            if(''){
+                console.log(true)
+            }else{
+                console.log(false)
+            }
+
+            if(new Object()){//非空对象会判断为true
+                console.log(true)
+            }else{
+                console.log(false)
+            }
+
+            if(null){
+                console.log(true)
+            }else{
+                console.log(false)
+            }
+
+            if(3.5){//非0的number会判断为true
+                console.log(true)
+            }else{
+                console.log(false)
+            }
+
+            switch(month){
+                case 3:
+                case 4:
+                case 5:
+                    console.log("spring");
+                    break;   
+                case 6:
+                case 7:
+                case 8:
+                    console.log("summer");
+                    break;   
+                case 9:
+                case 10:
+                case 11:
+                    console.log("autumn");
+                    break;   
+                case 12:
+                case 1:
+                case 2:
+                    console.log("winter");
+                    break;   
+                default:
+                    console.log("wrong season");
+            }
+            
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
