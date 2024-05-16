@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS函数</title>
+        <script>
+            /*  
+            函数声明的语法
+                1 function 函数名(){}
+                2 var 函数名 = function(){}
+            特点
+                1 没有访问修饰符
+                2 没有返回值类型，也没有void，如果有返回值直接return
+                3 没有异常列表  
+                4 调用方法时，实参和形参可以在数量上不一致,在方法内部可以通过arguments获得调用时的实参  
+                5 函数也可以作为参数传递给另一个方法
+            */
+
+            //声明函数
+            // function sum(a,b){
+            //     return a+b
+            // }
+            //调用函数
+            // var result = sum(10,20)
+            // console.log(result)
+            
+            //声明函数
+            var sum = function(a,b){
+                console.log(arguments)
+                return a+b
+            }
+            //调用函数
+            // var sum = sum(10,20)//30
+            // console.log(sum)
+            
+            // var sum = sum(10,20,30,40,50)//30
+            // console.log(sum)
+            
+            // var sum = sum(10)//NaN
+            // console.log(sum)
+
+
+            function add(getSum){
+                return getSum(20,30)
+            }
+
+            var result = add(sum)//50
+            console.log(result)
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
