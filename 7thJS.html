@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS声明对象的语法</title>
+        <script>
+            /*  
+            1 new Object()
+            2 {属性名:属性值,...,...函数名:function(){}}
+            */
+
+            // var person = new Object()
+            //对象的属性：添加属性
+            // person.name = "张三"
+            // person.age = 10
+            //对象的方法：添加方法
+            // person.eat = function(food){
+            //     console.log(this.age+"岁" + this.name + "正在吃" + food)
+            // }
+            //访问属性
+            // console.log(person.name)
+            // console.log(person.age)
+            //访问方法
+            // person.eat("火锅")
+
+            var person = {
+                "name":"李四",
+                "age":18,
+                "eat":function(food){
+                    console.log(this.age+"岁" + this.name + "正在吃" + food)
+                }
+            }
+            console.log(person.name)
+            console.log(person.age)
+            person.eat("涮羊肉")
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
