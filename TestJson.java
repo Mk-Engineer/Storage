@@ -6,6 +6,11 @@ import com.omen.pojo.Dog;
 import com.omen.pojo.Person;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author 0xhekt
  * @date 2024/5/16 - 16:23
@@ -29,4 +34,36 @@ public class TestJson {
         Person person = objectMapper.readValue(personStr, Person.class);
         System.out.print(person);
     }
+    //Map和JSON之间的转换
+    @Test
+    public void testMapToJson() throws JsonProcessingException {
+        Map data = new HashMap();
+        data.put("a","valuea");
+        data.put("b","valueb");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(data);
+        System.out.println(s);
+    }
+
+    //List / Array和JSON之间的转换
+    @Test
+    public void testListToJson() throws JsonProcessingException {
+//        List data = new ArrayList();
+//        data.add("a");
+//        data.add("b");
+//        data.add("c");
+
+//        String[] data = {"a","b","c"};
+
+        Dog dog = new Dog("小花");
+        Person person = new Person("李四",18,dog);
+        List data = new ArrayList();
+        data.add(person);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(data);
+        System.out.println(s);
+    }
 }
+
