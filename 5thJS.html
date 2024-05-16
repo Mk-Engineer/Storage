@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS的循环结构</title>
+        <script>
+            document.write("<h1>九九乘法表</h1>");
+            document.write("<br>");
+            
+            var i = 1
+            while (i <= 9){
+                var j = 1
+                while(j <= i){
+                    document.write(j+"*"+i+"="+(j*i)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    j++;
+                }
+                document.write("<hr>");
+                i++;
+            }
+
+            document.write("<br>");
+            document.write("<br>");
+
+            for (i = 1;i <= 9;i++){
+                for(j = 1;j <= i;j++){
+                    document.write(j+"*"+i+"="+(j*i)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                }
+                document.write("<hr>");
+            }
+            
+            document.write("<br>");
+            document.write("<br>");
+            
+            var arr = ["beijing","shanghai","guangzhou"];
+            document.write("<ul>");
+                for(var index = 0; index <arr.length;index++){
+                    document.write("<li>"+arr[index]+"</li>");
+                }
+                document.write("</ul>");
+                
+            document.write("<ul>");
+                
+            /* for each */
+            for(var index in arr){
+                document.write("<li>"+arr[index]+"</li>");
+            }
+            document.write("</ul>");
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
