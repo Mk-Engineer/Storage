@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS事件</title>
+        <script>
+            /*  
+            1 事件的绑定方式：
+                1 通过元素的属性绑定  on***
+                2 通过DOM编程动态绑定
+            注意：
+                1 一个事件可以同时绑定多个函数   
+                2 一个元素可以同时绑定多个事件 
+            2 常见的事件
+                1 鼠标事件 onclick / ondbclick / onmouseover / onmousemove / onmouseleave
+                2 键盘事件 onkeydown / onkeyup
+                3 表单事件    
+            */
+            function fun1(){
+                // alert("单击事件");
+                console.log("单击事件");
+            }
+            function fun2(){
+                // alert("多个函数");
+                console.log("多个函数");
+            }
+            function fun3(){
+                alert("双击事件");
+            }
+            function fun4(){
+                console.log("鼠标悬停");
+            }
+            function fun5(){
+                console.log("鼠标移动");
+            }
+            function fun6(){
+                console.log("鼠标离开");
+            }
+            function fun7(){
+                console.log("按键按下");
+            }
+            function fun8(){
+                console.log("按键抬起");
+            }
+        </script>
+    </head>
+    <body>
+        <input type="button" value="按钮" onclick="fun1(),fun2()" ondblclick="fun3()"/>
+        <br>
+        <img src="img/Interstellar.jpg" onmouseover="fun4()" onmousemove="fun5()" onmouseleave="fun6()"/>
+        <br>
+        <input type="text" onkeydown="fun7()" onkeyup="fun8()"/>
+        <br>
+    </body>
+</html>
