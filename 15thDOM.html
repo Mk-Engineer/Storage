@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM编程API</title>
+        <script>
+            /*  
+            1 获得document dom树
+                window.document
+            2 从document中获取要操作的元素
+                1 直接获取
+                2 间接获取
+            3 对元素进行操作
+                1 操作元素的属性
+                2 操作元素的样式
+                3 操作元素的文本
+                4 增删元素
+            */
+            function changeAttribute(){
+                in1 = document.getElementById("in1")
+                //语法：元素.属性名=""
+                //获得属性值
+                console.log(in1.type)
+                console.log(in1.value)
+                //修改属性值
+                in1.type = "button"
+                in1.value = "嗨"
+            }
+
+            function changeStyle(){
+                var in1 = document.getElementById("in1")
+                //语法：元素.style.样式名=""
+                in1.style.color="green"
+                in1.style.borderRadius="5px"
+            }
+
+            function changeText(){
+                var div01 = document.getElementById("div01")
+                /*  
+                语法：
+                元素名.innerText
+                元素名.innerHTML
+                */
+               console.log(div01.innerText)
+               div01.innerText="Hi"
+               div01.innerHTML="<h1>Hi</h1>"
+            }
+        </script>
+        <style>
+            #in1{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="in1" type="text" value="hello"><br>
+        <div id="div01">hello</div>
+        <br>
+        <br>
+        <button onclick="changeAttribute()">操作属性</button>
+        <br>
+        <br>
+        <button onclick="changeStyle()">操作样式</button>
+        <br>
+        <br>
+        <button onclick="changeText()">操作文本</button>
+    </body>
+</html>
