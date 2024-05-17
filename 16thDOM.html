@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM编程API</title>
+        <script>
+            /*  
+            1 获得document dom树
+                window.document
+            2 从document中获取要操作的元素
+                1 直接获取
+                2 间接获取
+            3 对元素进行操作
+                1 操作元素的属性
+                2 操作元素的样式
+                3 操作元素的文本
+                4 增删元素
+            */
+           function addCs(){
+                //创建子元素
+                var csli = document.createElement("li") //<li></li>
+                //设置子元素的属性和文本
+                csli.id="hz"
+                csli.innerText="杭州"
+                //将子元素放入父元素中
+                var cityul = document.getElementById("city")
+                cityul.appendChild(csli)
+           }
+
+           function addCsBeforeSz(){
+                //创建子元素
+                var csli = document.createElement("li") //<li></li>
+                //设置子元素的属性和文本
+                csli.id="hz"
+                csli.innerText="杭州"
+                //在父元素中追加元素
+                var cityul = document.getElementById("city")
+                var szli = document.getElementById("sz")
+                //cityul.insertBefore(新元素,参照元素)
+                cityul.insertBefore(csli,szli)
+           }
+
+           function replaceSZ(){
+                //创建子元素
+                var csli = document.createElement("li") //<li></li>
+                //设置子元素的属性和文本
+                csli.id="hz"
+                csli.innerText="杭州"
+                //在父元素中追加元素
+                var cityul = document.getElementById("city")
+                var szli = document.getElementById("sz")
+                //cityul.replaceChild(新元素,参照元素)
+                cityul.replaceChild(csli,szli)            
+           }
+           
+           function deleteSZ(){
+                var szli = document.getElementById("sz")
+                szli.remove()
+           }
+
+           function clearCity(){
+                var cityul = document.getElementById("city")
+                // var fc = cityul.firstChild
+                // while(fc != null){
+                //     fc.remove()
+                //     fc = city.firstChild
+                // }
+                cityul.innerHTML=""
+           }
+        </script>
+
+    </head>
+    <body>
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li id="sh">上海</li>
+            <li id="sz">深圳</li>
+            <li id="gz">广州</li>
+        </ul>
+        <br>
+        <br>
+        <!-- 目标1 在城市列表的最后添加一个子标签 -->
+        <button onclick="addCs()">增加城市</button>
+        <br>
+        <!-- 目标2 在城市列表`深圳`前添加一个城市 -->
+        <button onclick="addCsBeforeSz()">插入城市</button>
+        <br>
+        <!-- 目标3 将城市列表`深圳`替换为其他城市 -->
+        <button onclick="replaceSZ()">替换城市</button>
+        <br>
+        <!-- 目标4 在城市列表中删除`深圳` -->
+        <button onclick="deleteSZ()">删除城市</button>
+        <br>
+        <!-- 目标5 清空城市列表 -->
+        <button onclick="clearCity()">清空城市</button>
+    </body>
+</html>
