@@ -20,7 +20,7 @@ public class JDBCQuick {
         //2.获取连接对象
         String url = "jdbc:mysql://localhost:3306/dbtest";
         String username = "root";
-        String password = "1111";
+        String password = "0000";
         Connection connection = DriverManager.getConnection(url, username, password);
 
         //3.获取执行SQL语句的对象
