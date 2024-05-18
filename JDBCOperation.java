@@ -15,7 +15,7 @@ public class JDBCOperation {
         //1.注册驱动-省略
 
         //2.获取连接
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "0000");
 
         //3.预编译SQL语句得到PreparedStatement对象
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM t_emp");
@@ -41,7 +41,7 @@ public class JDBCOperation {
         //1.注册驱动-省略
 
         //2.获取连接
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "0000");
 
         //3.预编译SQL语句得到PreparedStatement对象
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT emp_id,emp_name,emp_salary,emp_age FROM t_emp WHERE emp_id = ?");
@@ -73,7 +73,7 @@ public class JDBCOperation {
         //1.注册驱动-省略
 
         //2.获取连接
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "0000");
 
         //3.预编译SQL语句得到PreparedStatement对象
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT emp_id,emp_name,emp_salary,emp_age FROM t_emp WHERE emp_age > ?");
@@ -102,7 +102,7 @@ public class JDBCOperation {
     //新增功能
     @Test
     public void testInsert() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "0000");
 
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO t_emp(emp_name,emp_salary,emp_age) VALUES(?,?,?)");
 
