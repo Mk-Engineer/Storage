@@ -18,7 +18,7 @@ public class JDBCInjection {
         //1.注册驱动(省略)
 
         //2.获取连接对象
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "0000");
 
         //3.获取执行SQL语句的对象
         Statement statement = connection.createStatement();
