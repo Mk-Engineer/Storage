@@ -17,4 +17,45 @@
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
+    
+<!--    
+    1 一个servlet-name可以同时对应多个url-pattern
+    2 一个servlet标签可以同时对应多个servlet-mapping标签
+    3 url-pattern
+        精确匹配
+            /servlet1
+        模糊匹配
+            `*`作为通配符
+                /        匹配全部，不包含jsp文件
+                /*       匹配全部，包含jsp文件
+                /a/*     匹配前缀，后缀模糊
+                *.action 匹配后缀，前缀模糊
+-->
+    <servlet>
+        <servlet-name>servlet1</servlet-name>
+        <servlet-class>com.omen.servlet.Servlet1</servlet-class>
+    </servlet>
+    
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>servlet1</servlet-name>-->
+<!--        <url-pattern>/s1</url-pattern>-->
+<!--        <url-pattern>/s2</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>servlet1</servlet-name>-->
+<!--        <url-pattern>/a</url-pattern>-->
+<!--        <url-pattern>/b</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+    <servlet-mapping>
+        <servlet-name>servlet1</servlet-name>
+        <!--    精确匹配    -->
+        <url-pattern>/servlet1</url-pattern>
+        <!--    模糊匹配    -->
+<!--    <url-pattern>/</url-pattern>-->
+<!--    <url-pattern>/*</url-pattern>-->
+<!--    <url-pattern>/a/*</url-pattern>-->
+<!--    <url-pattern>*.action</url-pattern>-->
+    </servlet-mapping>
 </web-app>
