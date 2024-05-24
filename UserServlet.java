@@ -15,6 +15,11 @@ import java.io.PrintWriter;
  * 2 重写service方法，service(HttpServletRequest req, HttpServletResponse resp)
  * 3 在service方法中定义业务处理代码
  * 4 在web.xml中配置Servlet对应的请求映射路径
+ *
+ * 注意
+ * 1 servlet-api.jar导入问题
+ * 2 Content-Type响应头的问题
+ *      客户端根据响应头中的Content-Type的MIME类型，解析响应体
  * */
 public class UserServlet extends HttpServlet {
     @Override
@@ -30,6 +35,10 @@ public class UserServlet extends HttpServlet {
         }
 
         //3 将要响应的数据放入response
+        //应该设置Content-Type响应头
+        //response.setHeader("Content-Type", "text/html");
+        response.setContentType("text/html");
+
         PrintWriter writer = response.getWriter();//该方法返回的是一个向响应体中打印字符串的打印流
         writer.write(info);
     }
