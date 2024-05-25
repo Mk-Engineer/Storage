@@ -57,5 +57,11 @@ public class Servlet2 extends HttpServlet {
             String pname = parameterNames.nextElement();
             System.out.println(pname + " : " + servletContext.getInitParameter(pname));
         }
+
+        //域对象的3个API
+        //setAttribute(String,Object)
+        servletContext.setAttribute("ka","va");        //向域中`存储 / 修改`数据
+        Object object = servletContext.getAttribute("ka");//获得域中的数据
+        servletContext.removeAttribute("ka");             //移除域中的数据
     }
 }
