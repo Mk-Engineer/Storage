@@ -20,6 +20,13 @@ import java.io.PrintWriter;
  * 1 servlet-api.jar导入问题
  * 2 Content-Type响应头的问题
  *      客户端根据响应头中的Content-Type的MIME类型，解析响应体
+ *
+ * 注意
+ * 1 推荐在servlet中重写 doGet() / doPost() 方法来处理请求
+ *   如果直接重写 service() 方法，父类中的 service() 方法的部分处理功能将失效
+ * 2 目前直接重写 service() 也适用
+ * 3 如果 doGet() 和 doPost() 中定义的代码耦合度很高，可以使用doGet()调用doPost()，或相反
+ * 4 后续使用SpringMVC框架后，无需继承HttpServlet，处理请求的方法也不再使用重写 doXxx() / service() 的模式
  * */
 public class UserServlet extends HttpServlet {
     @Override
