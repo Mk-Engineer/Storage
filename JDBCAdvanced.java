@@ -133,4 +133,80 @@ public class JDBCAdvanced {
         preparedStatement.close();
         connection.close();
     }
+
+    /* 批量操作 */
+    @Test
+    public void testMoreInsert() throws SQLException {
+        //注册驱动
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+
+        //获取连接
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest", "root", "1111");
+
+        //编写SQL语句
+        String sql = "INSERT INTO t_emp(emp_name,emp_salary,emp_age) VALUES(?,?,?)";
+
+        //创建预编译prepareStatement对象，传入SQL语句
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        /* 插入多条数据 */
+        long start = System.currentTimeMillis();
+        for(int i = 1; i <= 10000; i++){
+            //为占位符赋值
+            preparedStatement.setString(1,"Mary"+i);
+            preparedStatement.setDouble(2,100.0+i);
+            preparedStatement.setInt(3,20+i);
+
+            preparedStatement.executeUpdate();
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("TimeCost:" + (end-start));
+
+        //释放资源
+        preparedStatement.close();
+        connection.close();
+    }
+
+    @Test
+    public void testBatch() throws SQLException {
+        //注册驱动
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+
+        //获取连接
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///dbtest?rewriteBatchedStatements=true", "root", "1111");
+
+        //编写SQL语句
+        /*
+        * 注意：
+        *   1 必须在连接数据的URL后面追加?rewriteBatchedStatements=true，允许批量操作
+        *   2 新增SQL必须用VALUES，且语句尾不要加`;`
+        *   3 调用addBatch()方法，将SQL语句进行批量添加
+        *   4 统一执行批量操作，调用executeBatch()
+        */
+        String sql = "INSERT INTO t_emp(emp_name,emp_salary,emp_age) VALUES(?,?,?)";
+
+        //创建预编译prepareStatement对象，传入SQL语句
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        /* 插入多条数据 */
+        long start = System.currentTimeMillis();
+        for(int i = 1; i <= 10000; i++){
+            //为占位符赋值
+            preparedStatement.setString(1,"Mary"+i);
+            preparedStatement.setDouble(2,100.0+i);
+            preparedStatement.setInt(3,20+i);
+
+            preparedStatement.addBatch();
+        }
+
+        //执行批量操作
+        preparedStatement.executeBatch();
+
+        long end = System.currentTimeMillis();
+        System.out.println("TimeCost:" + (end-start));
+
+        //释放资源
+        preparedStatement.close();
+        connection.close();
+    }
 }
