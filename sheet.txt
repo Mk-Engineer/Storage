@@ -1,0 +1,1257 @@
+把图片中的A1换成Y，A2换成U，A3换成I，A4换成O，A5换成P，A6换成H，A7换成J，B1换成K，B2换成L，B3换成;，B4换成N，B5换成M，B6换成<，B7换成>，C1换成？
+
+A1 -> Y
+A2 -> U
+A3 -> I
+A4 -> O
+A5 -> P
+A6 -> H
+A7 -> J
+B1 -> K
+B2 -> L
+B3 -> ;
+B4 -> N
+B5 -> M
+B6 -> <
+B7 -> >
+C1 -> ?
+
+
+#打上花火
+
+【A段 前奏】
+L ; M K  L ; M K
+L ; M <  L ; H K
+L ; M K  L ; M K
+L ; M <  L ; H K
+
+【B段】
+I P H K L K P O I P J K 
+あの日見渡した渚を
+K J H K J P P P
+今も思い出すんだ
+I P H K L K P O I P J K
+砂の上刻んだ言葉
+K J H K J P P P H
+SS君の後ろ姿
+
+【C段】
+H J K J H J K
+寄り返す波が
+J H J K J P H P Y Y H P Y U U I
+足元をよぎり何かを攫う
+H J K J H J K
+夕凪の中
+J H J K L ; N N K K ; L K K
+日暮れだけが通り過ぎて行く
+
+【D段】
+; M ; L K H K L
+パッと光って咲いた
+; M ; L K P K K
+花火を見ていた
+; M ; L ; M M < M N ;
+きっとまだ終わらない夏が
+; M ; L K H K L
+曖昧な心を
+; M ; L K H K K
+解かして繋いだ
+K J H J H L J H J J K
+この夜が続いて欲しかった
+
+
+#星际穿越
+HO ; HO ;
+
+JP ; JP ;
+
+KH ; KH ;
+
+LP ; LP ; J
+
+HO ; ; ;   ;
+
+HO ; ; ;   ;
+
+JP ; ; ;   ;
+
+JP ; ; ;   ;
+
+KH ; ; ;   ;
+
+KH ; ; ;   ;
+
+LP ; ; ;   ;
+
+LP ; ; ;   ;
+
+
+#反方向的钟
+< M ; L ; K L ; M
+
+< M ; L ; L K L K
+
+< M ; L ; K L ; M
+
+< M ; L ; H
+
+
+#身骑白马
+
+K J K K J L L P P L L K ;
+我爱谁 跨不过 从来也不觉得错
+K J K K J L L P P L N ; ;
+自以为 抓着痛 总能修成爱的果
+K ; ; L N J K L L L K ;
+偏执相信着 受诅咒的水晶球
+H J K H H I ; L H J
+阻挡可~能心动的理由
+K J K K J L
+而你却 靠近了
+L P P L L K ; L
+逼我们视线交错哦
+K K J K P L L L
+原地不动 或向前走
+L P P L ; N M ;
+突然在意 ~ 这分钟
+; N M N ; N ; L L
+眼前荒沙弥漫了等候
+L ; N ; L L ; L K
+耳边传来孱弱的呼救
+H J K H H  K ; L H ; N ; N ;
+追赶要~我   爱的不保留~~~
+M M ; L ; M ; M ; L K ;
+我身骑白~马呀 走~三~关
+; ; H L L ; K H ; M L K I P
+我改换素衣~哟~ 回~中~原~
+; H ; M L ; L K K L ; ; H
+放下西~凉~~~ 无人~管~
+H K K H P I L K L K H K
+我一心只~想 王~~宝~钏
+
+
+
+
+#此生不换
+; ; ; L L
+时光穿不断
+K L ; L H
+流转在从前
+; ; ; L L
+刻骨的变迁
+K L ; M
+不是遥远
+
+; ; L H L
+再有一万年
+; L K P K
+深情也不变
+K L ; K L ; ; L
+爱像烈火般蔓延
+; ; ; L L K
+记忆是条长线
+K L ; L H
+盘旋在天边
+
+; ; ; L L K L ; M
+沉浮中以为情深缘浅
+; ; L H L
+你再度出现
+; L K P K
+我看见誓言
+K L ; K L ; M
+承诺在水天之间
+
+; M < < M > ;
+回头看不曾走远
+; L K L K L M ; ;
+依依目光此生不换
+L ; L ; < M
+要分散不习惯
+K L K L M K
+怎么算都太难
+
+L ; ; L K L K K
+分开之后更勇敢
+; M < < M M ; ;
+愿这爱世代相传~
+
+
+#下个路口见
+K K H H H P P P H I
+刚下的地铁还不算拥挤
+K K H H H P P P P H
+你那边飞机碰巧也落地
+K K ; L P P L K J J K
+东京下雨淋湿巴黎收音机
+H H P P I
+你听几点几？
+K K H H H P P P H I
+当半个地球外还有个你
+K K H H H P P P P H
+当相遇还没到对的时机
+K K ; L P P L K J J K
+夏天一去，又是冬季七十一
+H ; H P H
+暖杯巧克力
+; H ; H ; ; L L P L P L L K
+秒针转动滴滴答，小小时差滴滴答
+; H ; H L M M ; L K
+我早茶月光洒在你头发
+; H ; H ; ; L L P L P L L ;
+平行的画滴滴答几时交叉滴滴答？
+; H ; H ; L K
+下个路口，再见吧！
+
+
+
+#化身孤岛的鲸
+M M ;  ; L L K  L ; ;
+我是只化身孤岛的蓝鲸
+P P K L K L ; K
+有着最巨大的身影
+P K L K L ; K
+鱼虾在身侧穿行
+P K L K L ; ; L
+也有飞鸟在背上停
+M M ; ; L L K L ; ;
+我路过太多太美的奇景
+P P K L K L M K
+如同伊甸般的仙境
+H K L K L ; K
+而大海太平太静
+P K L K L ; ; L
+多少故事无人倾听
+K L ; M M < < M
+我爱地中海的天晴
+; M N ; N M L ;
+爱西伯利亚的雪景
+; L ; M ; L K
+爱万丈高空的鹰
+H H K < > < M
+爱肚皮下的藻荇
+; M N ; N ; N ? ?
+我在尽心尽力地多情
+M < ? < M
+直到那一天
+M < ? > < M
+你的衣衫破旧
+M < ? > < M
+而歌声却温柔
+M < ? > < M M M L ;
+陪我漫无目的地四处漂流
+; L ; M ; L K
+我的背脊如荒丘
+H H K < > < M
+而你却微笑摆首
+; M N ; N ? K L
+把它当成整个宇宙
+M < ? > < M
+你与太阳挥手
+M < ? > < M
+也同海鸥问候
+M < ? > < M M M L ;
+陪我爱天爱地的四处风流
+; L ; M ; L K
+只是遗憾你终究
+H H K < > < M
+无法躺在我胸口
+; M N ; N ; N ? K L
+欣赏夜空最辽阔的不朽
+P ; M < L K
+把星子放入眸
+
+; M N ; N M K L
+
+
+#夜车-曾轶可
+N N N M    K L
+
+; ; ; M    J K
+
+N ; M      K L
+
+P P P ;
+
+
+N N N M    K L
+
+; ; ; M    J K
+
+N ; M      K L
+
+P P P L K
+
+
+N N N M    K L
+
+; ; ; M    J K
+
+N ; M      K L
+
+; L L  P H K   
+
+
+#兰亭序
+P I P H I P H P I U I  
+兰亭临帖行书如行云流水  
+I U I K H K H P I Y I U  
+月下门推心细如你脚步碎  
+P P H  H K L K H  
+忙不迭千年碑易拓  
+P H P I U P I  
+却难拓你的美  
+U Y I   U Y I Y Y  
+真迹绝~ 真心能给谁  
+P I P H I P H P I U I  
+牧笛横吹黄酒小菜又几碟  
+I U I K H K H P I Y I U  
+夕阳余晖如你的羞怯似醉  
+P P P H  
+摹本易写  
+H K L K H P I P ; L K  
+而墨香不退与你同留余味  
+L K H P H K K L L  
+一行朱砂到底圈了谁  
+P H K L K L K ; L K  
+无关风月我题序等你回  
+K L ; M ; L K H P ;  
+悬笔一绝那岸边浪千叠  
+; M < ; L L K ; L K  
+情字何解怎落笔都不对  
+H K ; L K H P ; L K  
+而我独缺你一生的了解
+
+
+#一路向北
+O O I U Y U I  
+后视镜里的世界  
+O O I U Y U Y  
+越来越远的道别  
+Y I P P Y  
+你转身向背  
+H P P P I P Y  
+侧脸还是很美  
+H P P I I U  
+我用眼光去追  
+H P P I I U  
+竟听见你的泪  
+O O I U Y U I  
+在车窗外面徘徊  
+O O I U Y U Y  
+是我错失的机会  
+Y I J J K  
+你站的方位  
+K K L K K J K  
+跟我中间隔着泪  
+K K L K L ; L  
+街景一直在后退  
+K K L K L ; N ; L  
+你的崩溃在窗外零碎  
+P P L L K  
+我一路向北  
+;  ; L J H H P  
+离开有你的季节  
+P P K K O  
+方向盘周围  
+K K J K L L  ;  ;  
+回转着我的后悔  
+M ; L L K  
+我加速超越  
+;  ; L L K  J H H P L K  
+却甩不掉紧紧跟随的伤悲  
+P P H Y  
+细数惭愧  
+Y O I U Y  
+我伤你几回  
+P P H Y  
+停止狼狈  
+Y O I U Y  
+就让错纯粹
+
+P P L L K  
+我一路向北  
+;  ; L J H H P  
+离开有你的季节  
+P P K K O
+你说你好累  
+K K J K L L  ;  ;  
+已无法再爱上谁  
+P P L L K  
+风在山路吹  
+;  ;  L J H H P P I L K  
+过往的画面全都是我不对  
+P P H Y  
+细数惭愧  
+Y O I U Y  
+我伤你几回  
+P P L L K  
+我一路向北  
+;  ; L J H H P  
+离开有你的季节  
+P P K K O  
+方向盘周围  
+K K J K L L ; ;  
+回转着我的后悔  
+M ; L L K  
+我加速超越  
+;  ; L L K  J H H P L K  
+却甩不掉紧紧跟随的伤悲  
+P P H Y  
+细数惭愧  
+Y O I U Y  
+我伤你几回  
+P P H Y  
+停止狼狈  
+Y O I U Y  
+就让错纯粹
+
+
+#Mojito
+麻烦给我的爱人来一杯Mojito
+I H K  ; L K L  K J H J K H
+我喜欢阅读她微醺时的眼眸
+I H K  ; L K L  K J H J K
+而我的咖啡
+H K ; M N
+糖不用太多
+P J L N ;
+这世界已经因为她甜得过头
+I H K  ; L L ;  L K J H J
+
+没有跟她笑容一样浓郁的雪茄
+I H K  ; L K L  K J H J K H
+就别浪费时间介绍收起来吧
+I H K  ; L K L  K J H J K 
+拱廊的壁画
+H K ; M N
+旧城的涂鸦
+P J L N ;
+所有色彩都因为她说不出话
+I H K  ; L L ;  L K J K H
+
+这爱不落幕
+K K K J J
+忘了心事的国度
+J  L L K J  K H
+你所在之处
+K K K J J
+孤单都被征服
+J  L L K N ;
+
+铁铸的招牌锈
+H K ; M N
+错落着就像
+< M N N ;
+一封封城市献给天空的情书
+H H ;  ; L N ; L K J K H
+当街灯亮起
+H K ; M N
+Havana漫步
+< M N N ;
+这是世上最美丽的那双人舞
+H H ;  ; L N ; L K J K H
+
+
+#青花瓷
+L K H K  K H K  K H K H P
+素胚勾勒出青花笔锋浓转淡
+L K H K  K H K  K ; L K K
+瓶身描绘的牡丹一如你初妆
+P H ; ;  ; L ;  ; L ; M ;
+冉冉檀香透过窗心事我了然
+; ; ;  ; L L L  L K ; L
+宣纸上走笔至此搁一半~
+L K H K  K H K  K H K H P
+釉色渲染仕女图韵味被私藏
+P H ; M  M ; M  M ; L K K
+而你嫣然的一笑如含苞待放
+L K L ; L L K L
+你的美一缕飘~散
+K H L K K H K K K
+去到我去不了的地方
+M M ; L ; H L ; M ; L
+天青色等烟雨而我在等你
+M M ; L ; P L ; M L K
+炊烟袅袅升起隔江千万里
+K L ; M < M ; M ; ; L L
+在瓶底书汉隶仿前朝的飘逸
+K L K L K L ; M ;
+就当我为遇见你伏笔
+M M ; L ; H L ; M ; L
+天青色等烟雨而我在等你
+M M ; L ; P L ; M L K
+月色被打捞起晕开了结局
+K L ; M < M ; M ; ; L L
+如传世的青花瓷自顾自美丽
+P ; L L K
+你眼带笑意
+
+
+#天空之城
+H J K J K ; J
+I I H P H K P
+I I O I O K I
+K K J O O J J
+H J K J K ; J
+I I H P H K P
+I I O K J K L L ; K
+K J H J P H
+K L ; L ; M L
+P P K J K ; ;
+H J K J K L K P P
+N ; L K ; ;
+< M ; L K
+K L K L M ;
+; < M ; L K
+K L K L J H
+
+
+#相思      
+< ; < > ? ?? > < M ;
+M < ; < > ? ?? > < M <
+前奏
+
+< L L K ;
+红豆生南国
+K L L K L ; H
+是很遥远的事情
+< L L K ;
+相思算什么
+K L < L ;
+早无人在意
+< ; L K L
+醉卧不夜城
+K L ; H
+处处霓虹
+< ; < > ; > ?? >>
+酒杯中好一片滥滥风情
+; < < ; ; > >
+最肯忘却古人诗
+; ?? > < M < ;
+最不屑一顾是相思
+; < < ; > <
+守着爱怕人笑
+; L K L ;
+还怕人看清
+; < < ; ; > >
+春又来看红豆开
+; ?? > < M < ;
+竟不见有情人去采
+I H H I ; L ; K J H
+烟花拥着风流真情不在
+
+
+#下雨天
+I O P P P P P
+下雨天了怎么办
+P J K K
+我好想你
+L ; ; N K
+不敢打给你
+P P P L ; ;
+我找不到原因
+; ; ; ; N M K ; L
+什么失眠的声音
+; N M M L K
+变得好熟悉
+; N M L K  ; N M L K
+沉默的场景  做你的代替
+; N M L K
+陪我等雨停
+
+P P P P P P L J L K
+期待让人越来越沉溺
+; ; ; N K
+谁和我一样
+P P P L ; ;
+等不到他的谁
+; ; ; ; N M K ; L
+爱上你我总在学会
+; N M M L K
+寂寞的滋味
+; N M L K ; N M L K
+一个人撑伞 一个人擦泪
+; N M L K
+一个人好累
+
+P M N ;
+怎样的雨
+P M N ;
+怎样的夜
+P M N L K L K L ; ; ;
+怎样的我能让你更想念
+P M N ;
+雨要多大
+P M < L
+天要多黑
+L K L N ; K L ;
+才能够有你的体贴
+M <
+其实
+< M < M < < M ? < ? <
+没有我你分不清楚那些
+M M M  ; M < ;
+差别 结局还能多明显
+M N ; ; N H
+别说你会难过
+K ; L J J L K L ;
+别说你想改变
+M N ; N H H J J
+被爱的人不用道歉
+
+#水星记
+P ; L L K K
+着迷于你眼睛
+P ; L L K K
+银河有迹可循
+P ; L L K N ;
+穿过时间的缝隙
+K M ; L K H
+它依然真实地
+M ; L K L
+吸引我轨迹
+P ; L L K K
+这瞬眼的光景
+P ; L L K K
+最亲密的距离
+P ; L L K N ;
+沿着你皮肤纹理
+K M ; L K H
+走过曲折手臂
+M ; L K K
+做个梦给你
+M ; L K P
+做个梦给你
+P K L ; ; ; N ;
+等到看你银色满际
+L ; N ; L K K ; L
+等到分不清季节更替
+L K L K K
+才敢说沉溺
+
+K L ; M < M ; < M ; <
+还要多远才能进入你的心
+< M ? ; L M ; L M ;
+还要多久才能和你接近
+K L ; M < M ; < M ; < M N
+咫尺远近却无法靠近的那个人
+? ? ? M M ; K
+要怎么和你相遇
+K L ; H L
+环游的行星
+K L ; N N ; L
+怎么可以
+; L K
+拥有你
+
+
+#夏天的风
+; L K H L ; K   ; L K H L ; K
+七月的风懒懒的 连云都变热热的
+; L K H L ; K ; L ; K J J P
+不久后天闷闷的 一阵云后雨下过
+P ; L L K K P 
+Woo... Yeah...
+L K  ; L K H P L ; M
+气~温~爬升到无法再忍受
+; L K H P L K
+索性闭上了双~眼
+H J K ; L K ;
+让想象任意改变
+L K L ; L K < M M ; L
+场景两个人一起散着步
+; L K J K M L ; K H K
+我的脸也轻轻贴着你胸口
+P H K M  ; ; L
+听到心跳  Wo...
+K K < M M M L L K L
+在乎我和天气一样温度
+
+
+; N M M  K K H L ;
+夏天的风 我永远记得
+J K L L  J J P L K
+清清楚楚的说你爱我
+; N M M  K K K L J J P
+我看见你 酷酷的笑容也有
+N N ; L ;
+腼腆的时候
+; N M M  K K H L ;
+夏天的风 正暖暖吹过
+J K L L  J J P L K
+穿过头发 穿过耳朵
+M N ; N  ; N
+你和我的 夏天
+M ; K J K
+风轻轻说着
+
+#童话镇
+H J K J K J H ; L  
+听说白雪公主在逃跑  
+H J K J K J H J I  
+小红帽在担心大灰狼  
+H J K J K J H ; M  
+听说疯帽喜欢爱丽丝  
+; ; L K L K L K J  
+丑小鸭会变成白天鹅  
+H J K J K J H ; L  
+听说彼得潘总长不大  
+H J K J K J H J I  
+杰克他有竖琴和魔法  
+H J K J K J H ; M  
+听说森林里有糖果屋  
+      H         H 
+; ; M N N N N ; N N ;  
+灰姑娘丢了心爱的玻璃鞋  
+; ; < M < M N < M  
+只有睿智的河水知道  
+      H  
+; ; ; N N N N N ; L N ;  
+白雪是因为贪玩跑出了城堡  
+; ; < M N < M N 
+小红帽有件抑制自己  
+; ; L L L K J  
+变成狼的大红袍  
+; L K H K L ; M ; L K H H P I  
+总有一条蜿蜒在童话镇里七彩的河  
+K J H P H K K M ;  
+沾染魔法的乖张气息  
+; L K K L H J  
+却又在爱里曲折  
+; L ; L ; M < M  
+川流不息扬起水花  
+M M ; < M N M N ;  
+又卷入一帘时光入水  
+L ; N ; L H ; L K  
+让所有很久很久以前  
+K K K J J J J J K H J  
+都走到幸福结局的时刻
+
+      
+#圣诞结
+【A段】
+Y U Y I P P O I Y
+我住的城市从不下雪
+Y U Y I P P I J P
+记忆却堆满冷的感觉
+O P P K H P O P I U I U Y
+思念的旺季霓虹扫过喧哗的街
+O O I O P I U
+把快乐赶得好远
+
+【B段】
+Y U Y I P P O I Y
+落单的恋人最怕过节
+Y Y U Y I P P I J P
+只能独自庆祝尽量喝醉
+O P P K H P O P I U I U Y
+我爱过的人没有一个留在身边
+O O I O I O P
+寂寞他陪我过夜
+
+【C段】
+I P I P L ;
+Merry Merry Christmas
+I P I P L ;
+Lonely Lonely Christmas
+L ; N N ; ; K H
+想祝福不知该给谁
+
+H K M M N N K L
+爱被我们打了死结
+I P I P L ;
+Lonely Lonely Christmas
+I P I P L ;
+Merry Merry Christmas
+L ; N N ; ; K H
+写了卡片能寄给谁
+H K M M N N K L K
+心碎得像街上的纸屑
+
+【重复B、C段】
+
+【D段】
+P P H K H K L L
+电话不接 不要被人
+K L ; M > M ; L L K
+发现我整夜都关在房间
+P P H O K H K M < L K L ;
+狂欢的笑声 听来像哀悼的音乐
+P P H K H K L L
+眼眶的泪 温热冻结
+K L ; M > M ; L L K
+望着电视里的无聊节目
+P P H O K H K M ; L K L K
+躺在沙发上变成没知觉的植物
+
+【重复C段】
+
+【结尾】
+H K M M N N K L K
+谁来陪我过这圣诞节
+; ; ; ; ; ; ; ; R5 R1 R2 ;
+
+#特别的人
+P H K L ;
+
+M ; L ; 
+
+M ; L ; 
+
+M ; L ;
+
+M ; L ; K K H L 
+
+P H K L ;
+
+< ; L ;
+
+
+#一千年以后
+
+P Y U I H P 
+
+O I Y I U
+
+P Y U I H J P  I H
+
+J J J K L K J
+
+K J K ;  J H J P
+
+H H J K L K L N ; L L K
+
+K J K ;  J H J P  H K
+
+K K K L ; L K L
+
+
+J K L ; L K P L
+
+; L K J H I J
+
+K J H J K L P ; ; 
+
+; N ; K L L
+
+J K L ; L K P L
+
+; L ; K J H L J
+
+K J H P H K P L K
+
+; ; N L L ~
+
+K L L L K L K P K
+
+
+#漂洋过海来看你
+
+L ; ; ; ; L K M ; ;
+为你 我用了半年的积蓄
+L ; L L ; L K H
+漂洋过海的来看你
+K K K K L K
+为了这次相聚
+I I K K K K L K  K K L L  ; L
+我连见面时的呼吸 都曾反复练习
+L ; ; ; ; ; M M ; L ;
+言语从来没能将我的情意
+L ; L L L K H
+表达千万分之一
+K K K K K L  I I K K K H L K
+为了整个遗憾我在夜里想了又想
+L L ; L
+不肯睡去
+< M M M M < ? < M <
+记忆他总是慢慢的累计
+M K L L L L ; L H
+在我心中无法抹去
+K K K H L K I I K K K H L K
+为了你的承诺我在最绝望的时候
+< < < < ; < M
+都忍着不哭泣
+M ; L ; M ;
+陌生的城市啊
+L L ; L H L
+熟悉的角落里
+K K K K K H
+也曾彼此安慰
+K K K K K L
+也曾相拥叹息
+K H < M M M M M M ; < M
+不管将会面对什么样的结局
+M < M < M <
+在漫天风沙里
+M ; M ; M
+望着你远去
+M M < < < M < M ;
+我竟悲伤得不能自已
+; L K L K L <
+多盼能送君千里
+K J K J K <
+直到山穷水尽
+? ? > ? > <
+一生和你相依
+
+#美丽的神话
+
+H ; J H H J K L ;
+H < M < M L N ;
+H < M L ; N ; L K
+H ; L J H
+H ; J H J K L ;
+H < M < M L N ;
+H < M L ; N ; L K
+H ; L J H
+H J K L ; K J P
+H K L ; ;
+H J K L ; K J P  H K L  K K
+H J K L ; K J P  H K L  ; ;
+H J K L ; K J P  H K L  K K
+
+# 小 情 歌
+K J K J K J P I P J K
+这 是 一 首 简 单 的 小 情 歌
+K J K J K J K ; ; ;
+唱 着 人 们 心 肠 的 曲 折
+H K H K ; L
+我 想 我 很 快 乐
+P J P J L K
+当 有 你 的 温 热
+; L K L K H P
+脚 边 的 空 气 转 了
+K J K J K J P I P J K
+这 是 一 首 简 单 的 小 情 歌
+K J K J K J K ; M ? > < M
+唱 着 我 们 心 头 的 白 鸽
+M N ; N M ; L
+我 想 我 很 适 合
+N ; L ; L K
+当 一 个 歌 颂 者
+; L ; N ; K L
+青 春 在 风 中 飘 着
+P H K ; ; L K ; L K ; L K K
+你 知 道 就 算 大 雨 让 这 座 城 市 颠 倒
+K H K L ; ;
+我 会 给 你 怀 抱
+P H K K H K L ; ; P
+受 不 了 看 见 你 背 影 来 到
+P H K K H K L ; ; L K L
+写 下 我 度 秒 如 年 难 捱 的 离 骚
+; ; L K ; L K ; L K K
+就 算 整 个 世 界 被 寂 寞 绑 票
+K H K L ; ;
+我 也 不 会 奔 跑
+P H K K H K L ; ; P
+逃 不 了 最 后 谁 也 都 苍 老
+P H K K H K L ; ; L K L K
+写 下 我 时 间 和 琴 声 交 错 的 城 堡
+
+#大鱼
+Part1【前奏】
+; L ; <  ; L ; >  ; L ; ? > M
+; L ; <  ; L ; >  M K J
+; L ; <  ; L ; >  ; L ; ? > M
+L ; H L  ; H P H
+
+Part2【引入】
+H K K L L ; ; < M ; L
+H K K L L ; ; H P
+H K K L L ; ; < M ; L
+L ; H L ; H P H
+H K L K H H K L K ;
+; M < < M ; L K L ;
+H K L K H H K L K ;
+L ; H L ; H P H
+
+Part3【主歌】
+; M ? > ;  ; L K K L ;
+; L K < ? > < M L ;
+; M ? > ;  ; L K K L ;
+L ; H  L ; H P H
+
+#君に夢中
+H K L   L
+
+L  LL ; L K H P 
+
+H K L L  L
+
+L LLL ; L K H K
+
+M LL
+
+NN ; N ; L K
+
+L ; L
+
+L K K
+
+
+#花海
+K ; ; ; L K L ;
+K ; ; N ; M K
+K N N N ; K P ;
+K ; L K ; L K ; L
+K ; ; ; L K L M
+K ; ; N ; M K
+K N N N ; K M ; ?
+M N N K K J K
+
+K L ; M M
+; L K L ;
+K L ; > ?
+? > < M < < M
+K L ; M M
+; L K L K
+K L ; M M N N ; ? ; ; L
+
+K L ; M M
+; L K L ;
+K L ; > ?
+? > < M < < M
+
+K L ; M M
+; L K L K
+K L ; M K
+K J H J K
+
+#我们的纪念
+K J K ; L  L P N ; L K ;
+K J K ; L  L ; N ; L K K
+K J K ; L  L P N ; L K ;  L
+K J K M M < M L L ; N ; L K K
+
+N  N ; L K L ; L ; L
+L ; N ; N M < M < ? >
+
+K J H H H  ; ; N ; L K J H J K L ;
+K J H H H  ; L ; L K J K L K K J K
+K J H H H  ; ; N ; L  H J K L ; L K ;  L
+K J K M M < M L L  L L ; N ; L K K
+
+
+#老男孩
+
+P P P P P H P
+那是我日夜思念
+O I H J K J P
+深深爱着的人呐
+P P H Y Y Y I P
+到底我该如何表达
+P O P I Y U
+她会接受我吗
+P P P P P H P
+也许永远都不会
+O I H J K J P
+跟她说出那句话
+P P H Y Y U I P
+注定我要浪迹天涯
+P O P I U Y Y
+怎么能有牵挂
+K J H J K L ; J
+梦想总是遥不可及
+P P H ; L K K
+是不是应该放弃
+K J H J K L ; J
+花开花落又是雨季
+P P H ; L K K
+春天啊你在哪里
+K K M M M < M J J
+青春如同奔流的江河
+J J M M M < M K K
+一去不回来不及道别
+K L ; L N ; ;
+只剩下麻木的我
+L N ; ; L N ; M
+没有了当年的热血
+K K M M M < M J J
+看那漫天飘零的花朵
+J J M M M < M K K
+在最美丽的时刻凋谢
+K L ; L N ; ; L K J K
+有谁会记得这世界他来过
+
+
+#Merry Christmas Mr. Lawrence
+L ; L H L
+L ; L ; M ;
+L ; L H K
+?  > M ;
+
+L ; L H L
+L ; L ; M ;
+L ; L K H   K
+H P P I U
+
+I I I I I I I I
+Y    Y    Y    Y
+
+I I I I U U U U
+Y    Y    Y    Y
+
+U U U U U U U U YY
+Y    Y    Y    Y
+
+Y Y Y Y Y    U
+                  Y
+
+I I I I I I I I
+Y    Y    Y    Y         
+
+I I I I I U    H
+Y    Y    Y   
+
+P P P P P P J 
+U    U    U    U
+
+J J J J Y    U 
+I    I    I    O 
+
+
+#浴室
+? > M < ; M L ;;HKL;LK H
+終於忘記你的時候你出現在我的夢裡
+? > M < ; M L ;;HKL;LK H 
+終於忘記你的時候你出現在我的夢裡
+P ;L LM; ;L; M; 
+我們都困在這寂寞的夜晚 
+L;L M; L;ML K
+陽光照進窗簾卻太過刺眼
+;;; L;M ;    
+過於溫暖的冬天
+;;;; M L K 
+讓人失去自覺
+?? MM< ; L ;ML ;
+波浪在海面上 營火在岸邊 
+????M< ; LL;M ;
+我又淚流滿面 你不在我身邊
+;H KL; ; H KM; L;   
+芒草在山巔 痛苦還留在眉間
+;;; ;H K; L;;; HL   
+他天真地以為這一切都無所謂
+MM MMM L; L;L;M ;
+他單純只想把日子過得不浪費
+?? ?? MM      H;L;L;; M   N ;L
+我就是你的人 而這就是我的人生
+;L L;; ; H K;L H;; L;; ;M ;L ;
+深夜的時光如此珍貴 安靜的故事裡沒有音樂
+? > M < ; M L ;;HKL;LK H
+終於忘記你的時候你出現在我的夢裡
+? > M < ; M L ;;HKL;LK H
+終於忘記你的時候你出現在我的夢裡
+
+
+#CornfieldChase
+H      J
+
+H J K J H J   K   J 
+
+H   ; K   J
+
+H ; K J H J K   J
+
+H ; K J H J K   L   ;
+
+H J K J H K  J H P H J P  J H P H J P
+
+H K J L K H  J P H K J L  K L K J H K
+
+J H P H J P  J H P ; J P  
+
+
+H J K J H K  J H P H J P  J H P ; J P  
+
+H K J L K H  J P H K J L  K L K J H K  
+
+J P H K J L  J H P ; J P
+
+
+H J K J ; J  K L K J H K  J H P H J P
+
+J H P ; J P  H K ; J K H  J P H K J L
+
+K J H J K H  L K J K L J  
+
+;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  
+
+HO ; HO ;
+
+JP ; JP ;
+
+KH ; KH ;
+
+LP ; LP ; J
+
+HO ;;;  ;
+HO ;;;  ;
+
+JP ;;;  ; 
+JP ;;;  ;
+
+KH ;;;  ; 
+KH ;;;  ;
+
+LP ;;;  ; 
+LP ;;;  ; 
+
+>? >? >? >? >? >? >? >? >? >? >? >?
+>? >? >? >? >? >? >? >? >? >? >? >?
+>? >? >? >? >? >? >? >? >? >? >? >?
+>? >? >? >? >? >? >? >? >? >? >? >?
+
+HO ; HO ;
+
+JP ; JP ;
+
+KH ; KH ;
+
+LP ; LP ; J
+
+
+HO ; H
+HO ; H
+
+JP ; J 
+JP ; J 
+
+KH ; K
+KH ; K 
+
+HO ; H
+HO ; H
+
+JP ; J 
+JP ; J 
+
+KH ; K 
+KH ; K
+
+LP ; L
+LP ; J
+
+
+HO ; HO ;
+
+JP ; JP ;
+
+KH ; KH ;
+
+LP ; LP ; J
+
+
+HO ; H
+HO ; H
+
+JP ; J 
+JP ; J 
+
+KH ; K
+KH ; K 
+
+LP ; L
+LP ; J
+
+; ; ; ; ; ; 
